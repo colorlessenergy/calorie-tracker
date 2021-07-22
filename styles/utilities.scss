@@ -3,6 +3,11 @@
   margin-right: 15px;
 }
 
+.mx-1 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
@@ -34,4 +39,8 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.text-bold {
+  font-weight: 600;
 }
