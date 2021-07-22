@@ -16,12 +16,21 @@ export default function Date () {
         }
     }, [ date ]);
 
+    const [ totalCalories, setTotalCalories ] = useState(0);
+    useEffect(() => {
+        let calories = 0;
+        foodBlocks.forEach((foodBlock) => {
+            calories = foodBlock.amount * foodBlock.calories;
+        });
+        setTotalCalories(calories);
+    }, [ foodBlocks ])
+
     return (
         <>
             <Nav />
 
             <p className="mx-15">
-                45 calories
+                { totalCalories } calories
             </p>
 
             { foodBlocks.map((foodBlock, index) => {
