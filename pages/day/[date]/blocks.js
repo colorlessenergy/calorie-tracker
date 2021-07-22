@@ -15,6 +15,15 @@ export default function Blocks () {
         }
     }, [ date ]);
 
+    const [ totalCalories, setTotalCalories ] = useState(0);
+    useEffect(() => {
+        let calories = 0;
+        foodBlocks.forEach((foodBlock) => {
+            calories = foodBlock.limit * foodBlock.calories;
+        });
+        setTotalCalories(calories);
+    }, [ foodBlocks ]);
+
     return (
         <div className="container">
             <Nav />
@@ -23,7 +32,7 @@ export default function Blocks () {
                     food blocks
                     <button className="add-food-block-button">+</button>
                 </div>
-                405 calories
+                { totalCalories } calories
             </div>
 
             { foodBlocks.map((foodBlock, index) => {
