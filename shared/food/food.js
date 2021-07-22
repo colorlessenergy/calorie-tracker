@@ -31,3 +31,12 @@ export function getFoodFromLocalStorage (date) {
 
     return getFoodBlock(date);
 }
+
+export function setFoodBlockIntoLocalStorage ({ date, foodBlock }) {
+    if (!date) return;
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    foodBlocksFromLocalStorage[date].blocks = foodBlock;
+    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
+    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+}

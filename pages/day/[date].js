@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Nav from "../../shared/components/nav";
 
-import { getFoodFromLocalStorage } from '../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../shared/food/food';
 
 export default function Date () {
     const router = useRouter();
@@ -23,7 +23,18 @@ export default function Date () {
             calories = foodBlock.amount * foodBlock.calories;
         });
         setTotalCalories(calories);
-    }, [ foodBlocks ])
+    }, [ foodBlocks ]);
+
+    const updateAmountOfFood = ({ amount, index }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        if (cloneFoodBlocks[index].amount === 0 && Math.sign(foodBlocks[index].amount) === -1) {
+            return;
+        }
+
+        cloneFoodBlocks[index].amount += amount;
+        setFoodBlocks(cloneFoodBlocks);
+        setFoodBlockIntoLocalStorage({ date, foodBlock: cloneFoodBlocks });
+    }
 
     return (
         <>
@@ -48,13 +59,13 @@ export default function Date () {
                         </div> 
 
                         <div>
-                            <button>
+                            <button onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}>
                                 -
                             </button>
                             <span className="mx-1">
                                 { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
                             </span>
-                            <button>
+                            <button onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}>
                                 +
                             </button>
                         </div>
