@@ -3,8 +3,7 @@ function getFoodBlock (date) {
     if (foodBlocks[date]) {
         return foodBlocks[date];
     } else {
-        foodBlocks[date] = {
-            blocks: [
+        foodBlocks[date] = [
                 {
                     name: 'beans',
                     calories: 100,
@@ -14,8 +13,7 @@ function getFoodBlock (date) {
                     limit: 3,
                     ribbonColor: '#ffccc7'
                 }
-            ]
-        }
+            ];
     }
     localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
     return foodBlocks[date];
@@ -30,8 +28,7 @@ export function getFoodFromLocalStorage (date) {
 
     localStorage.setItem('foodBlocks', [
         JSON.stringify({
-            [ date ]: {
-                blocks: [
+            [ date ]:  [
                     {
                         name: 'beans',
                         calories: 100,
@@ -42,8 +39,7 @@ export function getFoodFromLocalStorage (date) {
                         ribbonColor: '#ffd8bf'
                     }
                 ]
-            }
-        })
+            })
     ]);
 
     return getFoodBlock(date);
@@ -53,7 +49,7 @@ export function setFoodBlockIntoLocalStorage ({ date, foodBlock }) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
-    foodBlocksFromLocalStorage[date].blocks = foodBlock;
+    foodBlocksFromLocalStorage[date] = foodBlock;
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }

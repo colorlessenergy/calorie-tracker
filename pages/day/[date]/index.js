@@ -12,7 +12,7 @@ export default function Date () {
 
     useEffect(() => {
         if (date) {
-            setFoodBlocks((getFoodFromLocalStorage(date)).blocks);
+            setFoodBlocks(getFoodFromLocalStorage(date));
         }
     }, [ date ]);
 

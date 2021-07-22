@@ -11,7 +11,7 @@ export default function Blocks () {
     const [ foodBlocks, setFoodBlocks ] = useState([]);
     useEffect(() => {
         if (date) {
-            setFoodBlocks((getFoodFromLocalStorage(date)).blocks);
+            setFoodBlocks(getFoodFromLocalStorage(date));
         }
     }, [ date ]);
 
