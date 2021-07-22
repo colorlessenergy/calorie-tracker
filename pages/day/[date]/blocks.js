@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Nav from '../../../shared/components/nav';
+import Modal from '../../../shared/components/modal';
 
 import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage } from '../../../shared/food/food';
 
@@ -44,13 +45,23 @@ export default function Blocks () {
         removeFoodBlockFromLocalStorage({ date, index });
     }
 
+
+    const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const toggleModal = () => {
+        setIsModalOpen(previousIsModalOpen => {
+            return !previousIsModalOpen;
+        });
+    }
+
     return (
         <div className="container">
             <Nav />
             <div className="flex justify-content-between mx-15 pt-3">
                 <div>
                     food blocks
-                    <button className="add-food-block-button">+</button>
+                    <button
+                        onClick={ toggleModal }
+                        className="add-food-block-button">+</button>
                 </div>
                 { totalCalories } calories
             </div>
@@ -126,6 +137,12 @@ export default function Blocks () {
                     </div>
                 );
             }) }
+
+            <Modal isOpen={ isModalOpen }>
+                <p>
+                    modal
+                </p>
+            </Modal>
         </div>
     );
 }
