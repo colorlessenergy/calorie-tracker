@@ -2,7 +2,7 @@ import Nav from '../../../shared/components/nav';
 
 export default function Blocks () {
     return (
-        <>
+        <div className="container">
             <Nav />
             <div className="flex justify-content-between mx-15 pt-3">
                 <div>
@@ -14,7 +14,7 @@ export default function Blocks () {
 
             <div className="ribbon"></div>
             <form className="flex justify-content-between mx-15">
-               <div className="flex flex-direction-column align-items-start">
+               <div className="flex flex-direction-column align-items-start form-groups-container">
                     <label htmlFor="food">
                         food
                     </label>
@@ -62,6 +62,6 @@ export default function Blocks () {
                     </button>
                 </div>
             </form>
-        </>
+        </div>
     );
 }
