@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Nav from '../../../shared/components/nav';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -35,7 +35,14 @@ export default function Blocks () {
 
         setFoodBlockIntoLocalStorage({ date, foodBlock: foodBlocks });
     }
-    
+
+    const removeFoodBlock = ({ date, index }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        cloneFoodBlocks.splice(index, 1);
+        setFoodBlocks(cloneFoodBlocks);
+
+        removeFoodBlockFromLocalStorage({ date, index });
+    }
 
     return (
         <div className="container">
@@ -107,6 +114,7 @@ export default function Blocks () {
                             <div className="flex flex-direction-column">
                                 <button
                                     type="button"
+                                    onClick={ () => removeFoodBlock({ date, index }) }
                                     className="button button-red mb-2">
                                     remove
                                 </button>

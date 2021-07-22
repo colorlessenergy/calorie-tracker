@@ -53,3 +53,12 @@ export function setFoodBlockIntoLocalStorage ({ date, foodBlock }) {
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
+
+export function removeFoodBlockFromLocalStorage ({ date, index }) {
+    if (!date) return;
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    foodBlocksFromLocalStorage[date].splice(index, 1);
+    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
+    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+}
