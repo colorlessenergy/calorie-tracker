@@ -1,8 +1,23 @@
 function getFoodBlock (date) {
-    const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
+    let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
     if (foodBlocks[date]) {
         return foodBlocks[date];
+    } else {
+        foodBlocks[date] = {
+            blocks: [
+                {
+                    name: 'beans',
+                    calories: 100,
+                    increment: 1,
+                    unit: 'cans',
+                    amount: 0,
+                    limit: 3,
+                }
+            ]
+        }
     }
+    localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
+    return foodBlocks[date];
 }
 
 export function getFoodFromLocalStorage (date) {
