@@ -14,3 +14,35 @@
 .card-light-orange {
   background-color: $light-orange;
 }
+
+.add-food-block-button {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-left: 10px;
+
+  background-color: $dark-blue;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.ribbon {
+  height: 20px;
+  margin: 10px 15px;
+  background-color: $light-orange;
+}
+
+.button {
+  padding: 12px 20px;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+.button-red {
+  background-color: $red;
+}
+
+.button-green {
+  background-color: $green;
+}

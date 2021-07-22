@@ -21,6 +21,10 @@
   margin-top: 50px;
 }
 
+.mb-2 {
+  margin-bottom: 20px;
+}
+
 .pt-3 {
   padding-top: 30px;
 }
@@ -33,12 +37,20 @@
   display: flex;
 }
 
+.flex-direction-column {
+  flex-direction: column;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
 
 .align-items-center {
   align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
 }
 
 .text-bold {
