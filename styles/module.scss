@@ -1,0 +1,16 @@
+.card {
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 15px 10px 15px;
+  padding: 20px 15px;
+}
+
+.card-light-red {
+  background-color: $light-red;
+}
+
+.card-light-orange {
+  background-color: $light-orange;
+}
