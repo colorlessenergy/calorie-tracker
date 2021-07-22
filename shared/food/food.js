@@ -12,6 +12,7 @@ function getFoodBlock (date) {
                     unit: 'cans',
                     amount: 0,
                     limit: 3,
+                    ribbonColor: '#ffccc7'
                 }
             ]
         }
@@ -38,6 +39,7 @@ export function getFoodFromLocalStorage (date) {
                         unit: 'cans',
                         amount: 0,
                         limit: 3,
+                        ribbonColor: '#ffd8bf'
                     }
                 ]
             }

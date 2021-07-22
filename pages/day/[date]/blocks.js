@@ -29,7 +29,9 @@ export default function Blocks () {
             { foodBlocks.map((foodBlock, index) => {
                 return (
                     <div key={index}>
-                        <div className="ribbon"></div>
+                        <div
+                            className="ribbon"
+                            style={{ backgroundColor: foodBlock.ribbonColor }}></div>
                         <form className="flex justify-content-between mx-15">
                             <div className="flex flex-direction-column align-items-start form-groups-container">
                                 <label htmlFor="food">
