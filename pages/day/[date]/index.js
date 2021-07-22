@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 
-import Nav from "../../shared/components/nav";
+import Nav from '../../../shared/components/nav';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
 
 export default function Date () {
     const router = useRouter();
@@ -75,4 +75,4 @@ export default function Date () {
 
         </> 
     );
-}
+''
