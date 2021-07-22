@@ -50,3 +50,24 @@
   margin: 0 auto;
   max-width: 1600px;
 }
+
+.modal {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal-content {
+  padding: 10px;
+  width: 80%;
+
+  background-color: #ffffff;
+}
