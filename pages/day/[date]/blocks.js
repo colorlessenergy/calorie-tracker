@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Nav from '../../../shared/components/nav';
 
-import { getFoodFromLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -24,6 +24,19 @@ export default function Blocks () {
         setTotalCalories(calories);
     }, [ foodBlocks ]);
 
+    const handleChange = ({ event, index }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        cloneFoodBlocks[index][event.target.id] = event.target.value;
+        setFoodBlocks(cloneFoodBlocks);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        setFoodBlockIntoLocalStorage({ date, foodBlock: foodBlocks });
+    }
+    
+
     return (
         <div className="container">
             <Nav />
@@ -41,28 +54,33 @@ export default function Blocks () {
                         <div
                             className="ribbon"
                             style={{ backgroundColor: foodBlock.ribbonColor }}></div>
-                        <form className="flex justify-content-between mx-15">
+                        <form
+                            onSubmit={ handleSubmit }
+                            className="flex justify-content-between mx-15">
                             <div className="flex flex-direction-column align-items-start form-groups-container">
-                                <label htmlFor="food">
+                                <label htmlFor="name">
                                     food
                                 </label>
                                 <input
+                                    onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].name }
                                     type="text"
-                                    id="food" />
+                                    id="name" />
 
                                 <label htmlFor="calories">
                                     calories
                                 </label>
                                 <input
+                                    onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].calories }
                                     type="number"
-                                    id="calorie" />
+                                    id="calories" />
 
                                 <label htmlFor="increment">
                                     increment
                                 </label>
                                 <input
+                                    onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].increment }
                                     type="number"
                                     id="increment" />
@@ -71,6 +89,7 @@ export default function Blocks () {
                                     unit
                                 </label>
                                 <input
+                                    onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].unit }
                                     type="text"
                                     id="unit" />
@@ -79,6 +98,7 @@ export default function Blocks () {
                                     limit
                                 </label>
                                 <input
+                                    onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].limit }
                                     type="number"
                                     id="limit" />
