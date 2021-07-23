@@ -62,3 +62,21 @@ export function removeFoodBlockFromLocalStorage ({ date, index }) {
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
+
+export function addFoodBlockToLocalStorage (date) {
+    if (!date) return;
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    foodBlocksFromLocalStorage[date].push({
+        name: '',
+        calories: 0,
+        increment: 0,
+        unit: '0',
+        amount: 0,
+        limit: 1,
+        ribbonColor: '#ffd8bf'
+    });
+
+    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
+    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+}

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addFoodBlockToLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -51,6 +51,11 @@ export default function Blocks () {
         setIsModalOpen(previousIsModalOpen => {
             return !previousIsModalOpen;
         });
+    }
+
+    const addFoodBlock = () => {
+        addFoodBlockToLocalStorage(date);
+        setFoodBlocks(getFoodFromLocalStorage(date));
     }
 
     return (
@@ -146,7 +151,9 @@ export default function Blocks () {
                         done
                     </button>
 
-                    <button className="align-self-start text-decoration-underline mb-1">
+                    <button
+                        onClick={ () => addFoodBlock(date) }
+                        className="align-self-start text-decoration-underline mb-1">
                         add a new food block
                     </button>
 
