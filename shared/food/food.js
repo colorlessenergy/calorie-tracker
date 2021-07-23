@@ -108,3 +108,10 @@ export function addPreviousFoodBlockToLocalStorage (foodBlock) {
 
     localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
 }
+
+export function removePreviousFoodBlockFromLocalStorage (index) {
+    let previousFoodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('previousFoodBlocks'));
+    previousFoodBlocksFromLocalStorage.splice(index, 1);
+    previousFoodBlocksFromLocalStorage = JSON.stringify(previousFoodBlocksFromLocalStorage);
+    localStorage.setItem('previousFoodBlocks', previousFoodBlocksFromLocalStorage);
+}

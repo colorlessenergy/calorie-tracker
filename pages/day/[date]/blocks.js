@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -63,6 +63,14 @@ export default function Blocks () {
     useEffect(() => {
         setPreviousFoodBlocks(JSON.parse(localStorage.getItem('previousFoodBlocks')) || []);
     }, []);
+
+    const removePreviousFoodBlock = (index) => {
+        let clonePreviousFoodBlocks = JSON.parse(JSON.stringify(previousFoodBlocks));
+        clonePreviousFoodBlocks.splice(index, 1);
+        setPreviousFoodBlocks(clonePreviousFoodBlocks);
+
+        removePreviousFoodBlockFromLocalStorage(index);
+    }
 
     return (
         <div className="container">
@@ -225,7 +233,7 @@ export default function Blocks () {
                                     <div className="flex flex-direction-column">
                                         <button
                                             type="button"
-                                            onClick={ () => removeFoodBlock({ date, index }) }
+                                            onClick={ () => removePreviousFoodBlock(index) }
                                             className="button button-red mb-2">
                                             remove
                                         </button>
