@@ -21,6 +21,10 @@
   margin-top: 50px;
 }
 
+.mb-1 {
+  margin-bottom: 10px;
+}
+
 .mb-2 {
   margin-bottom: 20px;
 }
@@ -59,4 +63,16 @@
 
 .text-bold {
   font-weight: 600;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.align-self-start {
+  align-self: flex-start;
 }
