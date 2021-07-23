@@ -31,11 +31,11 @@ export default function Blocks () {
         setFoodBlocks(cloneFoodBlocks);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
         setFoodBlockIntoLocalStorage({ date, foodBlock: foodBlocks });
-        addPreviousFoodBlockToLocalStorage(foodBlocks);
+        addPreviousFoodBlockToLocalStorage(foodBlocks[index]);
     }
 
     const removeFoodBlock = ({ date, index }) => {
