@@ -59,6 +59,8 @@ export default function Blocks () {
         setFoodBlocks(getFoodFromLocalStorage(date));
     }
 
+    const previousFoodBlocks = JSON.parse(localStorage.getItem('previousFoodBlocks')) || [];
+
     return (
         <div className="container">
             <Nav />
@@ -159,6 +161,79 @@ export default function Blocks () {
                     </button>
 
                     <div className="text-medium">previous food blocks</div>
+
+                    { previousFoodBlocks.map((foodBlock, index) => {
+                        console.log(JSON.parse(localStorage.getItem('previousFoodBlocks')))
+                        return (
+                            <div key={index}>
+                                <div
+                                    className="ribbon mx-0"
+                                    style={{ backgroundColor: foodBlock.ribbonColor }}></div>
+                                <form
+                                    onSubmit={ handleSubmit }
+                                    className="flex justify-content-between">
+                                    <div className="flex flex-direction-column align-items-start form-groups-container">
+                                        <label htmlFor="name">
+                                            food
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.name }
+                                            type="text"
+                                            id="name" />
+
+                                        <label htmlFor="calories">
+                                            calories
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.calories }
+                                            type="number"
+                                            id="calories" />
+
+                                        <label htmlFor="increment">
+                                            increment
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.increment }
+                                            type="number"
+                                            id="increment" />
+
+                                        <label htmlFor="unit">
+                                            unit
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.unit }
+                                            type="text"
+                                            id="unit" />
+
+                                        <label htmlFor="limit">
+                                            limit
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.limit }
+                                            type="number"
+                                            id="limit" />
+                                    </div> 
+
+                                    <div className="flex flex-direction-column">
+                                        <button
+                                            type="button"
+                                            onClick={ () => removeFoodBlock({ date, index }) }
+                                            className="button button-red mb-2">
+                                            remove
+                                        </button>
+                                        <button className="button button-pink">
+                                            add
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        );
+                    }) }
                 </div> 
             </Modal>
         </div>
