@@ -35,7 +35,7 @@ export default function Blocks () {
         event.preventDefault();
 
         setFoodBlockIntoLocalStorage({ date, foodBlock: foodBlocks });
-        addPreviousFoodBlockToLocalStorage(foodBlocks[index]);
+        addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
     const removeFoodBlock = ({ date, index }) => {
@@ -174,7 +174,6 @@ export default function Blocks () {
                     <div className="text-medium">previous food blocks</div>
 
                     { previousFoodBlocks.map((foodBlock, index) => {
-                        console.log(JSON.parse(localStorage.getItem('previousFoodBlocks')))
                         return (
                             <div key={index}>
                                 <div

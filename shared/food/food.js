@@ -81,7 +81,7 @@ export function addFoodBlockToLocalStorage (date) {
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
-export function addPreviousFoodBlockToLocalStorage (foodBlock) {
+export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks }) {
     if (!localStorage.getItem('previousFoodBlocks')) {
         localStorage.setItem('previousFoodBlocks', JSON.stringify([]));
     }
@@ -104,6 +104,7 @@ export function addPreviousFoodBlockToLocalStorage (foodBlock) {
 
     if (isFoodBlockNew) {
         previousFoodBlocksFromLocalStorage.push(foodBlock);
+        setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
     }
 
     localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
