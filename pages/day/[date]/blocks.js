@@ -87,7 +87,7 @@ export default function Blocks () {
 
             { foodBlocks.map((foodBlock, index) => {
                 return (
-                    <div key={index}>
+                    <div key={ index }>
                         <div
                             className="ribbon"
                             style={{ backgroundColor: foodBlock.ribbonColor }}></div>
@@ -95,50 +95,50 @@ export default function Blocks () {
                             onSubmit={ (event) => handleSubmit({ event, index }) }
                             className="flex justify-content-between mx-15">
                             <div className="flex flex-direction-column align-items-start form-groups-container">
-                                <label htmlFor="name">
+                                <label htmlFor={`${ index }-name`}>
                                     food
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].name }
                                     type="text"
-                                    id="name" />
+                                    id={`${ index }-name`} />
 
-                                <label htmlFor="calories">
+                                <label htmlFor={`${ index }-calories`}>
                                     calories
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].calories }
                                     type="number"
-                                    id="calories" />
+                                    id={`${ index }-calories`} />
 
-                                <label htmlFor="increment">
+                                <label htmlFor={`${ index }-increment`}>
                                     increment
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].increment }
                                     type="number"
-                                    id="increment" />
+                                    id={`${ index }-increment`} />
 
-                                <label htmlFor="unit">
+                                <label htmlFor={`${ index }-unit`}>
                                     unit
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].unit }
                                     type="text"
-                                    id="unit" />
+                                    id={`${ index }-unit`} />
 
-                                <label htmlFor="limit">
+                                <label htmlFor={`${ index }-limit`}>
                                     limit
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].limit }
                                     type="number"
-                                    id="limit" />
+                                    id={`${ index }-limit`} />
                             </div> 
 
                             <div className="flex flex-direction-column">
