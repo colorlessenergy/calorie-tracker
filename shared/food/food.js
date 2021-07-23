@@ -80,3 +80,31 @@ export function addFoodBlockToLocalStorage (date) {
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
+
+export function addPreviousFoodBlockToLocalStorage (foodBlock) {
+    if (!localStorage.getItem('previousFoodBlocks')) {
+        localStorage.setItem('previousFoodBlocks', JSON.stringify([]));
+    }
+
+    let previousFoodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('previousFoodBlocks'));
+
+    let isFoodBlockNew = true;
+    for (let i = 0; i < previousFoodBlocksFromLocalStorage; i++) {
+        let previousFoodBlock = previousFoodBlocksFromLocalStorage[i];
+
+        if (previousFoodBlock.name === foodBlock.name &&
+            previousFoodBlock.calories === foodBlock.calories &&
+            previousFoodBlock.increment === foodBlock.increment &&
+            previousFoodBlock.unit === foodBlock.unit &&
+            previousFoodBlock.amount === foodBlock.amount &&
+            previousFoodBlock.limit === foodBlock.limit) {
+                isFoodBlockNew = false;
+            }
+    }
+
+    if (isFoodBlockNew) {
+        previousFoodBlocksFromLocalStorage.push(foodBlock);
+    }
+
+    localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
+}
