@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -55,7 +55,7 @@ export default function Blocks () {
     }
 
     const addFoodBlock = () => {
-        addFoodBlockToLocalStorage(date);
+        addEmptyFoodBlockToLocalStorage(date);
         setFoodBlocks(getFoodFromLocalStorage(date));
     }
 

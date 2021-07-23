@@ -63,7 +63,7 @@ export function removeFoodBlockFromLocalStorage ({ date, index }) {
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
-export function addFoodBlockToLocalStorage (date) {
+export function addEmptyFoodBlockToLocalStorage (date) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
