@@ -81,7 +81,7 @@ export default function Blocks () {
                             className="ribbon"
                             style={{ backgroundColor: foodBlock.ribbonColor }}></div>
                         <form
-                            onSubmit={ () => handleSubmit({ event, index }) }
+                            onSubmit={ (event) => handleSubmit({ event, index }) }
                             className="flex justify-content-between mx-15">
                             <div className="flex flex-direction-column align-items-start form-groups-container">
                                 <label htmlFor="name">
