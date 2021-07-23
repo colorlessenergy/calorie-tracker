@@ -59,7 +59,10 @@ export default function Blocks () {
         setFoodBlocks(getFoodFromLocalStorage(date));
     }
 
-    const previousFoodBlocks = JSON.parse(localStorage.getItem('previousFoodBlocks')) || [];
+    const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
+    useEffect(() => {
+        setPreviousFoodBlocks(JSON.parse(localStorage.getItem('previousFoodBlocks')) || []);
+    }, []);
 
     return (
         <div className="container">
