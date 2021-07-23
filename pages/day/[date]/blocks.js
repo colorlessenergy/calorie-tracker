@@ -183,50 +183,50 @@ export default function Blocks () {
                                     onSubmit={ handleSubmit }
                                     className="flex justify-content-between">
                                     <div className="flex flex-direction-column align-items-start form-groups-container">
-                                        <label htmlFor="name">
+                                        <label htmlFor={`${ index }-previous-name`}>
                                             food
                                         </label>
                                         <input
                                             disabled={ true }
                                             value={ foodBlock.name }
                                             type="text"
-                                            id="name" />
+                                            id={`${ index }-previous-name`} />
 
-                                        <label htmlFor="calories">
+                                        <label htmlFor={`${ index }-previous-calories`}>
                                             calories
                                         </label>
                                         <input
                                             disabled={ true }
                                             value={ foodBlock.calories }
                                             type="number"
-                                            id="calories" />
+                                            id={`${ index }-previous-calories`} />
 
-                                        <label htmlFor="increment">
+                                        <label htmlFor={`${ index }-previous-increment`}>
                                             increment
                                         </label>
                                         <input
                                             disabled={ true }
                                             value={ foodBlock.increment }
                                             type="number"
-                                            id="increment" />
+                                            id={`${ index }-previous-increment`} />
 
-                                        <label htmlFor="unit">
+                                        <label htmlFor={`${ index }-previous-unit`}>
                                             unit
                                         </label>
                                         <input
                                             disabled={ true }
                                             value={ foodBlock.unit }
                                             type="text"
-                                            id="unit" />
+                                            id={`${ index }-previous-unit`} />
 
-                                        <label htmlFor="limit">
+                                        <label htmlFor={`${ index }-previous-limit`}>
                                             limit
                                         </label>
                                         <input
                                             disabled={ true }
                                             value={ foodBlock.limit }
                                             type="number"
-                                            id="limit" />
+                                            id={`${ index }-previous-limit`} />
                                     </div> 
 
                                     <div className="flex flex-direction-column">
