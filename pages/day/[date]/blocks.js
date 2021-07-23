@@ -27,7 +27,7 @@ export default function Blocks () {
 
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        cloneFoodBlocks[index][event.target.id] = event.target.value;
+        cloneFoodBlocks[index][event.target.name] = event.target.value;
         setFoodBlocks(cloneFoodBlocks);
     }
 
@@ -102,7 +102,8 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].name }
                                     type="text"
-                                    id={`${ index }-name`} />
+                                    id={`${ index }-name`}
+                                    name="name" />
 
                                 <label htmlFor={`${ index }-calories`}>
                                     calories
@@ -111,7 +112,8 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].calories }
                                     type="number"
-                                    id={`${ index }-calories`} />
+                                    id={`${ index }-calories`}
+                                    name="calories" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
@@ -120,7 +122,8 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].increment }
                                     type="number"
-                                    id={`${ index }-increment`} />
+                                    id={`${ index }-increment`}
+                                    name="increment" />
 
                                 <label htmlFor={`${ index }-unit`}>
                                     unit
@@ -129,7 +132,8 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].unit }
                                     type="text"
-                                    id={`${ index }-unit`} />
+                                    id={`${ index }-unit`}
+                                    name="unit" />
 
                                 <label htmlFor={`${ index }-limit`}>
                                     limit
@@ -138,7 +142,8 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].limit }
                                     type="number"
-                                    id={`${ index }-limit`} />
+                                    id={`${ index }-limit`}
+                                    name="limit" />
                             </div> 
 
                             <div className="flex flex-direction-column">
