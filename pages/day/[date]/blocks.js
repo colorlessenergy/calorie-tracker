@@ -139,9 +139,17 @@ export default function Blocks () {
             }) }
 
             <Modal isOpen={ isModalOpen }>
-                <p>
-                    modal
-                </p>
+                <div className="flex flex-direction-column">
+                    <button className="align-self-end text-decoration-underline">
+                        done
+                    </button>
+
+                    <button className="align-self-start text-decoration-underline mb-1">
+                        add a new food block
+                    </button>
+
+                    <div className="text-medium">previous food blocks</div>
+                </div> 
             </Modal>
         </div>
     );
