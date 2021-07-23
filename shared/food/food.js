@@ -71,7 +71,7 @@ export function addFoodBlockToLocalStorage (date) {
         name: '',
         calories: 0,
         increment: 0,
-        unit: '0',
+        unit: '',
         amount: 0,
         limit: 1,
         ribbonColor: '#ffd8bf'
