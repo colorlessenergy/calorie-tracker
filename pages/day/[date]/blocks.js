@@ -80,7 +80,7 @@ export default function Blocks () {
 
     return (
         <div className="container">
-            <Nav />
+            <Nav link={{ link: `/day/${ date }`, text: date }} />
             <div className="flex justify-content-between mx-15 pt-3">
                 <div>
                     food blocks
