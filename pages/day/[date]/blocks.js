@@ -40,6 +40,12 @@ export default function Blocks () {
         addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
+    const updateColor = ({ index, color }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        cloneFoodBlocks[index].ribbonColor = color;
+        setFoodBlocks(cloneFoodBlocks);
+    }
+
     const removeFoodBlock = ({ date, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
         cloneFoodBlocks.splice(index, 1);
@@ -161,7 +167,8 @@ export default function Blocks () {
                                     { colors.map(color => {
                                         return (
                                             <div
-                                                key={ color } 
+                                                key={ color }
+                                                onClick={ () => updateColor({ index, color }) }
                                                 className="circle mr-1 cursor-pointer"
                                                 style={{ backgroundColor: color }}
                                                 title={`${ color }`}>
