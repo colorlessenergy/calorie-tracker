@@ -48,7 +48,7 @@ export default function Date () {
                 return (
                     <div
                         key={ index } 
-                        className="card card-light-orange">
+                        className="card">
                         <div>
                             <div>
                                 { foodBlock.name }
