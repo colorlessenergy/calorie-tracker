@@ -33,7 +33,7 @@ export default function Date () {
             calories += foodBlock.limit * foodBlock.calories;
         });
         setGoalCalories(calories);
-    }, [])
+    }, [ foodBlocks ])
 
     const updateAmountOfFood = ({ amount, index }) => {
         amount = Number(amount);
