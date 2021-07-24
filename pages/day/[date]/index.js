@@ -28,7 +28,7 @@ export default function Date () {
     const updateAmountOfFood = ({ amount, index }) => {
         amount = Number(amount);
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        if (cloneFoodBlocks[index].amount === 0 && Math.sign(foodBlocks[index].amount) === -1) {
+        if (cloneFoodBlocks[index].amount === 0 && Math.sign(amount) === -1) {
             return;
         }
 
