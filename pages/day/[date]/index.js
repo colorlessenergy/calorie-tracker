@@ -26,6 +26,15 @@ export default function Date () {
         setTotalCalories(calories);
     }, [ foodBlocks ]);
 
+    const [ goalCalories, setGoalCalories ] = useState(0);
+    useEffect(() => {
+        let calories = 0;
+        foodBlocks.forEach((foodBlock) => {
+            calories += foodBlock.limit * foodBlock.calories;
+        });
+        setGoalCalories(calories);
+    }, [])
+
     const updateAmountOfFood = ({ amount, index }) => {
         amount = Number(amount);
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
@@ -42,9 +51,14 @@ export default function Date () {
         <>
             <Nav />
 
-            <p className="mx-15">
-                { totalCalories } calories
-            </p>
+            <div className="mx-15 mt-1 mb-1 flex">
+                <div className="mr-1">
+                    { totalCalories } total calories
+                </div>
+                <div>
+                    { goalCalories } goal calories
+                </div>
+            </div>
 
             { foodBlocks.length === 0 ? (
                 <Link href={`/day/${ date }/blocks`}>
