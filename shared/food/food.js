@@ -81,6 +81,16 @@ export function addEmptyFoodBlockToLocalStorage (date) {
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
+export function addPreviousFoodBlockToFoodBlocksInLocalStorage ({ date, index }) {
+    if (!date) return;
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    const previousFoodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('previousFoodBlocks'));
+    foodBlocksFromLocalStorage[date].push(previousFoodBlocksFromLocalStorage[index]);
+    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
+    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+}
+
 export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks }) {
     if (!localStorage.getItem('previousFoodBlocks')) {
         localStorage.setItem('previousFoodBlocks', JSON.stringify([]));

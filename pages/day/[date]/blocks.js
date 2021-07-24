@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -70,6 +70,12 @@ export default function Blocks () {
         setPreviousFoodBlocks(clonePreviousFoodBlocks);
 
         removePreviousFoodBlockFromLocalStorage(index);
+    }
+
+    const handlePreviousFoodBlocksSubmit = ({ event, index }) => {
+        event.preventDefault();
+        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, index });
+        setFoodBlocks(getFoodFromLocalStorage(date));
     }
 
     return (
@@ -185,7 +191,7 @@ export default function Blocks () {
                                     className="ribbon mx-0"
                                     style={{ backgroundColor: foodBlock.ribbonColor }}></div>
                                 <form
-                                    onSubmit={ handleSubmit }
+                                    onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
                                     className="flex justify-content-between">
                                     <div className="flex flex-direction-column align-items-start form-groups-container">
                                         <label htmlFor={`${ index }-previous-name`}>
