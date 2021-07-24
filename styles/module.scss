@@ -76,6 +76,11 @@
   background-color: #ffffff;
 }
 
+.previous-food-blocks-container {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
 .text-medium {
   font-size: 20px;
 }
