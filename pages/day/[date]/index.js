@@ -20,7 +20,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            calories = foodBlock.amount * foodBlock.calories;
+            calories += foodBlock.amount * foodBlock.calories;
         });
         setTotalCalories(calories);
     }, [ foodBlocks ]);
