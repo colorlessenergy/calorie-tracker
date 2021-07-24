@@ -52,6 +52,8 @@ export function removeFoodBlockFromLocalStorage ({ date, index }) {
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
+const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffadd2"];
+
 export function addEmptyFoodBlockToLocalStorage (date) {
     if (!date) return;
 
@@ -63,7 +65,7 @@ export function addEmptyFoodBlockToLocalStorage (date) {
         unit: '',
         amount: 0,
         limit: 1,
-        ribbonColor: '#ffd8bf'
+        ribbonColor: colors[Math.floor(Math.random() * colors.length)]
     });
 
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
