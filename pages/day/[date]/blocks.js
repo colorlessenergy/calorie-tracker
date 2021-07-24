@@ -6,6 +6,8 @@ import Modal from '../../../shared/components/modal';
 
 import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
 
+const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffadd2"];
+
 export default function Blocks () {
     const router = useRouter();
     const date = router.query.date;
@@ -93,7 +95,9 @@ export default function Blocks () {
 
             { foodBlocks.map((foodBlock, index) => {
                 return (
-                    <div key={ index }>
+                    <div
+                        key={ index }
+                        className="mb-1">
                         <div
                             className="ribbon"
                             style={{ backgroundColor: foodBlock.ribbonColor }}></div>
@@ -150,6 +154,21 @@ export default function Blocks () {
                                     type="number"
                                     id={`${ index }-limit`}
                                     name="limit" />
+                                <div className="text-gray text-small ml-04 mb-04">
+                                    select a color
+                                </div>
+                                <div className="flex">
+                                    { colors.map(color => {
+                                        return (
+                                            <div
+                                                key={ color } 
+                                                className="circle mr-1 cursor-pointer"
+                                                style={{ backgroundColor: color }}
+                                                title={`${ color }`}>
+                                            </div>
+                                        );
+                                    }) }
+                                </div>
                             </div> 
 
                             <div className="flex flex-direction-column">
