@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import Nav from '../../../shared/components/nav';
 
@@ -44,6 +45,12 @@ export default function Date () {
             <p className="mx-15">
                 { totalCalories } calories
             </p>
+
+            { foodBlocks.length === 0 ? (
+                <Link href={`/day/${ date }/blocks`}>
+                    <a className="text-center text-large d-block">add a food block</a>
+                </Link>
+            ) : (null) }
 
             { foodBlocks.map((foodBlock, index) => {
                 return (
