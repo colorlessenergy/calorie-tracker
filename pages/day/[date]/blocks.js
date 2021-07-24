@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
 
 export default function Blocks () {
     const router = useRouter();
@@ -34,7 +34,7 @@ export default function Blocks () {
     const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
-        setFoodBlockIntoLocalStorage({ date, foodBlock: foodBlocks });
+        updateFoodBlockInLocalStorage({ date, index, foodBlock: foodBlocks[index] });
         addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
