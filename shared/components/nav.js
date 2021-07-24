@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function Nav () {
+export default function Nav ({ link }) {
     const router = useRouter();
     const date = router.query.date;
 
@@ -12,6 +12,13 @@ export default function Nav () {
                     home
                 </a>
             </Link>
+            { link ? (
+                <Link href={ link.link }>
+                    <a>
+                        { link.text }
+                    </a>
+                </Link>
+            ) : (null) }
             <Link href={`/day/${ date }/blocks`}>
                 <a>
                     blocks
