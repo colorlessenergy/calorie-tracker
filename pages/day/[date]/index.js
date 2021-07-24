@@ -48,7 +48,8 @@ export default function Date () {
                 return (
                     <div
                         key={ index } 
-                        className="card">
+                        className="card"
+                        style={{ backgroundColor: foodBlock.ribbonColor }}>
                         <div>
                             <div>
                                 { foodBlock.name }
