@@ -26,12 +26,24 @@
   margin-top: 50px;
 }
 
+.mr-1 {
+  margin-right: 10px;
+}
+
+.mb-04 {
+  margin-bottom: 4px;
+}
+
 .mb-1 {
   margin-bottom: 10px;
 }
 
 .mb-2 {
   margin-bottom: 20px;
+}
+
+.ml-04 {
+  margin-left: 4px;
 }
 
 .pt-3 {
@@ -80,4 +92,8 @@
 
 .align-self-start {
   align-self: flex-start;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
