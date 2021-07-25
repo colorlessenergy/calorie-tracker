@@ -220,10 +220,10 @@ export default function Blocks () {
             }) }
 
             <Modal isOpen={ isModalOpen }>
-                <div className="flex flex-direction-column">
+                <div className="flex flex-direction-column position-relative">
                     <button
                         onClick={ toggleModal }
-                        className="align-self-end text-decoration-underline">
+                        className="modal-button-close">
                         done
                     </button>
 
