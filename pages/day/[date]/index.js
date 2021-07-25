@@ -66,36 +66,37 @@ export default function Date () {
                 </Link>
             ) : (null) }
 
-            { foodBlocks.map((foodBlock, index) => {
-                return (
-                    <div
-                        key={ index } 
-                        className="card"
-                        style={{ backgroundColor: foodBlock.ribbonColor }}>
-                        <div>
+            <div className="flex flex-wrap justify-content-between">
+                { foodBlocks.map((foodBlock, index) => {
+                    return (
+                        <div
+                            key={ index } 
+                            className="card"
+                            style={{ backgroundColor: foodBlock.ribbonColor }}>
                             <div>
-                                { foodBlock.name }
-                            </div>
-                            <div className="text-bold">
-                                { foodBlock.calories } calories
-                            </div>
-                        </div> 
+                                <div>
+                                    { foodBlock.name }
+                                </div>
+                                <div className="text-bold">
+                                    { foodBlock.calories } calories
+                                </div>
+                            </div> 
 
-                        <div>
-                            <button onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}>
-                                -
-                            </button>
-                            <span className="mx-1">
-                                { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
-                            </span>
-                            <button onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}>
-                                +
-                            </button>
+                            <div>
+                                <button onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}>
+                                    -
+                                </button>
+                                <span className="mx-1">
+                                    { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
+                                </span>
+                                <button onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}>
+                                    +
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )
-            }) }
-
+                    )
+                }) }
+            </div>
         </> 
     );
 }
