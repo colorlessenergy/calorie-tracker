@@ -21,7 +21,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            if (Number.isInteger(Number(foodBlock.limit))) {
+            if (Number.isInteger(Number(foodBlock.limit)) && Number.isInteger(Number(foodBlock.increment)) && Number.isInteger(Number(foodBlock.amount))) {
                 calories += foodBlock.amount * foodBlock.calories;
             } else {
                 let amountOfTimesAddedOrRemoved = foodBlock.amount / foodBlock.increment;
