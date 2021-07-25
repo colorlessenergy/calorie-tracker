@@ -21,7 +21,12 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            calories += foodBlock.amount * foodBlock.calories;
+            if (Number.isInteger(Number(foodBlock.limit))) {
+                calories += foodBlock.amount * foodBlock.calories;
+            } else {
+                let amountOfTimesAddedOrRemoved = foodBlock.amount / foodBlock.limit;
+                calories += amountOfTimesAddedOrRemoved * foodBlock.calories;
+            }
         });
         setTotalCalories(calories);
     }, [ foodBlocks ]);
