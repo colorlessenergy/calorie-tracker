@@ -119,7 +119,8 @@ export default function Blocks () {
                                     value={ foodBlocks[index].name }
                                     type="text"
                                     id={`${ index }-name`}
-                                    name="name" />
+                                    name="name"
+                                    required />
 
                                 <label htmlFor={`${ index }-calories`}>
                                     calories
@@ -129,7 +130,9 @@ export default function Blocks () {
                                     value={ foodBlocks[index].calories }
                                     type="number"
                                     id={`${ index }-calories`}
-                                    name="calories" />
+                                    name="calories"
+                                    required
+                                    min="1" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
@@ -139,7 +142,8 @@ export default function Blocks () {
                                     value={ foodBlocks[index].increment }
                                     type="number"
                                     id={`${ index }-increment`}
-                                    name="increment" />
+                                    name="increment"
+                                    required />
 
                                 <label htmlFor={`${ index }-unit`}>
                                     unit
@@ -159,7 +163,8 @@ export default function Blocks () {
                                     value={ foodBlocks[index].limit }
                                     type="number"
                                     id={`${ index }-limit`}
-                                    name="limit" />
+                                    name="limit"
+                                    required />
                                 <div className="text-gray text-small ml-04 mb-04">
                                     select a color
                                 </div>
