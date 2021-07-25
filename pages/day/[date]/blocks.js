@@ -104,6 +104,21 @@ export default function Blocks () {
                 { totalCalories } calories
             </div>
 
+            { foodBlocks.length === 0 ? (
+                <>
+                    <div className="no-food-blocks-emoji">
+                        🍋
+                    </div>
+                    <p className="text-center text-medium text-gray">
+                        no food blocks
+                    </p>
+
+                    <button
+                        onClick={ toggleModal }
+                        className="add-food-block-button add-food-block-button--large d-block m-center">+</button>
+                </>
+            ) : (null) }
+
             { foodBlocks.map((foodBlock, index) => {
                 return (
                     <div
