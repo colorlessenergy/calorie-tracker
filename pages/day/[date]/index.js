@@ -24,7 +24,7 @@ export default function Date () {
             if (Number.isInteger(Number(foodBlock.limit))) {
                 calories += foodBlock.amount * foodBlock.calories;
             } else {
-                let amountOfTimesAddedOrRemoved = foodBlock.amount / foodBlock.limit;
+                let amountOfTimesAddedOrRemoved = foodBlock.amount / foodBlock.increment;
                 calories += amountOfTimesAddedOrRemoved * foodBlock.calories;
             }
         });
