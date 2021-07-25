@@ -143,8 +143,7 @@ export default function Blocks () {
                                     type="number"
                                     id={`${ index }-increment`}
                                     name="increment"
-                                    required
-                                    min="0" />
+                                    required />
 
                                 <label htmlFor={`${ index }-unit`}>
                                     unit
@@ -165,8 +164,7 @@ export default function Blocks () {
                                     type="number"
                                     id={`${ index }-limit`}
                                     name="limit"
-                                    required
-                                    min="0" />
+                                    required />
                                 <div className="text-gray text-small ml-04 mb-04">
                                     select a color
                                 </div>
