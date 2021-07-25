@@ -29,11 +29,7 @@ export default function Blocks () {
 
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        if (event.target.type === 'number') {
-            cloneFoodBlocks[index][event.target.name] = Math.abs(event.target.value);
-        } else {
-            cloneFoodBlocks[index][event.target.name] = event.target.value;
-        }
+        cloneFoodBlocks[index][event.target.name] = event.target.value;
         setFoodBlocks(cloneFoodBlocks);
     }
 
@@ -170,7 +166,7 @@ export default function Blocks () {
                                     id={`${ index }-limit`}
                                     name="limit"
                                     required
-                                    min="1" />
+                                    min="0" />
                                 <div className="text-gray text-small ml-04 mb-04">
                                     select a color
                                 </div>
