@@ -61,9 +61,17 @@ export default function Date () {
             </div>
 
             { foodBlocks.length === 0 ? (
-                <Link href={`/day/${ date }/blocks`}>
-                    <a className="text-center text-large d-block">add a food block</a>
-                </Link>
+                <>
+                    <div className="no-food-blocks-emoji">
+                        🍉
+                    </div>
+                    <p className="text-center text-medium text-gray">
+                        no food blocks
+                    </p>
+                    <Link href={`/day/${ date }/blocks`}>
+                        <a className="text-center text-large d-block">add a food block</a>
+                    </Link>
+                </>
             ) : (null) }
 
             <div className="flex flex-wrap justify-content-between">
