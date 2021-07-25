@@ -29,7 +29,11 @@ export default function Blocks () {
 
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        cloneFoodBlocks[index][event.target.name] = event.target.value;
+        if (event.target.type === 'number') {
+            cloneFoodBlocks[index][event.target.name] = Math.abs(event.target.value);
+        } else {
+            cloneFoodBlocks[index][event.target.name] = event.target.value;
+        }
         setFoodBlocks(cloneFoodBlocks);
     }
 
