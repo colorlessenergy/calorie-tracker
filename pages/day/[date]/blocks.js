@@ -233,7 +233,9 @@ export default function Blocks () {
                         add a new food block
                     </button>
 
-                    <div className="text-medium">previous food blocks</div>
+                    { previousFoodBlocks.length ? (
+                        <div className="text-medium">previous food blocks</div>
+                    ) : (null) }
 
                     <div className="previous-food-blocks-container">
                         { previousFoodBlocks.map((foodBlock, index) => {
