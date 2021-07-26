@@ -105,10 +105,7 @@ export default function Blocks () {
         });
     }
 
-    const addFoodBlock = () => {
-        addEmptyFoodBlockToLocalStorage(date);
-        setFoodBlocks(getFoodFromLocalStorage(date));
-
+    const addFoodBlockSnackbar = () => {
         let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
         if (cloneSnackbars.add.timeout) {
             clearTimeout(snackbars.add.timeout);
@@ -132,6 +129,13 @@ export default function Blocks () {
         cloneSnackbars.add.timeout = snackbarTimeout;
         cloneSnackbars.add.amountOfTimesAdded += 1;
         setSnackbars(cloneSnackbars);
+    }
+
+    const addFoodBlock = () => {
+        addEmptyFoodBlockToLocalStorage(date);
+        setFoodBlocks(getFoodFromLocalStorage(date));
+
+        addFoodBlockSnackbar();
     }
 
     const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
