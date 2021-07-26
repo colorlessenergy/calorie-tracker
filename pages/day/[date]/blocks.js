@@ -44,6 +44,11 @@ export default function Blocks () {
             snackbar: null,
             timeout: null,
             amountOfTimesUpdated: 0
+        },
+        add: {
+            snackbar: null,
+            timeout: null,
+            amountOfTimesAdded: 0
         }
     });
 
@@ -103,6 +108,30 @@ export default function Blocks () {
     const addFoodBlock = () => {
         addEmptyFoodBlockToLocalStorage(date);
         setFoodBlocks(getFoodFromLocalStorage(date));
+
+        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+        if (cloneSnackbars.add.timeout) {
+            clearTimeout(snackbars.add.timeout);
+        }
+
+        let message = 'a new food block was added';
+        if (cloneSnackbars.add.amountOfTimesAdded >= 1) {
+            message = `${ cloneSnackbars.add.amountOfTimesAdded + 1 } food blocks were added`;
+        }
+
+        cloneSnackbars.add.snackbar = <Snackbar message={ message } className="snackbar-pink" />
+
+        let snackbarTimeout = setTimeout(() => {
+            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+            cloneSnackbars.add.snackbar = null;
+            cloneSnackbars.add.timeout = null;
+            cloneSnackbars.add.amountOfTimesAdded = 0;
+            setSnackbars(cloneSnackbars)
+        }, 5000);
+
+        cloneSnackbars.add.timeout = snackbarTimeout;
+        cloneSnackbars.add.amountOfTimesAdded += 1;
+        setSnackbars(cloneSnackbars);
     }
 
     const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
@@ -349,6 +378,7 @@ export default function Blocks () {
 
             <div className="snackbars-container">
                 { snackbars.update.snackbar ? (snackbars.update.snackbar) : (null) }
+                { snackbars.add.snackbar ? (snackbars.add.snackbar) : (null) }
             </div>
         </div>
     );
