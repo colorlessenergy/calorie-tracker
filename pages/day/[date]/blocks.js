@@ -23,12 +23,7 @@ export default function Blocks () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            if (Number.isInteger(Number(foodBlock.limit)) && Number.isInteger(Number(foodBlock.increment))) {
-                calories += foodBlock.limit * foodBlock.calories;
-            } else {
-                let amountOfTimesAddedOrRemoved = foodBlock.limit / foodBlock.increment;
-                calories += amountOfTimesAddedOrRemoved * foodBlock.calories;
-            }
+            calories += foodBlock.limit * foodBlock.calories;
         });
         setTotalCalories(calories);
     }, [ foodBlocks ]);
