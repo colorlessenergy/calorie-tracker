@@ -21,12 +21,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            if (Number.isInteger(Number(foodBlock.limit)) && Number.isInteger(Number(foodBlock.increment)) && Number.isInteger(Number(foodBlock.amount))) {
-                calories += foodBlock.amount * foodBlock.calories;
-            } else {
-                let amountOfTimesAddedOrRemoved = foodBlock.amount / foodBlock.increment;
-                calories += amountOfTimesAddedOrRemoved * foodBlock.calories;
-            }
+            calories += foodBlock.amount * foodBlock.calories;
         });
         setTotalCalories(calories);
     }, [ foodBlocks ]);
@@ -35,12 +30,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks.forEach((foodBlock) => {
-            if (Number.isInteger(Number(foodBlock.limit)) && Number.isInteger(Number(foodBlock.increment))) {
-                calories += foodBlock.limit * foodBlock.calories;
-            } else {
-                let amountOfTimesAddedOrRemoved = foodBlock.limit / foodBlock.increment;
-                calories += amountOfTimesAddedOrRemoved * foodBlock.calories;
-            }
+            calories += foodBlock.limit * foodBlock.calories;
         });
         setGoalCalories(calories);
     }, [ foodBlocks ])
