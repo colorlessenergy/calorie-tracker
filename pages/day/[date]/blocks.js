@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
+import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
 import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
 
@@ -38,9 +39,41 @@ export default function Blocks () {
         setFoodBlocks(cloneFoodBlocks);
     }
 
+    const [ snackbars, setSnackbars ] = useState({
+        update: {
+            snackbar: null,
+            timeout: null,
+            amountOfTimesUpdated: 0
+        }
+    });
+
     const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
+        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+        if (cloneSnackbars.update.timeout) {
+            clearTimeout(snackbars.update.timeout);
+        }
+
+        let message = 'food block was updated';
+        if (cloneSnackbars.update.amountOfTimesUpdated >= 1) {
+            message = `${ cloneSnackbars.update.amountOfTimesUpdated + 1 } food block were updated`;
+        }
+
+        cloneSnackbars.update.snackbar = <Snackbar message={ message } className="snackbar-green" />
+
+        let snackbarTimeout = setTimeout(() => {
+            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+            cloneSnackbars.update.snackbar = null;
+            cloneSnackbars.update.timeout = null;
+            cloneSnackbars.update.amountOfTimesUpdated = 0;
+            setSnackbars(cloneSnackbars)
+        }, 5000);
+
+        cloneSnackbars.update.timeout = snackbarTimeout;
+        cloneSnackbars.update.amountOfTimesUpdated += 1;
+
+        setSnackbars(cloneSnackbars);
         updateFoodBlockInLocalStorage({ date, index, foodBlock: foodBlocks[index] });
         addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
@@ -312,6 +345,11 @@ export default function Blocks () {
                     </div>
                 </div> 
             </Modal>
+
+
+            <div className="snackbars-container">
+                { snackbars.update.snackbar ? (snackbars.update.snackbar) : (null) }
+            </div>
         </div>
     );
 }
