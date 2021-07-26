@@ -133,3 +133,10 @@
     transform: translateY(-12px);
   }
 }
+
+.snackbars-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 50%;
+}
