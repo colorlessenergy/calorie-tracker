@@ -111,7 +111,7 @@ export default function Blocks () {
     const addFoodBlockSnackbar = () => {
         let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
         if (cloneSnackbars.add.timeout) {
-            clearTimeout(snackbars.add.timeout);
+            clearTimeout(cloneSnackbars.add.timeout);
         }
 
         let message = 'a new food block was added';
