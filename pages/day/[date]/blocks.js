@@ -65,7 +65,10 @@ export default function Blocks () {
             message = `${ cloneSnackbars.update.amountOfTimesUpdated + 1 } updates were made to food blocks`;
         }
 
-        cloneSnackbars.update.snackbar = <Snackbar message={ message } className="snackbar-green" />
+        cloneSnackbars.update.snackbar = {
+            message: message,
+            className: 'snackbar-green'
+        }
 
         let snackbarTimeout = setTimeout(() => {
             let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
@@ -116,7 +119,10 @@ export default function Blocks () {
             message = `${ cloneSnackbars.add.amountOfTimesAdded + 1 } food blocks were added`;
         }
 
-        cloneSnackbars.add.snackbar = <Snackbar message={ message } className="snackbar-pink" />
+        cloneSnackbars.add.snackbar = {
+            message: message,
+            className: 'snackbar-pink'
+        }
 
         let snackbarTimeout = setTimeout(() => {
             let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
@@ -383,8 +389,12 @@ export default function Blocks () {
 
 
             <div className="snackbars-container">
-                { snackbars.update.snackbar ? (snackbars.update.snackbar) : (null) }
-                { snackbars.add.snackbar ? (snackbars.add.snackbar) : (null) }
+                { snackbars.update.snackbar ? (
+                    <Snackbar message={ snackbars.update.snackbar.message } className={ snackbars.update.snackbar.className } />
+                ) : (null) }
+                { snackbars.add.snackbar ? (
+                    <Snackbar message={ snackbars.add.snackbar.message } className={ snackbars.add.snackbar.className } />
+                ) : (null) }
             </div>
         </div>
     );
