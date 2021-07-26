@@ -57,7 +57,7 @@ export default function Blocks () {
 
         let message = 'food block was updated';
         if (cloneSnackbars.update.amountOfTimesUpdated >= 1) {
-            message = `${ cloneSnackbars.update.amountOfTimesUpdated + 1 } food block were updated`;
+            message = `${ cloneSnackbars.update.amountOfTimesUpdated + 1 } updates were made to food blocks`;
         }
 
         cloneSnackbars.update.snackbar = <Snackbar message={ message } className="snackbar-green" />
