@@ -155,6 +155,8 @@ export default function Blocks () {
         event.preventDefault();
         addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, index });
         setFoodBlocks(getFoodFromLocalStorage(date));
+
+        addFoodBlockSnackbar();
     }
 
     return (
