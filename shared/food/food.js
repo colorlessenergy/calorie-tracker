@@ -60,8 +60,8 @@ export function addEmptyFoodBlockToLocalStorage (date) {
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     foodBlocksFromLocalStorage[date].push({
         name: '',
-        calories: 0,
-        increment: 0,
+        calories: 1,
+        increment: 1,
         unit: '',
         amount: 0,
         limit: 1,
