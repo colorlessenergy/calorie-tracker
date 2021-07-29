@@ -65,7 +65,7 @@ export function addEmptyFoodBlockToLocalStorage (date) {
         unit: '',
         amount: 0,
         limit: 1,
-        ribbonColor: colors[Math.floor(Math.random() * colors.length)]
+        color: colors[Math.floor(Math.random() * colors.length)]
     });
 
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
