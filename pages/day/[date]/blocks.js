@@ -313,76 +313,76 @@ export default function Blocks () {
                     </button>
 
                     { previousFoodBlocks.length ? (
-                        <div className="text-medium">previous food blocks</div>
+                        <div className="text-medium mb-1">previous food blocks</div>
                     ) : (null) }
 
-                    <div className="previous-food-blocks-container">
+                    <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
                         { previousFoodBlocks.map((foodBlock, index) => {
                             return (
-                                <div key={index}>
-                                    <form
-                                        onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
-                                        className="flex justify-content-between">
-                                        <div className="flex flex-direction-column align-items-start">
-                                            <label htmlFor={`${ index }-previous-name`}>
-                                                food
-                                            </label>
-                                            <input
-                                                disabled={ true }
-                                                value={ foodBlock.name }
-                                                type="text"
-                                                id={`${ index }-previous-name`} />
+                                <form
+                                    key={ index }
+                                    onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
+                                    className="flex flex-direction-column justify-content-between mb-2 p-1 food-block-form"
+                                    style={{ borderTop: `20px solid ${ foodBlock.ribbonColor }` }}>
+                                    <div className="flex flex-direction-column align-items-start">
+                                        <label htmlFor={`${ index }-previous-name`}>
+                                            food
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.name }
+                                            type="text"
+                                            id={`${ index }-previous-name`} />
 
-                                            <label htmlFor={`${ index }-previous-calories`}>
-                                                calories
-                                            </label>
-                                            <input
-                                                disabled={ true }
-                                                value={ foodBlock.calories }
-                                                type="number"
-                                                id={`${ index }-previous-calories`} />
+                                        <label htmlFor={`${ index }-previous-calories`}>
+                                            calories
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.calories }
+                                            type="number"
+                                            id={`${ index }-previous-calories`} />
 
-                                            <label htmlFor={`${ index }-previous-increment`}>
-                                                increment
-                                            </label>
-                                            <input
-                                                disabled={ true }
-                                                value={ foodBlock.increment }
-                                                type="number"
-                                                id={`${ index }-previous-increment`} />
+                                        <label htmlFor={`${ index }-previous-increment`}>
+                                            increment
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.increment }
+                                            type="number"
+                                            id={`${ index }-previous-increment`} />
 
-                                            <label htmlFor={`${ index }-previous-unit`}>
-                                                unit
-                                            </label>
-                                            <input
-                                                disabled={ true }
-                                                value={ foodBlock.unit }
-                                                type="text"
-                                                id={`${ index }-previous-unit`} />
+                                        <label htmlFor={`${ index }-previous-unit`}>
+                                            unit
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.unit }
+                                            type="text"
+                                            id={`${ index }-previous-unit`} />
 
-                                            <label htmlFor={`${ index }-previous-limit`}>
-                                                limit
-                                            </label>
-                                            <input
-                                                disabled={ true }
-                                                value={ foodBlock.limit }
-                                                type="number"
-                                                id={`${ index }-previous-limit`} />
-                                        </div> 
+                                        <label htmlFor={`${ index }-previous-limit`}>
+                                            limit
+                                        </label>
+                                        <input
+                                            disabled={ true }
+                                            value={ foodBlock.limit }
+                                            type="number"
+                                            id={`${ index }-previous-limit`} />
+                                    </div> 
 
-                                        <div className="flex flex-direction-column">
-                                            <button
-                                                type="button"
-                                                onClick={ () => removePreviousFoodBlock(index) }
-                                                className="button button-red mb-2">
-                                                remove
-                                            </button>
-                                            <button className="button button-pink">
-                                                add
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    <div className="flex justify-content-between">
+                                        <button
+                                            type="button"
+                                            onClick={ () => removePreviousFoodBlock(index) }
+                                            className="button button-red">
+                                            remove
+                                        </button>
+                                        <button className="button button-pink">
+                                            add
+                                        </button>
+                                    </div>
+                                </form>
                             );
                         }) }
                     </div>
