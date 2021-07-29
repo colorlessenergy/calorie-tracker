@@ -81,7 +81,7 @@ export default function Date () {
                             key={ index } 
                             className="card"
                             style={{ backgroundColor: foodBlock.ribbonColor }}>
-                            <div>
+                            <div className="flex justify-content-between w-100">
                                 <div>
                                     { foodBlock.name }
                                 </div>
@@ -90,14 +90,20 @@ export default function Date () {
                                 </div>
                             </div> 
 
-                            <div>
-                                <button onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}>
+                            <div className="mx-1 text-large">
+                                { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
+                            </div>
+
+                            <div className="flex justify-content-between w-100">
+                                <button
+                                    onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}
+                                    className="card-button">
                                     -
                                 </button>
-                                <span className="mx-1">
-                                    { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
-                                </span>
-                                <button onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}>
+                                
+                                <button
+                                    onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}
+                                    className="card-button">
                                     +
                                 </button>
                             </div>
