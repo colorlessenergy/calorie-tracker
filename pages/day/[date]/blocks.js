@@ -300,7 +300,7 @@ export default function Blocks () {
 
                     <button
                         onClick={ () => addFoodBlock(date) }
-                        className="align-self-start text-decoration-underline mb-1">
+                        className="align-self-start text-decoration-underline text-medium mb-1">
                         add a new food block
                     </button>
 
