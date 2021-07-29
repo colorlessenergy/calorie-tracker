@@ -80,7 +80,7 @@ export default function Date () {
                         <div
                             key={ index } 
                             className="card"
-                            style={{ backgroundColor: foodBlock.ribbonColor }}>
+                            style={{ backgroundColor: foodBlock.color }}>
                             <div className="flex justify-content-between w-100">
                                 <div>
                                     { foodBlock.name }

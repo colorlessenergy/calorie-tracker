@@ -88,7 +88,7 @@ export default function Blocks () {
 
     const updateColor = ({ index, color }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        cloneFoodBlocks[index].ribbonColor = color;
+        cloneFoodBlocks[index].color = color;
         setFoodBlocks(cloneFoodBlocks);
     }
 
@@ -207,7 +207,7 @@ export default function Blocks () {
                             key={ index }
                             onSubmit={ (event) => handleSubmit({ event, index }) }
                             className="flex flex-direction-column justify-content-between mb-2 p-1 food-block-form"
-                            style={{ borderTop: `20px solid ${ foodBlock.ribbonColor }` }}>
+                            style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
                             <div className="flex flex-direction-column align-items-start mb-2">
                                 <label htmlFor={`${ index }-name`}>
                                     food
@@ -275,7 +275,7 @@ export default function Blocks () {
                                                 key={ color }
                                                 onClick={ () => updateColor({ index, color }) }
                                                 className="circle mr-1 cursor-pointer"
-                                                style={{ backgroundColor: color, border: color === foodBlock.ribbonColor ? "3px solid #000000" : null }}
+                                                style={{ backgroundColor: color, border: color === foodBlock.color ? "3px solid #000000" : null }}
                                                 title={`${ color }`}>
                                             </div>
                                         );
@@ -323,7 +323,7 @@ export default function Blocks () {
                                     key={ index }
                                     onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
                                     className="flex flex-direction-column justify-content-between mb-2 p-1 food-block-form"
-                                    style={{ borderTop: `20px solid ${ foodBlock.ribbonColor }` }}>
+                                    style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
                                     <div className="flex flex-direction-column align-items-start">
                                         <label htmlFor={`${ index }-previous-name`}>
                                             food
