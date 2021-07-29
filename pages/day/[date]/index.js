@@ -56,7 +56,7 @@ export default function Date () {
                     { totalCalories } total calories
                 </div>
                 <div>
-                    { goalCalories } goal calories
+                    { goalCalories } calorie goal
                 </div>
             </div>
 
