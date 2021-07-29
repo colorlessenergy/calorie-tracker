@@ -70,7 +70,12 @@ export default function Blocks () {
             cloneSnackbars.update.snackbar = null;
             cloneSnackbars.update.timeout = null;
             cloneSnackbars.update.amountOfTimesUpdated = 0;
-            setSnackbars(cloneSnackbars)
+            setSnackbars(previousSnackbars => { 
+                return {
+                    ...previousSnackbars,
+                    update: cloneSnackbars.update
+                }
+            });
         }, 5000);
 
         cloneSnackbars.update.timeout = snackbarTimeout;
@@ -124,7 +129,12 @@ export default function Blocks () {
             cloneSnackbars.add.snackbar = null;
             cloneSnackbars.add.timeout = null;
             cloneSnackbars.add.amountOfTimesAdded = 0;
-            setSnackbars(cloneSnackbars)
+            setSnackbars(previousSnackbars => { 
+                return {
+                    ...previousSnackbars,
+                    add: cloneSnackbars.add
+                }
+            });
         }, 5000);
 
         cloneSnackbars.add.timeout = snackbarTimeout;
@@ -159,6 +169,8 @@ export default function Blocks () {
 
         addFoodBlockSnackbar();
     }
+
+    console.log(snackbars)
 
     return (
         <div className="container">
