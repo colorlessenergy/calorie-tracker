@@ -9,7 +9,7 @@ import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../
 export default function Date () {
     const router = useRouter();
     const date = router.query.date;
-    const [ foodBlocks, setFoodBlocks ] = useState([]);
+    const [ foodBlocks, setFoodBlocks ] = useState(null);
 
     useEffect(() => {
         if (date) {
@@ -20,7 +20,7 @@ export default function Date () {
     const [ totalCalories, setTotalCalories ] = useState(0);
     useEffect(() => {
         let calories = 0;
-        foodBlocks.forEach((foodBlock) => {
+        foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.amount * foodBlock.calories;
         });
         setTotalCalories(calories);
@@ -29,7 +29,7 @@ export default function Date () {
     const [ goalCalories, setGoalCalories ] = useState(0);
     useEffect(() => {
         let calories = 0;
-        foodBlocks.forEach((foodBlock) => {
+        foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.limit * foodBlock.calories;
         });
         setGoalCalories(calories);
@@ -60,7 +60,7 @@ export default function Date () {
                 </div>
             </div>
 
-            { foodBlocks.length === 0 ? (
+            { foodBlocks?.length === 0 ? (
                 <>
                     <div className="no-food-blocks-emoji">
                         🍉
@@ -75,7 +75,7 @@ export default function Date () {
             ) : (null) }
 
             <div className="flex flex-wrap justify-content-between">
-                { foodBlocks.map((foodBlock, index) => {
+                { foodBlocks?.map((foodBlock, index) => {
                     return (
                         <div
                             key={ index } 

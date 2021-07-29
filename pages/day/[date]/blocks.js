@@ -12,7 +12,7 @@ const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 export default function Blocks () {
     const router = useRouter();
     const date = router.query.date;
-    const [ foodBlocks, setFoodBlocks ] = useState([]);
+    const [ foodBlocks, setFoodBlocks ] = useState(null);
     useEffect(() => {
         if (date) {
             setFoodBlocks(getFoodFromLocalStorage(date));
@@ -22,7 +22,7 @@ export default function Blocks () {
     const [ totalCalories, setTotalCalories ] = useState(0);
     useEffect(() => {
         let calories = 0;
-        foodBlocks.forEach((foodBlock) => {
+        foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.limit * foodBlock.calories;
         });
         setTotalCalories(calories);
@@ -173,7 +173,7 @@ export default function Blocks () {
                 { totalCalories } calories
             </div>
 
-            { foodBlocks.length === 0 ? (
+            { foodBlocks?.length === 0 ? (
                 <>
                     <div className="no-food-blocks-emoji">
                         🍋
@@ -188,7 +188,7 @@ export default function Blocks () {
                 </>
             ) : (null) }
 
-            { foodBlocks.map((foodBlock, index) => {
+            { foodBlocks?.map((foodBlock, index) => {
                 return (
                     <div
                         key={ index }
