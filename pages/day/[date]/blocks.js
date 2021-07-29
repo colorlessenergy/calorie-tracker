@@ -200,18 +200,15 @@ export default function Blocks () {
                 </>
             ) : (null) }
 
-            { foodBlocks?.map((foodBlock, index) => {
-                return (
-                    <div
-                        key={ index }
-                        className="mb-1">
-                        <div
-                            className="ribbon"
-                            style={{ backgroundColor: foodBlock.ribbonColor }}></div>
+            <div className="flex flex-wrap justify-content-between mt-2 mx-15">
+                { foodBlocks?.map((foodBlock, index) => {
+                    return (
                         <form
+                            key={ index }
                             onSubmit={ (event) => handleSubmit({ event, index }) }
-                            className="flex justify-content-between mx-15">
-                            <div className="flex flex-direction-column align-items-start form-groups-container">
+                            className="flex flex-direction-column justify-content-between mb-2 p-1 food-block-form"
+                            style={{ borderTop: `20px solid ${ foodBlock.ribbonColor }` }}>
+                            <div className="flex flex-direction-column align-items-start mb-2">
                                 <label htmlFor={`${ index }-name`}>
                                     food
                                 </label>
@@ -286,22 +283,21 @@ export default function Blocks () {
                                 </div>
                             </div> 
 
-                            <div className="flex flex-direction-column">
+                            <div className="flex justify-content-between">
                                 <button
                                     type="button"
                                     onClick={ () => removeFoodBlock({ date, index }) }
-                                    className="button button-red mb-2">
+                                    className="button button-red">
                                     remove
                                 </button>
                                 <button className="button button-green">
                                     update
                                 </button>
                             </div>
-                        </form>
-                    </div>
-                );
-            }) }
-
+                    </form>
+                    );
+                }) }
+            </div>
             <Modal isOpen={ isModalOpen }>
                 <div className="flex flex-direction-column position-relative">
                     <button
@@ -324,13 +320,10 @@ export default function Blocks () {
                         { previousFoodBlocks.map((foodBlock, index) => {
                             return (
                                 <div key={index}>
-                                    <div
-                                        className="ribbon mx-0"
-                                        style={{ backgroundColor: foodBlock.ribbonColor }}></div>
                                     <form
                                         onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
                                         className="flex justify-content-between">
-                                        <div className="flex flex-direction-column align-items-start form-groups-container">
+                                        <div className="flex flex-direction-column align-items-start">
                                             <label htmlFor={`${ index }-previous-name`}>
                                                 food
                                             </label>
