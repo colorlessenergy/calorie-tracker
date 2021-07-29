@@ -266,7 +266,7 @@ export default function Blocks () {
                                                 key={ color }
                                                 onClick={ () => updateColor({ index, color }) }
                                                 className="circle mr-1 cursor-pointer"
-                                                style={{ backgroundColor: color }}
+                                                style={{ backgroundColor: color, border: color === foodBlock.ribbonColor ? "3px solid #000000" : null }}
                                                 title={`${ color }`}>
                                             </div>
                                         );
