@@ -23,8 +23,6 @@ button {
 }
 
 label {
-  margin-left: 4px;
-
   color: #606060;
   font-size: 14px;
 }
@@ -44,24 +42,26 @@ input {
 @import "./utilities.scss";
 @import "./module.scss";
 
-@media (min-width: 521px) {
-  .form-groups-container {
-    width: 60%;
+@media (min-width: 400px) {
+  .snackbars-container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 600px) {
+  .food-block-form {
+    width: 48%;
   }
 }
 
 @media (min-width: 867px) {
-  .form-groups-container {
-    width: 40%;
-  }
-
   .card {
     width: 30%;
   }
 }
 
-@media (min-width: 400) {
-  .snackbars-container {
-    width: 50%;
+@media (min-width: 1100px) {
+  .food-block-form {
+    width: 32%;
   }
 }
