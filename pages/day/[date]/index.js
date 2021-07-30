@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
+import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
 
@@ -63,7 +65,11 @@ export default function Date () {
             { foodBlocks?.length === 0 ? (
                 <>
                     <div className="no-food-blocks-emoji">
-                        🍉
+                        <Image
+                            height={ 140 }
+                            width={ 140 }
+                            src={ watermelonIcon }
+                            alt="watermelon icon" />
                     </div>
                     <p className="text-center text-medium text-gray">
                         no food blocks
