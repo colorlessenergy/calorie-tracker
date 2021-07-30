@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 
@@ -10,6 +11,25 @@ export default function Home() {
         date = date.toLocaleDateString('en-US').replace(/\//g, '-');
         router.push(`day/${ date }`);
     }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && 'serviceWorker' in navigator && window.workbox !== undefined) {
+            const wb = window.workbox
+            const promptNewVersionAvailable = () => {
+                if (confirm('A newer version of this web app is available, reload to update?')) {
+                    wb.addEventListener('controlling', () => {
+                        window.location.reload()
+                    });
+
+                    wb.messageSkipWaiting();
+                } 
+            }
+
+            wb.addEventListener('waiting', promptNewVersionAvailable);
+
+            wb.register();
+        }
+    }, []);
 
     return (
         <div>
