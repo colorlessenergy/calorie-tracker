@@ -154,6 +154,10 @@ export default function Blocks () {
     const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
     useEffect(() => {
         setPreviousFoodBlocks(JSON.parse(localStorage.getItem('previousFoodBlocks')) || []);
+
+        if (router.query.modalOpen === "true") {
+            setIsModalOpen(true);
+        }
     }, []);
 
     const removePreviousFoodBlock = (index) => {

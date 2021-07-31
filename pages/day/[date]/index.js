@@ -74,7 +74,7 @@ export default function Date () {
                     <p className="text-center text-medium text-gray">
                         no food blocks
                     </p>
-                    <Link href={`/day/${ date }/blocks`}>
+                    <Link href={`/day/${ date }/blocks?modalOpen=true`}>
                         <a className="text-center text-large d-block">add a food block</a>
                     </Link>
                 </>
