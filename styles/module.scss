@@ -97,6 +97,10 @@
   background-color: #ffffff;
 }
 
+body.modal-is-open {
+  overflow: hidden;
+}
+
 .previous-food-blocks-container {
   max-height: 500px;
   overflow-y: scroll;
