@@ -170,8 +170,6 @@ export default function Blocks () {
         addFoodBlockSnackbar();
     }
 
-    console.log(snackbars)
-
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
