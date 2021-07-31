@@ -52,6 +52,14 @@ input {
   .food-block-form {
     width: 48%;
   }
+
+  .modal-content {
+    width: 80%;
+  }
+
+  .modal-button-close {
+    right: -26px;
+  }
 }
 
 @media (min-width: 867px) {

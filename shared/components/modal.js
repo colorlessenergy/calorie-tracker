@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const Modal = ({ isOpen, toggleModal, children }) => {
     const modalRef = useRef(null);
@@ -7,6 +7,14 @@ const Modal = ({ isOpen, toggleModal, children }) => {
             toggleModal();
         }
     }
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('modal-is-open');
+        } else {
+            document.body.classList.remove('modal-is-open');
+        }
+    }, [ isOpen ]);
 
     return (
        <div

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import orangeIcon from '../../../public/icons/orange.svg';
 
 import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
@@ -152,6 +154,10 @@ export default function Blocks () {
     const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
     useEffect(() => {
         setPreviousFoodBlocks(JSON.parse(localStorage.getItem('previousFoodBlocks')) || []);
+
+        if (router.query.modalOpen === "true") {
+            setIsModalOpen(true);
+        }
     }, []);
 
     const removePreviousFoodBlock = (index) => {
@@ -170,8 +176,6 @@ export default function Blocks () {
         addFoodBlockSnackbar();
     }
 
-    console.log(snackbars)
-
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
@@ -188,7 +192,11 @@ export default function Blocks () {
             { foodBlocks?.length === 0 ? (
                 <>
                     <div className="no-food-blocks-emoji">
-                        🍋
+                        <Image
+                            height={ 140 }
+                            width={ 140 }
+                            src={ orangeIcon }
+                            alt="orange icon" />
                     </div>
                     <p className="text-center text-medium text-gray">
                         no food blocks

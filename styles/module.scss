@@ -65,7 +65,7 @@
   padding: 5px;
   position: absolute;
   top: -22px;
-  right: -26px;
+  right: 0;
 
   background-color: #ffffff;
 }
@@ -92,9 +92,13 @@
 .modal-content {
   padding: 10px;
   min-height: 200px;
-  width: 80%;
+  width: 100%;
 
   background-color: #ffffff;
+}
+
+body.modal-is-open {
+  overflow: hidden;
 }
 
 .previous-food-blocks-container {
