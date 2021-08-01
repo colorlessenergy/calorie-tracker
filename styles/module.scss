@@ -173,6 +173,11 @@ body.modal-is-open {
 .react-calendar__month-view__weekdays__weekday {
   font-family: "Roboto", sans-serif;
 }
+
 .react-calendar__month-view__weekdays__weekday abbr[title] {
   text-decoration: none;
+}
+
+.react-calendar__navigation__arrow {
+  font-size: 30px;
 }
