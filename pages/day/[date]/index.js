@@ -97,7 +97,7 @@ export default function Date () {
                             </div> 
 
                             <div className="mx-1 text-large">
-                                { foodBlock.amount } / { foodBlock.limit } { foodBlock.unit }
+                                { foodBlock.amount } / { foodBlock.limit } <span className="text-medium">{ foodBlock.unit }</span>
                             </div>
 
                             <div className="flex justify-content-between w-100">
