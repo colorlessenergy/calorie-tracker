@@ -159,3 +159,20 @@ body.modal-is-open {
 .food-block-form {
   width: 100%;
 }
+
+.react-calendar {
+  border-radius: 10px;
+  border: 3px solid #000000 !important;
+}
+
+.react-calendar button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-family: "Roboto", sans-serif;
+}
+.react-calendar__month-view__weekdays__weekday abbr[title] {
+  text-decoration: none;
+}
