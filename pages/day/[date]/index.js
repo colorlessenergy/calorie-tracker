@@ -50,7 +50,7 @@ export default function Date () {
     }
 
     return (
-        <>
+        <div className="container">
             <Nav />
 
             <div className="mx-15 mt-1 mb-1 flex">
@@ -117,6 +117,6 @@ export default function Date () {
                     )
                 }) }
             </div>
-        </> 
+        </div> 
     );
 }
