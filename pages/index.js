@@ -44,7 +44,7 @@ export default function Home() {
 
             <Calender
                 onChange={ onChange }
-                className="mt-5 m-center" />
+                className="m-center" />
         </div>
     );
 }
