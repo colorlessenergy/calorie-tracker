@@ -9,7 +9,7 @@ export default function Nav ({ link }) {
         <div className="flex justify-content-between align-items-center pt-3 mx-15 nav">
             <Link href="/">
                 <a>
-                    home
+                    calendar
                 </a>
             </Link>
             { link ? (
