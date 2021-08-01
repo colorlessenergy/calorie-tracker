@@ -52,13 +52,14 @@ input {
   }
 
   .nav {
-    border: 1px solid #000000;
-    background-color: #ffffff;
+    border-top: 3px solid #000000;
     margin: 0;
     padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
+
+    background-color: #ffffff;
   }
 }
 
