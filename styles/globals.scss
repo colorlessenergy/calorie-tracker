@@ -42,6 +42,22 @@ input {
 @import "./utilities.scss";
 @import "./module.scss";
 
+@media (max-width: 411px) {
+  .container {
+    padding-bottom: 41px;
+  }
+
+  .nav {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
 @media (min-width: 400px) {
   .snackbars-container {
     width: 50%;

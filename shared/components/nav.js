@@ -6,7 +6,7 @@ export default function Nav ({ link }) {
     const date = router.query.date;
 
     return (
-        <div className="flex justify-content-between align-items-center pt-3 mx-15">
+        <div className="flex justify-content-between align-items-center pt-3 mx-15 nav">
             <Link href="/">
                 <a>
                     home
