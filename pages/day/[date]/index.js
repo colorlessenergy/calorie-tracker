@@ -5,6 +5,7 @@ import Image from 'next/image';
 import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
+import Confetti from 'react-confetti'
 
 import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
 
@@ -20,11 +21,22 @@ export default function Date () {
     }, [ date ]);
 
     const [ totalCalories, setTotalCalories ] = useState(0);
+    const [ confetti, setConfetti ] = useState(null);
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.amount * foodBlock.calories;
         });
+
+        if (calories === goalCalories) {
+            const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const height = window.innerHeight|| document.documentElement.clientHeight || document.body.clientHeight
+            setConfetti({
+                width: width,
+                height: height
+            });
+        }
+
         setTotalCalories(calories);
     }, [ foodBlocks ]);
 
@@ -117,6 +129,14 @@ export default function Date () {
                     )
                 }) }
             </div>
+            { confetti ? (
+                <Confetti
+                    width={ confetti.width }
+                    height={ confetti.height }
+                    recycle={ false }
+                    numberOfPieces={ 200 }
+                    onConfettiComplete={ () => setConfetti(null) } />
+            ) : (null) }
         </div> 
     );
 }
