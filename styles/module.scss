@@ -184,3 +184,10 @@ body.modal-is-open {
 .react-calendar__navigation__arrow {
   font-size: 30px;
 }
+
+.import-export-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto 0 auto;
+  max-width: 350px;
+}

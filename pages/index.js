@@ -65,10 +65,22 @@ export default function Home() {
             <Calender
                 onChange={ onChange }
                 className="m-center" />
-            
-            <button
-                onClick={ exportData }
-                className="button button-green">export data</button>
+
+            <div className="import-export-buttons">
+                <button
+                    onClick={ exportData }
+                    className="button button-green">export data</button>
+                
+
+                <label
+                    htmlFor="import-data"
+                    className="button button-pink cursor-pointer">import data</label>
+                <input
+                    type="file"
+                    id="import-data"
+                    accept=".json"
+                    className="hidden" />
+            </div>
         </div>
     );
 }
