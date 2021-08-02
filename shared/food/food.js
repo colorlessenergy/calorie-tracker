@@ -82,6 +82,14 @@ export function addPreviousFoodBlockToFoodBlocksInLocalStorage ({ date, index })
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
+/**
+ * 
+ * add a single food blocks to previous food blocks in localStorage
+ * 
+ * @param { Object } foodBlock - a food block
+ * @param { Function } setPreviousFoodBlocks - set previous food blocks for react UI
+ */
+
 export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks }) {
     if (!localStorage.getItem('previousFoodBlocks')) {
         localStorage.setItem('previousFoodBlocks', JSON.stringify([]));
