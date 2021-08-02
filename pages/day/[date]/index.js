@@ -28,7 +28,7 @@ export default function Date () {
             calories += foodBlock.amount * foodBlock.calories;
         });
 
-        if (calories === goalCalories) {
+        if (calories === goalCalories && goalCalories !== 0) {
             const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             const height = window.innerHeight|| document.documentElement.clientHeight || document.body.clientHeight
             setConfetti({
