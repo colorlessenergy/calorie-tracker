@@ -100,15 +100,11 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     let isFoodBlockNew = true;
     for (let i = 0; i < previousFoodBlocksFromLocalStorage.length; i++) {
         let previousFoodBlock = previousFoodBlocksFromLocalStorage[i];
+        isFoodBlockNew = !(areFoodBlocksEqual(previousFoodBlock, foodBlock));
 
-        if (previousFoodBlock.name === foodBlock.name &&
-            previousFoodBlock.calories === foodBlock.calories &&
-            previousFoodBlock.increment === foodBlock.increment &&
-            previousFoodBlock.unit === foodBlock.unit &&
-            previousFoodBlock.amount === foodBlock.amount &&
-            previousFoodBlock.limit === foodBlock.limit) {
-                isFoodBlockNew = false;
-            }
+        if (isFoodBlockNew === true) {
+            break;
+        }
     }
 
     if (isFoodBlockNew) {
@@ -117,6 +113,19 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     }
 
     localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
+}
+
+const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
+    if (foodBlockOne.name === foodBlockTwo.name &&
+        foodBlockOne.calories === foodBlockTwo.calories &&
+        foodBlockOne.increment === foodBlockTwo.increment &&
+        foodBlockOne.unit === foodBlockTwo.unit &&
+        foodBlockOne.amount === foodBlockTwo.amount &&
+        foodBlockOne.limit === foodBlockTwo.limit) {
+            return true;
+    }
+
+    return false;
 }
 
 export function removePreviousFoodBlockFromLocalStorage (index) {
