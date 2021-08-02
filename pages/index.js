@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+import { addPreviousFoodBlockToLocalStorage } from '../shared/food/food';
+
 export default function Home() {
     const router = useRouter();
     const onChange = (date) => {
@@ -51,6 +53,21 @@ export default function Home() {
         document.body.removeChild(anchorElement);
     }
 
+
+    const importData = (event) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const importedData = JSON.parse(e.target.result)
+            const previousFoodBlocks = JSON.parse(importedData.previousFoodBlocks);
+
+            previousFoodBlocks.forEach(previousFoodBlock => {
+                addPreviousFoodBlockToLocalStorage({ foodBlock: previousFoodBlock })
+            });
+        }
+
+        reader.readAsText(event.target.files[0]);
+    }
+
     return (
         <div>
             <Head>
@@ -79,6 +96,7 @@ export default function Home() {
                     type="file"
                     id="import-data"
                     accept=".json"
+                    onChange={ importData }
                     className="hidden" />
             </div>
         </div>
