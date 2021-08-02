@@ -113,7 +113,7 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
 
     if (isFoodBlockNew) {
         previousFoodBlocksFromLocalStorage.push(foodBlock);
-        setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
+        if (setPreviousFoodBlocks) setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
     }
 
     localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
