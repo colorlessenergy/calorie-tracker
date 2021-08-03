@@ -187,6 +187,8 @@ body.modal-is-open {
 
 .import-export-buttons {
   display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 10px auto 0 auto;
   max-width: 350px;
