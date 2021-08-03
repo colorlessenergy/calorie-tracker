@@ -161,7 +161,7 @@ export default function Home() {
                 onChange={ onChange }
                 className="m-center" />
 
-            <div className="import-export-buttons">
+            <div className="data-buttons">
                 <button
                     onClick={ exportData }
                     className="button button-green mb-1">export data</button>
