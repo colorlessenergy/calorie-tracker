@@ -43,8 +43,10 @@
 
 .button {
   padding: 12px 20px;
+
   color: #ffffff;
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
   text-transform: uppercase;
 }
 
@@ -68,6 +70,7 @@
   right: 0;
 
   background-color: #ffffff;
+  font-size: 16px;
 }
 
 .container {
@@ -180,4 +183,13 @@ body.modal-is-open {
 
 .react-calendar__navigation__arrow {
   font-size: 30px;
+}
+
+.data-buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px auto 0 auto;
+  max-width: 350px;
 }

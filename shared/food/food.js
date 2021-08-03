@@ -82,6 +82,14 @@ export function addPreviousFoodBlockToFoodBlocksInLocalStorage ({ date, index })
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
+/**
+ * 
+ * add a single food blocks to previous food blocks in localStorage
+ * 
+ * @param { Object } foodBlock - a food block
+ * @param { Function } setPreviousFoodBlocks - set previous food blocks for react UI
+ */
+
 export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks }) {
     if (!localStorage.getItem('previousFoodBlocks')) {
         localStorage.setItem('previousFoodBlocks', JSON.stringify([]));
@@ -92,23 +100,31 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     let isFoodBlockNew = true;
     for (let i = 0; i < previousFoodBlocksFromLocalStorage.length; i++) {
         let previousFoodBlock = previousFoodBlocksFromLocalStorage[i];
-
-        if (previousFoodBlock.name === foodBlock.name &&
-            previousFoodBlock.calories === foodBlock.calories &&
-            previousFoodBlock.increment === foodBlock.increment &&
-            previousFoodBlock.unit === foodBlock.unit &&
-            previousFoodBlock.amount === foodBlock.amount &&
-            previousFoodBlock.limit === foodBlock.limit) {
-                isFoodBlockNew = false;
-            }
+        if (areFoodBlocksEqual(previousFoodBlock, foodBlock)) {
+            isFoodBlockNew = false;
+            break;
+        }
     }
 
     if (isFoodBlockNew) {
         previousFoodBlocksFromLocalStorage.push(foodBlock);
-        setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
+        if (setPreviousFoodBlocks) setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
     }
 
     localStorage.setItem('previousFoodBlocks', JSON.stringify(previousFoodBlocksFromLocalStorage));
+}
+
+const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
+    if (foodBlockOne.name === foodBlockTwo.name &&
+        foodBlockOne.calories === foodBlockTwo.calories &&
+        foodBlockOne.increment === foodBlockTwo.increment &&
+        foodBlockOne.unit === foodBlockTwo.unit &&
+        foodBlockOne.amount === foodBlockTwo.amount &&
+        foodBlockOne.limit === foodBlockTwo.limit) {
+            return true;
+    }
+
+    return false;
 }
 
 export function removePreviousFoodBlockFromLocalStorage (index) {
@@ -116,4 +132,36 @@ export function removePreviousFoodBlockFromLocalStorage (index) {
     previousFoodBlocksFromLocalStorage.splice(index, 1);
     previousFoodBlocksFromLocalStorage = JSON.stringify(previousFoodBlocksFromLocalStorage);
     localStorage.setItem('previousFoodBlocks', previousFoodBlocksFromLocalStorage);
+}
+
+export function importFoodBlocks (foodBlocks) {
+    if (Object.keys(foodBlocks).length === 0) return;
+
+    if (!localStorage.getItem('foodBlocks')) {
+        localStorage.setItem('foodBlocks', JSON.stringify({}));
+    }
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    for (const date in foodBlocks) {
+        if (!foodBlocksFromLocalStorage[date] || foodBlocksFromLocalStorage[date].length === 0) {
+            foodBlocksFromLocalStorage[date] = foodBlocks[date];
+            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+        } else {
+            foodBlocks[date].forEach(foodBlock => {
+                let doesFoodBlockExist = false;
+                for (let i = 0; i < foodBlocksFromLocalStorage[date].length; i++) {
+                    if (areFoodBlocksEqual(foodBlocksFromLocalStorage[date][i], foodBlock)) {
+                        doesFoodBlockExist = true;
+                        break;
+                    }
+                }
+
+                if (doesFoodBlockExist === false) {
+                    foodBlocksFromLocalStorage[date].push(foodBlock);
+                }
+            });
+
+            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+        }
+    }
 }
