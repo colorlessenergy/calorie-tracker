@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Snackbar from '../shared/components/Snackbar/Snackbar';
 
 import { addPreviousFoodBlockToLocalStorage, importFoodBlocks } from '../shared/food/food';
 
@@ -33,6 +34,12 @@ export default function Home() {
         }
     }, []);
 
+    const [ snackbars, setSnackbars ] = useState({
+        clear: {
+            snackbar: null,
+            timeout: null
+        }
+    });
 
     const exportData = () => {
         const foodBlocks = localStorage.getItem('foodBlocks');
@@ -71,6 +78,36 @@ export default function Home() {
         reader.readAsText(event.target.files[0]);
     }
 
+    const clearLocalStorage = () => {
+        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+        if (cloneSnackbars.clear.timeout) {
+            clearTimeout(snackbars.clear.timeout);
+        }
+
+        let message = 'cleared all data';
+        cloneSnackbars.clear.snackbar = {
+            message: message,
+            className: 'snackbar-red'
+        }
+
+        let snackbarTimeout = setTimeout(() => {
+            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+            cloneSnackbars.clear.snackbar = null;
+            cloneSnackbars.clear.timeout = null;
+            setSnackbars(previousSnackbars => { 
+                return {
+                    ...previousSnackbars,
+                    clear: cloneSnackbars.clear
+                }
+            });
+        }, 5000);
+
+        cloneSnackbars.clear.timeout = snackbarTimeout;
+        setSnackbars(cloneSnackbars);
+
+        localStorage.clear();
+    }
+
     return (
         <div>
             <Head>
@@ -102,8 +139,16 @@ export default function Home() {
                     className="hidden" />
 
                 <button
-                    onClick={ () => localStorage.clear() }
+                    onClick={ clearLocalStorage }
                     className="button button-red flex-grow-1">clear data</button>
+            </div>
+
+
+
+            <div className="snackbars-container">
+                { snackbars.clear.snackbar ? (
+                    <Snackbar message={ snackbars.clear.snackbar.message } className={ snackbars.clear.snackbar.className } />
+                ) : (null) }
             </div>
         </div>
     );
