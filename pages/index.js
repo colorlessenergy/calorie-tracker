@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Image from 'next/image';
+import gearIcon from '../public/icons/gear.svg';
 
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -153,6 +156,17 @@ export default function Home() {
                 <meta name="description" content="calorie tracker" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
+            <Link href="/settings">
+                <a className="d-block text-right">
+                    <Image
+                        src={ gearIcon }
+                        alt="gear icon"
+                        width={ 50 }
+                        height={ 50 }
+                        title="gear icon" />
+                </a>
+            </Link>
 
             <h1 className="my-0 pt-3 text-center">calorie tracker</h1>
             <p className="my-0 mb-2 text-center">track calories for a day</p>
