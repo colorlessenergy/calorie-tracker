@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -7,8 +7,6 @@ import gearIcon from '../public/icons/gear.svg';
 
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Snackbar from '../shared/components/Snackbar/Snackbar';
-
 
 export default function Home() {
     const router = useRouter();
@@ -36,44 +34,6 @@ export default function Home() {
         }
     }, []);
 
-    const [ snackbars, setSnackbars ] = useState({
-        clear: {
-            snackbar: null,
-            timeout: null
-        }
-    });
-
-
-    const clearLocalStorage = () => {
-        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-        if (cloneSnackbars.clear.timeout) {
-            clearTimeout(snackbars.clear.timeout);
-        }
-
-        let message = 'cleared all data';
-        cloneSnackbars.clear.snackbar = {
-            message: message,
-            className: 'snackbar-red'
-        }
-
-        let snackbarTimeout = setTimeout(() => {
-            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-            cloneSnackbars.clear.snackbar = null;
-            cloneSnackbars.clear.timeout = null;
-            setSnackbars(previousSnackbars => { 
-                return {
-                    ...previousSnackbars,
-                    clear: cloneSnackbars.clear
-                }
-            });
-        }, 5000);
-
-        cloneSnackbars.clear.timeout = snackbarTimeout;
-        setSnackbars(cloneSnackbars);
-
-        localStorage.clear();
-    }
-
     return (
         <div>
             <Head>
@@ -99,18 +59,6 @@ export default function Home() {
             <Calender
                 onChange={ onChange }
                 className="m-center" />
-
-            <div className="data-buttons">
-                <button
-                    onClick={ clearLocalStorage }
-                    className="button button-red flex-grow-1">clear data</button>
-            </div>
-
-            <div className="snackbars-container">
-                { snackbars.clear.snackbar ? (
-                    <Snackbar message={ snackbars.clear.snackbar.message } className={ snackbars.clear.snackbar.className } />
-                ) : (null) }
-            </div>
         </div>
     );
 }
