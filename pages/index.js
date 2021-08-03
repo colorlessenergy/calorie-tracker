@@ -168,7 +168,7 @@ export default function Home() {
                 </a>
             </Link>
 
-            <h1 className="my-0 pt-3 text-center">calorie tracker</h1>
+            <h1 className="my-0 text-center">calorie tracker</h1>
             <p className="my-0 mb-2 text-center">track calories for a day</p>
 
             <Calender
