@@ -35,6 +35,10 @@ export default function Home() {
     }, []);
 
     const [ snackbars, setSnackbars ] = useState({
+        add: {
+            snackbar: null,
+            timeout: null
+        },
         clear: {
             snackbar: null,
             timeout: null
@@ -61,7 +65,36 @@ export default function Home() {
     }
 
 
+    const createAddSnackbar = (message) => {
+        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+        if (cloneSnackbars.add.timeout) {
+            clearTimeout(snackbars.add.timeout);
+        }
+
+        cloneSnackbars.add.snackbar = {
+            message: message,
+            className: 'snackbar-pink'
+        }
+
+        let snackbarTimeout = setTimeout(() => {
+            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
+            cloneSnackbars.add.snackbar = null;
+            cloneSnackbars.add.timeout = null;
+            setSnackbars(previousSnackbars => { 
+                return {
+                    ...previousSnackbars,
+                    add: cloneSnackbars.add
+                }
+            });
+        }, 5000);
+
+        cloneSnackbars.add.timeout = snackbarTimeout;
+        setSnackbars(cloneSnackbars);
+    }
+
     const importData = (event) => {
+        createAddSnackbar('started to import data');
+
         const reader = new FileReader();
         reader.onload = (e) => {
             const importedData = JSON.parse(e.target.result)
@@ -73,6 +106,7 @@ export default function Home() {
 
             const foodBlocks = JSON.parse(importedData.foodBlocks)
             importFoodBlocks(foodBlocks);
+            createAddSnackbar('all data imported');
         }
 
         reader.readAsText(event.target.files[0]);
@@ -146,6 +180,10 @@ export default function Home() {
 
 
             <div className="snackbars-container">
+                { snackbars.add.snackbar ? (
+                    <Snackbar message={ snackbars.add.snackbar.message } className={ snackbars.add.snackbar.className } />
+                ) : (null) }
+
                 { snackbars.clear.snackbar ? (
                     <Snackbar message={ snackbars.clear.snackbar.message } className={ snackbars.clear.snackbar.className } />
                 ) : (null) }
