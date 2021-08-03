@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-import { addPreviousFoodBlockToLocalStorage } from '../shared/food/food';
+import { addPreviousFoodBlockToLocalStorage, importFoodBlocks } from '../shared/food/food';
 
 export default function Home() {
     const router = useRouter();
@@ -63,6 +63,9 @@ export default function Home() {
             previousFoodBlocks.forEach(previousFoodBlock => {
                 addPreviousFoodBlockToLocalStorage({ foodBlock: previousFoodBlock })
             });
+
+            const foodBlocks = JSON.parse(importedData.foodBlocks)
+            importFoodBlocks(foodBlocks);
         }
 
         reader.readAsText(event.target.files[0]);

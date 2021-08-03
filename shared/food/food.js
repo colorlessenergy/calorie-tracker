@@ -133,3 +133,35 @@ export function removePreviousFoodBlockFromLocalStorage (index) {
     previousFoodBlocksFromLocalStorage = JSON.stringify(previousFoodBlocksFromLocalStorage);
     localStorage.setItem('previousFoodBlocks', previousFoodBlocksFromLocalStorage);
 }
+
+export function importFoodBlocks (foodBlocks) {
+    if (Object.keys(foodBlocks).length === 0) return;
+
+    if (!localStorage.getItem('foodBlocks')) {
+        localStorage.setItem('foodBlocks', JSON.stringify({}));
+    }
+
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    for (const date in foodBlocks) {
+        if (!foodBlocksFromLocalStorage[date] || foodBlocksFromLocalStorage[date].length === 0) {
+            foodBlocksFromLocalStorage[date] = foodBlocks[date];
+            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+        } else {
+            foodBlocks[date].forEach(foodBlock => {
+                let doesFoodBlockExist = false;
+                for (let i = 0; i < foodBlocksFromLocalStorage[date].length; i++) {
+                    if (areFoodBlocksEqual(foodBlocksFromLocalStorage[date][i], foodBlock)) {
+                        doesFoodBlockExist = true;
+                        break;
+                    }
+                }
+
+                if (doesFoodBlockExist === false) {
+                    foodBlocksFromLocalStorage[date].push(foodBlock);
+                }
+            });
+
+            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+        }
+    }
+}
