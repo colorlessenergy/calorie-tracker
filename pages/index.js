@@ -89,8 +89,7 @@ export default function Home() {
             <div className="import-export-buttons">
                 <button
                     onClick={ exportData }
-                    className="button button-green">export data</button>
-                
+                    className="button button-green mb-1">export data</button>
 
                 <label
                     htmlFor="import-data"
@@ -101,6 +100,10 @@ export default function Home() {
                     accept=".json"
                     onChange={ importData }
                     className="hidden" />
+
+                <button
+                    onClick={ () => localStorage.clear() }
+                    className="button button-red flex-grow-1">clear data</button>
             </div>
         </div>
     );
