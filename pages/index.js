@@ -112,6 +112,10 @@ export default function Home() {
         reader.readAsText(event.target.files[0]);
     }
 
+    const setValueToNull = event => { 
+        event.target.value = null;
+    }
+
     const clearLocalStorage = () => {
         let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
         if (cloneSnackbars.clear.timeout) {
@@ -170,6 +174,7 @@ export default function Home() {
                     id="import-data"
                     accept=".json"
                     onChange={ importData }
+                    onClick={ setValueToNull }
                     className="hidden" />
 
                 <button
