@@ -54,12 +54,21 @@
   padding-top: 30px;
 }
 
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .p-1 {
   padding: 5px;
 }
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .position-relative {
@@ -96,6 +105,14 @@
 
 .hidden {
   display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-inline-block {
+  display: inline-block;
 }
 
 .text-bold {

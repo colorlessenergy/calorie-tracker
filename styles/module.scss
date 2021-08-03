@@ -125,10 +125,6 @@ body.modal-is-open {
   color: #606060;
 }
 
-.d-block {
-  display: block;
-}
-
 .circle {
   border-radius: 50%;
   height: 20px;
@@ -183,13 +179,4 @@ body.modal-is-open {
 
 .react-calendar__navigation__arrow {
   font-size: 30px;
-}
-
-.data-buttons {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 10px auto 0 auto;
-  max-width: 350px;
 }
