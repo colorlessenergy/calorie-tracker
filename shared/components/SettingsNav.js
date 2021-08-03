@@ -4,7 +4,7 @@ import gearIcon from '../../public/icons/gear.svg';
 
 export default function SettingsNav () {
     return (
-        <div className="flex justify-content-between align-items-center mx-15 nav">
+        <div className="flex justify-content-between align-items-center mx-15 py-0 nav">
             <Link href="/">
                 <a>
                     calendar
