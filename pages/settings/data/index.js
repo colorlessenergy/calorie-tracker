@@ -6,7 +6,7 @@ export default function Data () {
         <div className="container">
             <SettingsNav />
             <div className="mx-15">
-                <h1 className="mt-0">
+                <h1 className="mt-1">
                     data 
                 </h1>
 

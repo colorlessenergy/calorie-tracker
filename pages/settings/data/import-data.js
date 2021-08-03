@@ -68,7 +68,7 @@ export default function ImportData () {
         <div className="container">
             <SettingsNav />
             <div className="mx-15">
-                <h1 className="mt-0">
+                <h1 className="mt-1">
                     import data 
                 </h1>
 

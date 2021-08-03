@@ -6,7 +6,7 @@ export default function Settings() {
         <div className="container">
             <SettingsNav />
             <div className="mx-15">
-                <h1 className="mt-0">
+                <h1 className="mt-1">
                     settings
                 </h1>
 
