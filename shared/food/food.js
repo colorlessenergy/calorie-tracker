@@ -100,9 +100,8 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     let isFoodBlockNew = true;
     for (let i = 0; i < previousFoodBlocksFromLocalStorage.length; i++) {
         let previousFoodBlock = previousFoodBlocksFromLocalStorage[i];
-        isFoodBlockNew = !(areFoodBlocksEqual(previousFoodBlock, foodBlock));
-
-        if (isFoodBlockNew === true) {
+        if (areFoodBlocksEqual(previousFoodBlock, foodBlock)) {
+            isFoodBlockNew = false;
             break;
         }
     }
