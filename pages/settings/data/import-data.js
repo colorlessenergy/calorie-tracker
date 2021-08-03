@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
 import { addPreviousFoodBlockToLocalStorage, importFoodBlocks } from '../../../shared/food/food';
@@ -65,8 +66,9 @@ export default function ImportData () {
 
     return (
         <div className="container">
+            <SettingsNav />
             <div className="mx-15">
-                <h1>
+                <h1 className="mt-0">
                     import data 
                 </h1>
 

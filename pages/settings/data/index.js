@@ -1,10 +1,12 @@
+import SettingsNav from '../../../shared/components/SettingsNav';
 import SettingsItem from '../../../shared/components/SettingsItems/SettingsItem';
 
 export default function Data () {
     return (
         <div className="container">
+            <SettingsNav />
             <div className="mx-15">
-                <h1>
+                <h1 className="mt-0">
                     data 
                 </h1>
 

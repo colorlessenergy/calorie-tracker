@@ -1,3 +1,5 @@
+import SettingsNav from "../../../shared/components/SettingsNav";
+
 export default function ExportData () {
     const exportData = () => {
         const foodBlocks = localStorage.getItem('foodBlocks');
@@ -20,8 +22,9 @@ export default function ExportData () {
 
     return (
         <div className="container">
+            <SettingsNav />
             <div className="mx-15">
-                <h1>
+                <h1 className="mt-0">
                     export data 
                 </h1>
 
