@@ -37,7 +37,7 @@ export default function Date () {
             });
         }
 
-        setTotalCalories(calories);
+        setTotalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ]);
 
     const [ goalCalories, setGoalCalories ] = useState(0);
@@ -46,7 +46,7 @@ export default function Date () {
         foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.limit * foodBlock.calories;
         });
-        setGoalCalories(calories);
+        setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
 
     const updateAmountOfFood = ({ amount, index }) => {

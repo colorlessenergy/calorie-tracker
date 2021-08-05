@@ -27,7 +27,7 @@ export default function Blocks () {
         foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.limit * foodBlock.calories;
         });
-        setTotalCalories(calories);
+        setTotalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ]);
 
     const handleChange = ({ event, index }) => {
