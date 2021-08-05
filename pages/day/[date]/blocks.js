@@ -253,7 +253,7 @@ export default function Blocks () {
                                     min="1" />
 
                                 <label htmlFor={`${ index }-unit`}>
-                                    unit
+                                    unit of measurement
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
@@ -361,7 +361,7 @@ export default function Blocks () {
                                             id={`${ index }-previous-increment`} />
 
                                         <label htmlFor={`${ index }-previous-unit`}>
-                                            unit
+                                            unit of measurement
                                         </label>
                                         <input
                                             disabled={ true }
