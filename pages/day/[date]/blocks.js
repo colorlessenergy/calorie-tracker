@@ -27,7 +27,7 @@ export default function Blocks () {
         foodBlocks?.forEach(foodBlock => {
             calories += foodBlock.limit * foodBlock.calories;
         });
-        setTotalCalories(calories);
+        setTotalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ]);
 
     const handleChange = ({ event, index }) => {
@@ -238,7 +238,8 @@ export default function Blocks () {
                                     id={`${ index }-calories`}
                                     name="calories"
                                     required
-                                    min="1" />
+                                    min="1"
+                                    step="0.1" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
@@ -349,7 +350,8 @@ export default function Blocks () {
                                             disabled={ true }
                                             value={ foodBlock.calories }
                                             type="number"
-                                            id={`${ index }-previous-calories`} />
+                                            id={`${ index }-previous-calories`}
+                                            step="0.1" />
 
                                         <label htmlFor={`${ index }-previous-increment`}>
                                             increment
