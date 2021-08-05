@@ -350,7 +350,8 @@ export default function Blocks () {
                                             disabled={ true }
                                             value={ foodBlock.calories }
                                             type="number"
-                                            id={`${ index }-previous-calories`} />
+                                            id={`${ index }-previous-calories`}
+                                            step="0.1" />
 
                                         <label htmlFor={`${ index }-previous-increment`}>
                                             increment
