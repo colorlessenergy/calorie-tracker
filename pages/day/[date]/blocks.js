@@ -238,7 +238,8 @@ export default function Blocks () {
                                     id={`${ index }-calories`}
                                     name="calories"
                                     required
-                                    min="1" />
+                                    min="1"
+                                    step="0.1" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
