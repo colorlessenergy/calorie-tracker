@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import orangeIcon from '../../../public/icons/orange.svg';
@@ -322,7 +322,13 @@ export default function Blocks () {
                     </button>
 
                     { previousFoodBlocks.length ? (
-                        <div className="text-medium mb-1">previous food blocks</div>
+                        <Fragment>
+                            <div className="text-medium mb-1">previous food blocks</div>
+
+                            <input
+                                type="text"
+                                placeholder="filter previous food blocks" />
+                        </Fragment>
                     ) : (null) }
 
                     <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
