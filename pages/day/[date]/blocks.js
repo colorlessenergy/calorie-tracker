@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import orangeIcon from '../../../public/icons/orange.svg';
@@ -176,6 +176,11 @@ export default function Blocks () {
         addFoodBlockSnackbar();
     }
 
+    const [ filterValue, setFilterValue ] = useState('');
+    const handleFilterChange = (event) => {
+        setFilterValue(event.target.value);
+    }
+
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
@@ -239,7 +244,7 @@ export default function Blocks () {
                                     name="calories"
                                     required
                                     min="1"
-                                    step="0.1" />
+                                    step="0.01" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
@@ -322,11 +327,19 @@ export default function Blocks () {
                     </button>
 
                     { previousFoodBlocks.length ? (
-                        <div className="text-medium mb-1">previous food blocks</div>
+                        <Fragment>
+                            <div className="text-medium mb-1">previous food blocks</div>
+
+                            <input
+                                type="text"
+                                onChange={ handleFilterChange }
+                                value={ filterValue }
+                                placeholder="filter previous food blocks" />
+                        </Fragment>
                     ) : (null) }
 
                     <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
-                        { previousFoodBlocks.map((foodBlock, index) => {
+                        { previousFoodBlocks.filter(previousFoodBlock => previousFoodBlock.name.toLowerCase().trim().includes(filterValue.toLowerCase().trim())).map((foodBlock, index) => {
                             return (
                                 <form
                                     key={ index }
@@ -351,7 +364,7 @@ export default function Blocks () {
                                             value={ foodBlock.calories }
                                             type="number"
                                             id={`${ index }-previous-calories`}
-                                            step="0.1" />
+                                            step="0.01" />
 
                                         <label htmlFor={`${ index }-previous-increment`}>
                                             increment
