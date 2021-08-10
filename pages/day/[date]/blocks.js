@@ -244,7 +244,7 @@ export default function Blocks () {
                                     name="calories"
                                     required
                                     min="1"
-                                    step="0.1" />
+                                    step="0.01" />
 
                                 <label htmlFor={`${ index }-increment`}>
                                     increment
@@ -364,7 +364,7 @@ export default function Blocks () {
                                             value={ foodBlock.calories }
                                             type="number"
                                             id={`${ index }-previous-calories`}
-                                            step="0.1" />
+                                            step="0.01" />
 
                                         <label htmlFor={`${ index }-previous-increment`}>
                                             increment
