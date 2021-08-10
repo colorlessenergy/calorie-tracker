@@ -176,6 +176,11 @@ export default function Blocks () {
         addFoodBlockSnackbar();
     }
 
+    const [ filterValue, setFilterValue ] = useState('');
+    const handleFilterChange = (event) => {
+        setFilterValue(event.target.value);
+    }
+
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
@@ -327,12 +332,14 @@ export default function Blocks () {
 
                             <input
                                 type="text"
+                                onChange={ handleFilterChange }
+                                value={ filterValue }
                                 placeholder="filter previous food blocks" />
                         </Fragment>
                     ) : (null) }
 
                     <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
-                        { previousFoodBlocks.map((foodBlock, index) => {
+                        { previousFoodBlocks.filter(previousFoodBlock => previousFoodBlock.name.toLowerCase().trim().includes(filterValue.toLowerCase().trim())).map((foodBlock, index) => {
                             return (
                                 <form
                                     key={ index }
