@@ -111,7 +111,6 @@ const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
         foodBlockOne.calories === foodBlockTwo.calories &&
         foodBlockOne.increment === foodBlockTwo.increment &&
         foodBlockOne.unit === foodBlockTwo.unit &&
-        foodBlockOne.amount === foodBlockTwo.amount &&
         foodBlockOne.limit === foodBlockTwo.limit) {
             return true;
     }
