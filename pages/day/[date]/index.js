@@ -6,8 +6,11 @@ import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
 import Confetti from 'react-confetti'
+import Modal from "../../../shared/components/modal";
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage } from '../../../shared/food/food';
+
+const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
 export default function Date () {
     const router = useRouter();
@@ -49,7 +52,9 @@ export default function Date () {
         setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
 
-    const updateAmountOfFood = ({ amount, index }) => {
+    const updateAmountOfFood = ({ event, amount, index }) => {
+        event.stopPropagation();
+
         amount = Number(amount);
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
         if (cloneFoodBlocks[index].amount === 0 && Math.sign(amount) === -1) {
@@ -58,12 +63,58 @@ export default function Date () {
 
         cloneFoodBlocks[index].amount += amount;
         setFoodBlocks(cloneFoodBlocks);
-        setFoodBlockIntoLocalStorage({ date, foodBlock: cloneFoodBlocks });
+        updateFoodBlockInLocalStorage({ date, index, foodBlock: cloneFoodBlocks[index] });
+    }
+
+    const [ isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen ] = useState(false);
+    const toggleEditFoodBlockModal = (foodBlock) => {
+        setFoodBlock(foodBlock);
+        setIsEditFoodBlockModalOpen(previousIsEditFoodBlockModalOpen => !previousIsEditFoodBlockModalOpen);
+    }
+
+    const [ foodBlock, setFoodBlock ] = useState({
+        name: '',
+        calories: '',
+        increment: '',
+        unit: '',
+        amount: '',
+        limit: '',
+        color: ''
+    });
+
+    const handleChange = (event) => {
+        setFoodBlock(previousFoodBlock => ({
+            ...previousFoodBlock,
+            [ event.target.id ]: event.target.value
+        }));
+    }
+
+    const updateColor = (color) => {
+        setFoodBlock(previousFoodBlock => ({
+            ...previousFoodBlock,
+            color: color
+        }));
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        updateFoodBlockInLocalStorage({ date, index: foodBlock.index, foodBlock: foodBlock });
+        setFoodBlocks(getFoodFromLocalStorage(date));
+        toggleEditFoodBlockModal({
+            name: '',
+            calories: '',
+            increment: '',
+            unit: '',
+            amount: '',
+            limit: '',
+            color: ''
+        });
     }
 
     return (
         <div className="container">
-            <Nav />
+            <Nav link={{ link: `/day/${ date }`, text: date }} />
 
             <div className="mx-15 mt-1 mb-1 flex">
                 <div className="mr-1">
@@ -94,11 +145,14 @@ export default function Date () {
 
             <div className="flex flex-wrap justify-content-between">
                 { foodBlocks?.map((foodBlock, index) => {
+                    foodBlock.index = index;
+
                     return (
                         <div
                             key={ index } 
                             className="card"
-                            style={{ backgroundColor: foodBlock.color }}>
+                            style={{ backgroundColor: foodBlock.color }}
+                            onClick={ () => toggleEditFoodBlockModal(foodBlock) }>
                             <div className="flex justify-content-between w-100">
                                 <div>
                                     { foodBlock.name }
@@ -114,13 +168,13 @@ export default function Date () {
 
                             <div className="flex justify-content-between w-100">
                                 <button
-                                    onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, amount: -foodBlock.increment, index }) }}
                                     className="card-button">
                                     -
                                 </button>
                                 
                                 <button
-                                    onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, amount: foodBlock.increment, index }) }}
                                     className="card-button">
                                     +
                                 </button>
@@ -136,6 +190,113 @@ export default function Date () {
                     recycle={ false }
                     numberOfPieces={ 200 }
                     onConfettiComplete={ () => setConfetti(null) } />
+            ) : (null) }
+
+            { isEditFoodBlockModalOpen ? (
+                <Modal isOpen={ isEditFoodBlockModalOpen }>
+                    <form
+                        onSubmit={ handleSubmit }
+                        className="flex flex-direction-column justify-content-between mb-2 p-1"
+                        style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
+                        <div className="flex flex-direction-column align-items-start mb-2">
+                            <label htmlFor="name">
+                                food
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.name }
+                                type="text"
+                                id="name"
+                                name="name"
+                                required />
+
+                            <label htmlFor="calories">
+                                calories
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.calories }
+                                type="number"
+                                id="calories"
+                                name="calories"
+                                required
+                                min="1"
+                                step="0.01" />
+
+                            <label htmlFor="increment">
+                                increment
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.increment }
+                                type="number"
+                                id="increment"
+                                name="increment"
+                                required
+                                min="1" />
+
+                            <label htmlFor="unit">
+                                unit of measurement
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.unit }
+                                type="text"
+                                id="unit"
+                                name="unit" />
+
+                            <label htmlFor="limit">
+                                limit
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.limit }
+                                type="number"
+                                id="limit"
+                                name="limit"
+                                required
+                                min="1" />
+                            <div className="text-gray text-small ml-04 mb-04">
+                                select a color
+                            </div>
+                            <div className="flex">
+                                { colors.map(color => {
+                                    return (
+                                        <div
+                                            key={ color }
+                                            onClick={ () => updateColor(color) }
+                                            className="circle mr-1 cursor-pointer"
+                                            style={{ backgroundColor: color, border: color === foodBlock.color ? "3px solid #000000" : null }}
+                                            title={`${ color }`}>
+                                        </div>
+                                    );
+                                }) }
+                            </div>
+                        </div> 
+
+                        <div className="flex justify-content-between">
+                            <button
+                                type="button"
+                                onClick={ () => {
+                                    toggleEditFoodBlockModal({
+                                        name: '',
+                                        calories: '',
+                                        increment: '',
+                                        unit: '',
+                                        amount: '',
+                                        limit: '',
+                                        color: ''
+                                    })
+                                }}
+                                className="button button-red">
+                                cancel
+                            </button>
+                            <button className="button button-green">
+                                update
+                            </button>
+                        </div>
+                    </form>
+                </Modal>
             ) : (null) }
         </div> 
     );

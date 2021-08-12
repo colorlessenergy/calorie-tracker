@@ -25,15 +25,6 @@ export function getFoodFromLocalStorage (date) {
     return getFoodBlock(date);
 }
 
-export function setFoodBlockIntoLocalStorage ({ date, foodBlock }) {
-    if (!date) return;
-
-    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
-    foodBlocksFromLocalStorage[date] = foodBlock;
-    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
-    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
-}
-
 export function updateFoodBlockInLocalStorage ({ date, index, foodBlock }) {
     if (!date) return;
 
@@ -107,6 +98,7 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     }
 
     if (isFoodBlockNew) {
+        foodBlock.amount = 0;
         previousFoodBlocksFromLocalStorage.push(foodBlock);
         if (setPreviousFoodBlocks) setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
     }
@@ -119,7 +111,6 @@ const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
         foodBlockOne.calories === foodBlockTwo.calories &&
         foodBlockOne.increment === foodBlockTwo.increment &&
         foodBlockOne.unit === foodBlockTwo.unit &&
-        foodBlockOne.amount === foodBlockTwo.amount &&
         foodBlockOne.limit === foodBlockTwo.limit) {
             return true;
     }
