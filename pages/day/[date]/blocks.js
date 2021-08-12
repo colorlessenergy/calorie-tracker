@@ -339,7 +339,11 @@ export default function Blocks () {
                     ) : (null) }
 
                     <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
-                        { previousFoodBlocks.filter(previousFoodBlock => previousFoodBlock.name.toLowerCase().trim().includes(filterValue.toLowerCase().trim())).map((foodBlock, index) => {
+                        { previousFoodBlocks.map((foodBlock, index) => {
+                            if (!(foodBlock.name.toLowerCase().trim().includes(filterValue.toLowerCase().trim()))) {
+                                return null;
+                            }
+
                             return (
                                 <form
                                     key={ index }
