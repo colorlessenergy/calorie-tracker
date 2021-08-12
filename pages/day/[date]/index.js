@@ -8,7 +8,7 @@ import Nav from '../../../shared/components/nav';
 import Confetti from 'react-confetti'
 import Modal from "../../../shared/components/modal";
 
-import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage, updateFoodBlockInLocalStorage } from '../../../shared/food/food';
+import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage } from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
@@ -63,7 +63,7 @@ export default function Date () {
 
         cloneFoodBlocks[index].amount += amount;
         setFoodBlocks(cloneFoodBlocks);
-        setFoodBlockIntoLocalStorage({ date, foodBlock: cloneFoodBlocks });
+        updateFoodBlockInLocalStorage({ date, index, foodBlock: cloneFoodBlocks[index] });
     }
 
     const [ isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen ] = useState(false);

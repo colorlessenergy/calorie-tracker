@@ -25,15 +25,6 @@ export function getFoodFromLocalStorage (date) {
     return getFoodBlock(date);
 }
 
-export function setFoodBlockIntoLocalStorage ({ date, foodBlock }) {
-    if (!date) return;
-
-    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
-    foodBlocksFromLocalStorage[date] = foodBlock;
-    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
-    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
-}
-
 export function updateFoodBlockInLocalStorage ({ date, index, foodBlock }) {
     if (!date) return;
 
