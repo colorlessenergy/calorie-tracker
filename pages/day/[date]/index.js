@@ -6,6 +6,7 @@ import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
 import Confetti from 'react-confetti'
+import Modal from "../../../shared/components/modal";
 
 import { getFoodFromLocalStorage, setFoodBlockIntoLocalStorage } from '../../../shared/food/food';
 
@@ -49,7 +50,9 @@ export default function Date () {
         setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
 
-    const updateAmountOfFood = ({ amount, index }) => {
+    const updateAmountOfFood = ({ event, amount, index }) => {
+        event.stopPropagation();
+
         amount = Number(amount);
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
         if (cloneFoodBlocks[index].amount === 0 && Math.sign(amount) === -1) {
@@ -59,6 +62,11 @@ export default function Date () {
         cloneFoodBlocks[index].amount += amount;
         setFoodBlocks(cloneFoodBlocks);
         setFoodBlockIntoLocalStorage({ date, foodBlock: cloneFoodBlocks });
+    }
+
+    const [ isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen ] = useState(false);
+    const toggleEditFoodBlockModal = () => {
+        setIsEditFoodBlockModalOpen(previousIsEditFoodBlockModalOpen => !previousIsEditFoodBlockModalOpen);
     }
 
     return (
@@ -98,7 +106,8 @@ export default function Date () {
                         <div
                             key={ index } 
                             className="card"
-                            style={{ backgroundColor: foodBlock.color }}>
+                            style={{ backgroundColor: foodBlock.color }}
+                            onClick={ toggleEditFoodBlockModal }>
                             <div className="flex justify-content-between w-100">
                                 <div>
                                     { foodBlock.name }
@@ -114,13 +123,13 @@ export default function Date () {
 
                             <div className="flex justify-content-between w-100">
                                 <button
-                                    onClick={() => { updateAmountOfFood({ amount: -foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, amount: -foodBlock.increment, index }) }}
                                     className="card-button">
                                     -
                                 </button>
                                 
                                 <button
-                                    onClick={() => { updateAmountOfFood({ amount: foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, amount: foodBlock.increment, index }) }}
                                     className="card-button">
                                     +
                                 </button>
@@ -136,6 +145,12 @@ export default function Date () {
                     recycle={ false }
                     numberOfPieces={ 200 }
                     onConfettiComplete={ () => setConfetti(null) } />
+            ) : (null) }
+
+            { isEditFoodBlockModalOpen ? (
+                <Modal isOpen={ isEditFoodBlockModalOpen }>
+                    
+                </Modal>
             ) : (null) }
         </div> 
     );
