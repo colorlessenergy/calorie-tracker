@@ -277,6 +277,17 @@ export default function Date () {
                         <div className="flex justify-content-between">
                             <button
                                 type="button"
+                                onClick={ () => {
+                                    toggleEditFoodBlockModal({
+                                        name: '',
+                                        calories: '',
+                                        increment: '',
+                                        unit: '',
+                                        amount: '',
+                                        limit: '',
+                                        color: ''
+                                    })
+                                }}
                                 className="button button-red">
                                 cancel
                             </button>
