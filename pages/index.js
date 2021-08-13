@@ -31,6 +31,32 @@ export default function Home() {
         }
     }, []);
 
+    const tileClassName = ({ date, view }) => {
+        if (typeof window !== 'undefined') {
+            console.log(date, view)
+            if (view === 'month') {
+                const foodBlocks = localStorage.getItem('foodBlocks');
+                if (foodBlocks) {
+                    const dates = Object.keys(JSON.parse(foodBlocks));
+                    
+                    let isDateInLocalStorage = false;
+                    for (let i = 0; i < dates.length; i++) {
+                        let [ month, day ] = dates[i].split('-');
+
+                        if (month == date.getMonth() + 1 && day == date.getDate()) {
+                            isDateInLocalStorage = true;
+                            break;
+                        }
+                    }
+
+                    if (isDateInLocalStorage) {
+                        return 'active-date';
+                    }
+                }
+            }
+        }
+    }
+
     return (
         <div>
             <Head>
@@ -55,7 +81,8 @@ export default function Home() {
 
             <Calender
                 onChange={ onChange }
-                className="m-center" />
+                className="m-center"
+                tileClassName={ tileClassName } />
         </div>
     );
 }
