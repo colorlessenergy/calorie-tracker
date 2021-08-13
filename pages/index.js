@@ -33,7 +33,6 @@ export default function Home() {
 
     const tileClassName = ({ date, view }) => {
         if (typeof window !== 'undefined') {
-            console.log(date, view)
             if (view === 'month') {
                 const foodBlocks = localStorage.getItem('foodBlocks');
                 if (foodBlocks) {
