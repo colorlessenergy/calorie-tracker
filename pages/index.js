@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -31,6 +31,36 @@ export default function Home() {
         }
     }, []);
 
+    const tileClassName = ({ date, view }) => {
+        if (typeof window !== 'undefined') {
+            if (view === 'month') {
+                const foodBlocks = localStorage.getItem('foodBlocks');
+                if (foodBlocks) {
+                    const dates = Object.keys(JSON.parse(foodBlocks));
+                    
+                    let isDateInLocalStorage = false;
+                    for (let i = 0; i < dates.length; i++) {
+                        let [ month, day ] = dates[i].split('-');
+
+                        if (month == date.getMonth() + 1 && day == date.getDate()) {
+                            isDateInLocalStorage = true;
+                            break;
+                        }
+                    }
+
+                    if (isDateInLocalStorage) {
+                        return 'active-date';
+                    }
+                }
+            }
+        }
+    }
+
+    const [ mounted, setMounted ] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <div>
             <Head>
@@ -55,7 +85,8 @@ export default function Home() {
 
             <Calender
                 onChange={ onChange }
-                className="m-center" />
+                className="m-center"
+                tileClassName={ mounted ? (tileClassName) : (null) } />
         </div>
     );
 }

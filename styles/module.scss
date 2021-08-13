@@ -185,3 +185,7 @@ body.modal-is-open {
 .react-calendar__navigation__arrow {
   font-size: 30px;
 }
+
+.active-date {
+  background-color: $light-green !important;
+}
