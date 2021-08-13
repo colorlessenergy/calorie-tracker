@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -56,6 +56,11 @@ export default function Home() {
         }
     }
 
+    const [ mounted, setMounted ] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <div>
             <Head>
@@ -81,7 +86,7 @@ export default function Home() {
             <Calender
                 onChange={ onChange }
                 className="m-center"
-                tileClassName={ tileClassName } />
+                tileClassName={ mounted ? (tileClassName) : (null) } />
         </div>
     );
 }
