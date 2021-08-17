@@ -186,6 +186,14 @@ body.modal-is-open {
   font-size: 30px;
 }
 
+.react-calendar__tile--now {
+  background-color: #ffffff !important;
+}
+
 .active-date {
   background-color: $light-green !important;
+}
+
+.react-calendar__tile--active {
+  background-color: #030852 !important;
 }

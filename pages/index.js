@@ -34,21 +34,21 @@ export default function Home() {
     const tileClassName = ({ date, view }) => {
         if (typeof window !== 'undefined') {
             if (view === 'month') {
-                const foodBlocks = localStorage.getItem('foodBlocks');
+                const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
                 if (foodBlocks) {
-                    const dates = Object.keys(JSON.parse(foodBlocks));
+                    const dates = Object.keys(foodBlocks);
                     
-                    let isDateInLocalStorage = false;
+                    let isValidPreviousDate = false;
                     for (let i = 0; i < dates.length; i++) {
                         let [ month, day ] = dates[i].split('-');
 
-                        if (month == date.getMonth() + 1 && day == date.getDate()) {
-                            isDateInLocalStorage = true;
+                        if (month == date.getMonth() + 1 && day == date.getDate() && foodBlocks[dates[i]].length) {
+                            isValidPreviousDate = true;
                             break;
                         }
                     }
 
-                    if (isDateInLocalStorage) {
+                    if (isValidPreviousDate) {
                         return 'active-date';
                     }
                 }
@@ -86,6 +86,7 @@ export default function Home() {
             <Calender
                 onChange={ onChange }
                 className="m-center"
+                defaultValue={ new Date() }
                 tileClassName={ mounted ? (tileClassName) : (null) } />
         </div>
     );
