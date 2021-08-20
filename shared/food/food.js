@@ -25,10 +25,11 @@ export function getFoodFromLocalStorage (date) {
     return getFoodBlock(date);
 }
 
-export function updateFoodBlockInLocalStorage ({ date, index, foodBlock }) {
+export function updateFoodBlockInLocalStorage ({ date, foodBlock }) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
     foodBlocksFromLocalStorage[date][index] = foodBlock;
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
