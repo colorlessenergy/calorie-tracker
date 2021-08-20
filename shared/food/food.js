@@ -108,8 +108,13 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
     }
 
     if (isFoodBlockNew) {
+        let ID = JSON.parse(localStorage.getItem('ID'));
+        ID += 1;
         foodBlock.amount = 0;
+        foodBlock.previousID = foodBlock.ID;
+        foodBlock.ID = ID;
         previousFoodBlocksFromLocalStorage.push(foodBlock);
+        localStorage.setItem('ID', JSON.stringify(ID));
         if (setPreviousFoodBlocks) setPreviousFoodBlocks(previousFoodBlocksFromLocalStorage);
     }
 
