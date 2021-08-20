@@ -84,7 +84,7 @@ export default function Blocks () {
         cloneSnackbars.update.amountOfTimesUpdated += 1;
 
         setSnackbars(cloneSnackbars);
-        updateFoodBlockInLocalStorage({ date, index, foodBlock: foodBlocks[index] });
+        updateFoodBlockInLocalStorage({ date, foodBlock: foodBlocks[index] });
         addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
