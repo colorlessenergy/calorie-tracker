@@ -35,11 +35,11 @@ export function updateFoodBlockInLocalStorage ({ date, foodBlock }) {
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
 }
 
-export function removeFoodBlockFromLocalStorage ({ date, foodBlock }) {
+export function removeFoodBlockFromLocalStorage ({ date, foodBlockID }) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
-    const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
+    const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlockID);
     foodBlocksFromLocalStorage[date].splice(index, 1);
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
