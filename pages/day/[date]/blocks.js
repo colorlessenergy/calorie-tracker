@@ -96,10 +96,10 @@ export default function Blocks () {
 
     const removeFoodBlock = ({ date, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        removeFoodBlockFromLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
+
         cloneFoodBlocks.splice(index, 1);
         setFoodBlocks(cloneFoodBlocks);
-
-        removeFoodBlockFromLocalStorage({ date, index });
     }
 
 
