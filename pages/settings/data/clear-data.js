@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
@@ -10,6 +10,14 @@ export default function ClearData () {
             timeout: null
         }
     });
+
+    useEffect(() => {
+        return () => {
+            if (snackbars.clear.timeout) {
+                clearTimeout(snackbars.clear.timeout);
+            }
+        }
+    }, []);
 
     const clearLocalStorage = () => {
         let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));

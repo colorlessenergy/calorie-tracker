@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
@@ -12,6 +12,14 @@ export default function ImportData () {
             timeout: null
         }
     });
+
+    useEffect(() => {
+        return () => {
+            if (snackbars.add.timeout) {
+                clearTimeout(snackbars.add.timeout);
+            }
+        }
+    }, []);
 
     const createAddSnackbar = (message) => {
         let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));

@@ -49,6 +49,18 @@ export default function Blocks () {
         }
     });
 
+    useEffect(() => {
+        return () => {
+            if (snackbars.update.timeout) {
+                clearTimeout(snackbars.update.timeout);
+            }
+
+            if (snackbars.add.timeout) {
+                clearTimeout(snackbars.add.timeout);
+            }
+        }
+    }, []);
+
     const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
