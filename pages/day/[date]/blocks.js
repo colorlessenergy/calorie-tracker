@@ -162,10 +162,10 @@ export default function Blocks () {
 
     const removePreviousFoodBlock = (index) => {
         let clonePreviousFoodBlocks = JSON.parse(JSON.stringify(previousFoodBlocks));
+        removePreviousFoodBlockFromLocalStorage(clonePreviousFoodBlocks[index].ID);
+
         clonePreviousFoodBlocks.splice(index, 1);
         setPreviousFoodBlocks(clonePreviousFoodBlocks);
-
-        removePreviousFoodBlockFromLocalStorage(index);
     }
 
     const handlePreviousFoodBlocksSubmit = ({ event, index }) => {

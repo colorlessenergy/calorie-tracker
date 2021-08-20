@@ -134,8 +134,9 @@ const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     return false;
 }
 
-export function removePreviousFoodBlockFromLocalStorage (index) {
+export function removePreviousFoodBlockFromLocalStorage (previousFoodBlockID) {
     let previousFoodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('previousFoodBlocks'));
+    const index = previousFoodBlocksFromLocalStorage.findIndex(previousFoodBlockFromLocalStorage => previousFoodBlockFromLocalStorage.ID === previousFoodBlockID);
     previousFoodBlocksFromLocalStorage.splice(index, 1);
     previousFoodBlocksFromLocalStorage = JSON.stringify(previousFoodBlocksFromLocalStorage);
     localStorage.setItem('previousFoodBlocks', previousFoodBlocksFromLocalStorage);
