@@ -2,9 +2,9 @@ function getFoodBlock (date) {
     let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
     if (foodBlocks[date]) {
         return foodBlocks[date];
-    } else {
-        foodBlocks[date] = [];
-    }
+    } 
+
+    foodBlocks[date] = [];
     localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
     return foodBlocks[date];
 }
