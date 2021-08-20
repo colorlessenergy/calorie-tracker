@@ -170,7 +170,7 @@ export default function Blocks () {
 
     const handlePreviousFoodBlocksSubmit = ({ event, index }) => {
         event.preventDefault();
-        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, index });
+        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, previousFoodBlockID: previousFoodBlocks[index].ID });
         setFoodBlocks(getFoodFromLocalStorage(date));
 
         addFoodBlockSnackbar();
