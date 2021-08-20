@@ -49,6 +49,18 @@ export default function Blocks () {
         }
     });
 
+    useEffect(() => {
+        return () => {
+            if (snackbars.update.timeout) {
+                clearTimeout(snackbars.update.timeout);
+            }
+
+            if (snackbars.add.timeout) {
+                clearTimeout(snackbars.add.timeout);
+            }
+        }
+    }, []);
+
     const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
@@ -84,7 +96,7 @@ export default function Blocks () {
         cloneSnackbars.update.amountOfTimesUpdated += 1;
 
         setSnackbars(cloneSnackbars);
-        updateFoodBlockInLocalStorage({ date, index, foodBlock: foodBlocks[index] });
+        updateFoodBlockInLocalStorage({ date, foodBlock: foodBlocks[index] });
         addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
@@ -96,10 +108,10 @@ export default function Blocks () {
 
     const removeFoodBlock = ({ date, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        removeFoodBlockFromLocalStorage({ date, foodBlock: cloneFoodBlocks[index].ID });
+
         cloneFoodBlocks.splice(index, 1);
         setFoodBlocks(cloneFoodBlocks);
-
-        removeFoodBlockFromLocalStorage({ date, index });
     }
 
 
@@ -162,15 +174,15 @@ export default function Blocks () {
 
     const removePreviousFoodBlock = (index) => {
         let clonePreviousFoodBlocks = JSON.parse(JSON.stringify(previousFoodBlocks));
+        removePreviousFoodBlockFromLocalStorage(clonePreviousFoodBlocks[index].ID);
+
         clonePreviousFoodBlocks.splice(index, 1);
         setPreviousFoodBlocks(clonePreviousFoodBlocks);
-
-        removePreviousFoodBlockFromLocalStorage(index);
     }
 
     const handlePreviousFoodBlocksSubmit = ({ event, index }) => {
         event.preventDefault();
-        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, index });
+        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, previousFoodBlockID: previousFoodBlocks[index].ID });
         setFoodBlocks(getFoodFromLocalStorage(date));
 
         addFoodBlockSnackbar();

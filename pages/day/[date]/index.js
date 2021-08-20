@@ -63,7 +63,7 @@ export default function Date () {
 
         cloneFoodBlocks[index].amount += amount;
         setFoodBlocks(cloneFoodBlocks);
-        updateFoodBlockInLocalStorage({ date, index, foodBlock: cloneFoodBlocks[index] });
+        updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
     }
 
     const [ isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen ] = useState(false);

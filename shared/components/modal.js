@@ -14,6 +14,10 @@ const Modal = ({ isOpen, toggleModal, children }) => {
         } else {
             document.body.classList.remove('modal-is-open');
         }
+
+        return () => {
+            document.body.classList.remove('modal-is-open');
+        }
     }, [ isOpen ]);
 
     return (
