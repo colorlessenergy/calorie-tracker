@@ -86,7 +86,7 @@ export default function Home() {
             <Calender
                 onChange={ onChange }
                 className="m-center"
-                defaultValue={ new Date() }
+                value={ mounted ? (new Date()) : (null) }
                 tileClassName={ mounted ? (tileClassName) : (null) } />
         </div>
     );
