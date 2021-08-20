@@ -79,9 +79,14 @@ export function addPreviousFoodBlockToFoodBlocksInLocalStorage ({ date, previous
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     const previousFoodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('previousFoodBlocks'));
     const index = previousFoodBlocksFromLocalStorage.findIndex(previousFoodBlockFromLocalStorage => previousFoodBlockFromLocalStorage.ID === previousFoodBlockID);
-    foodBlocksFromLocalStorage[date].push(previousFoodBlocksFromLocalStorage[index]);
+    let ID = JSON.parse(localStorage.getItem('ID'));
+    ID += 1;
+    let clonePreviousFoodBlock = JSON.parse(JSON.stringify(previousFoodBlocksFromLocalStorage[index]));
+    clonePreviousFoodBlock.ID = ID;
+    foodBlocksFromLocalStorage[date].push(clonePreviousFoodBlock);
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+    localStorage.setItem('ID', JSON.stringify(ID));
 }
 
 /**
