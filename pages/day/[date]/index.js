@@ -49,7 +49,9 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            calories += foodBlock.limit * foodBlock.calories;
+            if (parseFloat(foodBlock.calories)) {
+                calories += parseFloat(foodBlock.calories);
+            }
         });
         setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
