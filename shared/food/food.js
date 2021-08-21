@@ -95,9 +95,10 @@ export function addPreviousFoodBlockToFoodBlocksInLocalStorage ({ date, previous
  * 
  * @param { Object } foodBlock - a food block
  * @param { Function } setPreviousFoodBlocks - set previous food blocks for react UI
+ * @param { Boolean } isImported - if food block is imported set previous ID property to null
  */
 
-export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks }) {
+export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFoodBlocks, isImported }) {
     if (!localStorage.getItem('previousFoodBlocks')) {
         localStorage.setItem('previousFoodBlocks', JSON.stringify([]));
     }
@@ -117,7 +118,11 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
         let ID = JSON.parse(localStorage.getItem('ID'));
         ID += 1;
         foodBlock.amount = 0;
-        foodBlock.previousID = foodBlock.ID;
+        if (isImported) {
+            foodBlock.previousID = null;
+        } else {
+            foodBlock.previousID = foodBlock.ID;
+        }
         foodBlock.ID = ID;
         previousFoodBlocksFromLocalStorage.push(foodBlock);
         localStorage.setItem('ID', JSON.stringify(ID));
@@ -153,10 +158,21 @@ export function importFoodBlocks (foodBlocks) {
     if (!localStorage.getItem('foodBlocks')) {
         localStorage.setItem('foodBlocks', JSON.stringify({}));
     }
+    
+    if (!localStorage.getItem('ID')) {
+        localStorage.setItem('foodBlocks', JSON.stringify(0));
+    }
+
+    let ID = JSON.parse(localStorage.getItem('ID'));
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     for (const date in foodBlocks) {
         if (!foodBlocksFromLocalStorage[date] || foodBlocksFromLocalStorage[date].length === 0) {
+            foodBlocks[date].forEach(foodBlock => {
+                ID += 1;
+                foodBlock.ID = ID;
+                foodBlock.previousID = null;
+            });
             foodBlocksFromLocalStorage[date] = foodBlocks[date];
             localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
         } else {
@@ -170,11 +186,15 @@ export function importFoodBlocks (foodBlocks) {
                 }
 
                 if (doesFoodBlockExist === false) {
+                    ID += 1;
+                    foodBlock.ID = ID;
+                    foodBlock.previousID = null;
                     foodBlocksFromLocalStorage[date].push(foodBlock);
                 }
             });
 
             localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+            localStorage.setItem('ID', JSON.stringify(ID));
         }
     }
 }
