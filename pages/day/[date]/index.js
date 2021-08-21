@@ -28,7 +28,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            if (foodBlock.amount === foodBlock.limit && parseFloat(foodBlock.calories)) {
+            if (foodBlock.amount >= foodBlock.limit && parseFloat(foodBlock.calories)) {
                 calories += parseFloat(foodBlock.calories);
             }
         });
