@@ -101,7 +101,7 @@ export default function Date () {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        updateFoodBlockInLocalStorage({ date, index: foodBlock.index, foodBlock: foodBlock });
+        updateFoodBlockInLocalStorage({ date, foodBlock: foodBlock });
         setFoodBlocks(getFoodFromLocalStorage(date));
         toggleEditFoodBlockModal({
             name: '',
