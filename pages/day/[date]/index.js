@@ -28,7 +28,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            if (foodBlock.amount === foodBlock.limit && parseFloat(foodBlock.calories)) {
+            if (foodBlock.amount >= foodBlock.limit && parseFloat(foodBlock.calories)) {
                 calories += parseFloat(foodBlock.calories);
             }
         });
@@ -49,7 +49,9 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            calories += foodBlock.limit * foodBlock.calories;
+            if (parseFloat(foodBlock.calories)) {
+                calories += parseFloat(foodBlock.calories);
+            }
         });
         setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
@@ -213,7 +215,7 @@ export default function Date () {
                                 required />
 
                             <label htmlFor="calories">
-                                calories
+                                total calories
                             </label>
                             <input
                                 onChange={ (event) => handleChange(event) }
