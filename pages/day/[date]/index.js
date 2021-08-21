@@ -213,7 +213,7 @@ export default function Date () {
                                 required />
 
                             <label htmlFor="calories">
-                                calories
+                                total calories
                             </label>
                             <input
                                 onChange={ (event) => handleChange(event) }
