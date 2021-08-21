@@ -57,7 +57,7 @@ export default function ImportData () {
             const previousFoodBlocks = JSON.parse(importedData.previousFoodBlocks);
 
             previousFoodBlocks.forEach(previousFoodBlock => {
-                addPreviousFoodBlockToLocalStorage({ foodBlock: previousFoodBlock })
+                addPreviousFoodBlockToLocalStorage({ foodBlock: previousFoodBlock, isImported: true })
             });
 
             const foodBlocks = JSON.parse(importedData.foodBlocks)

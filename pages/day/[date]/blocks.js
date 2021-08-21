@@ -25,7 +25,9 @@ export default function Blocks () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            calories += foodBlock.limit * foodBlock.calories;
+            if (!Number.isNaN(parseFloat(foodBlock.calories))) {
+                calories += parseFloat(foodBlock.calories);
+            }
         });
         setTotalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ]);
@@ -108,7 +110,7 @@ export default function Blocks () {
 
     const removeFoodBlock = ({ date, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        removeFoodBlockFromLocalStorage({ date, foodBlock: cloneFoodBlocks[index].ID });
+        removeFoodBlockFromLocalStorage({ date, foodBlockID: cloneFoodBlocks[index].ID });
 
         cloneFoodBlocks.splice(index, 1);
         setFoodBlocks(cloneFoodBlocks);
@@ -246,7 +248,7 @@ export default function Blocks () {
                                     required />
 
                                 <label htmlFor={`${ index }-calories`}>
-                                    calories
+                                    total calories
                                 </label>
                                 <input
                                     onChange={ (event) => handleChange({ event, index }) }
@@ -373,7 +375,7 @@ export default function Blocks () {
                                             id={`${ index }-previous-name`} />
 
                                         <label htmlFor={`${ index }-previous-calories`}>
-                                            calories
+                                            total calories
                                         </label>
                                         <input
                                             disabled={ true }

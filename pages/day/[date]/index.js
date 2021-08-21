@@ -28,7 +28,9 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            calories += foodBlock.amount * foodBlock.calories;
+            if (foodBlock.amount === foodBlock.limit && parseFloat(foodBlock.calories)) {
+                calories += parseFloat(foodBlock.calories);
+            }
         });
 
         if (calories === goalCalories && goalCalories !== 0) {
@@ -99,7 +101,7 @@ export default function Date () {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        updateFoodBlockInLocalStorage({ date, index: foodBlock.index, foodBlock: foodBlock });
+        updateFoodBlockInLocalStorage({ date, foodBlock: foodBlock });
         setFoodBlocks(getFoodFromLocalStorage(date));
         toggleEditFoodBlockModal({
             name: '',
