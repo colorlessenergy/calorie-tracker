@@ -28,7 +28,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            if (foodBlock.amount >= foodBlock.limit && parseFloat(foodBlock.calories)) {
+            if (foodBlock.amount >= foodBlock.calories && parseFloat(foodBlock.calories)) {
                 calories += parseFloat(foodBlock.calories);
             }
         });
@@ -56,18 +56,19 @@ export default function Date () {
         setGoalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ])
 
-    const updateAmountOfFood = ({ event, amount, index }) => {
+    const updateAmountOfFood = ({ event, sign, index }) => {
         event.stopPropagation();
 
-        amount = Number(amount);
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        if (cloneFoodBlocks[index].amount === 0 && Math.sign(amount) === -1) {
-            return;
+        if (cloneFoodBlocks[index].amount === 0 && Math.sign(sign) === 1) {
+            cloneFoodBlocks[index].amount += parseFloat(cloneFoodBlocks[index].calories);
+            setFoodBlocks(cloneFoodBlocks);
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
+        } else if (cloneFoodBlocks[index].amount === parseFloat(cloneFoodBlocks[index].calories) && Math.sign(sign) === -1) {
+            cloneFoodBlocks[index].amount -= cloneFoodBlocks[index].calories;
+            setFoodBlocks(cloneFoodBlocks);
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
         }
-
-        cloneFoodBlocks[index].amount += amount;
-        setFoodBlocks(cloneFoodBlocks);
-        updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
     }
 
     const [ isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen ] = useState(false);
@@ -79,10 +80,8 @@ export default function Date () {
     const [ foodBlock, setFoodBlock ] = useState({
         name: '',
         calories: '',
-        increment: '',
         unit: '',
         amount: '',
-        limit: '',
         color: ''
     });
 
@@ -108,10 +107,8 @@ export default function Date () {
         toggleEditFoodBlockModal({
             name: '',
             calories: '',
-            increment: '',
             unit: '',
             amount: '',
-            limit: '',
             color: ''
         });
     }
@@ -167,18 +164,18 @@ export default function Date () {
                             </div> 
 
                             <div className="mx-1 text-large">
-                                { foodBlock.amount } / { foodBlock.limit } <span className="text-medium">{ foodBlock.unit }</span>
+                                { foodBlock.amount } / { foodBlock.calories } <span className="text-medium">{ foodBlock.unit }</span>
                             </div>
 
                             <div className="flex justify-content-between w-100">
                                 <button
-                                    onClick={(event) => { updateAmountOfFood({ event, amount: -foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, sign: -1, index }) }}
                                     className="card-button">
                                     -
                                 </button>
                                 
                                 <button
-                                    onClick={(event) => { updateAmountOfFood({ event, amount: foodBlock.increment, index }) }}
+                                    onClick={(event) => { updateAmountOfFood({ event, sign: 1, index }) }}
                                     className="card-button">
                                     +
                                 </button>
@@ -227,18 +224,6 @@ export default function Date () {
                                 min="1"
                                 step="0.01" />
 
-                            <label htmlFor="increment">
-                                increment
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.increment }
-                                type="number"
-                                id="increment"
-                                name="increment"
-                                required
-                                min="1" />
-
                             <label htmlFor="unit">
                                 unit of measurement
                             </label>
@@ -249,17 +234,6 @@ export default function Date () {
                                 id="unit"
                                 name="unit" />
 
-                            <label htmlFor="limit">
-                                limit
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.limit }
-                                type="number"
-                                id="limit"
-                                name="limit"
-                                required
-                                min="1" />
                             <div className="text-gray text-small ml-04 mb-04">
                                 select a color
                             </div>
@@ -285,10 +259,8 @@ export default function Date () {
                                     toggleEditFoodBlockModal({
                                         name: '',
                                         calories: '',
-                                        increment: '',
                                         unit: '',
                                         amount: '',
-                                        limit: '',
                                         color: ''
                                     })
                                 }}

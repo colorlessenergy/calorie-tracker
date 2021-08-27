@@ -61,10 +61,8 @@ export function addEmptyFoodBlockToLocalStorage (date) {
         ID,
         name: '',
         calories: 1,
-        increment: 1,
         unit: '',
         amount: 0,
-        limit: 1,
         color: colors[Math.floor(Math.random() * colors.length)]
     });
 
@@ -135,9 +133,7 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
 const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     if (foodBlockOne.name === foodBlockTwo.name &&
         foodBlockOne.calories === foodBlockTwo.calories &&
-        foodBlockOne.increment === foodBlockTwo.increment &&
-        foodBlockOne.unit === foodBlockTwo.unit &&
-        foodBlockOne.limit === foodBlockTwo.limit) {
+        foodBlockOne.unit === foodBlockTwo.unit) {
             return true;
     }
 
