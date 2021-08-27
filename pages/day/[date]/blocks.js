@@ -260,18 +260,6 @@ export default function Blocks () {
                                     min="1"
                                     step="0.01" />
 
-                                <label htmlFor={`${ index }-increment`}>
-                                    increment
-                                </label>
-                                <input
-                                    onChange={ (event) => handleChange({ event, index }) }
-                                    value={ foodBlocks[index].increment }
-                                    type="number"
-                                    id={`${ index }-increment`}
-                                    name="increment"
-                                    required
-                                    min="1" />
-
                                 <label htmlFor={`${ index }-unit`}>
                                     unit of measurement
                                 </label>
@@ -282,17 +270,6 @@ export default function Blocks () {
                                     id={`${ index }-unit`}
                                     name="unit" />
 
-                                <label htmlFor={`${ index }-limit`}>
-                                    limit
-                                </label>
-                                <input
-                                    onChange={ (event) => handleChange({ event, index }) }
-                                    value={ foodBlocks[index].limit }
-                                    type="number"
-                                    id={`${ index }-limit`}
-                                    name="limit"
-                                    required
-                                    min="1" />
                                 <div className="text-gray text-small ml-04 mb-04">
                                     select a color
                                 </div>
@@ -384,15 +361,6 @@ export default function Blocks () {
                                             id={`${ index }-previous-calories`}
                                             step="0.01" />
 
-                                        <label htmlFor={`${ index }-previous-increment`}>
-                                            increment
-                                        </label>
-                                        <input
-                                            disabled={ true }
-                                            value={ foodBlock.increment }
-                                            type="number"
-                                            id={`${ index }-previous-increment`} />
-
                                         <label htmlFor={`${ index }-previous-unit`}>
                                             unit of measurement
                                         </label>
@@ -402,14 +370,6 @@ export default function Blocks () {
                                             type="text"
                                             id={`${ index }-previous-unit`} />
 
-                                        <label htmlFor={`${ index }-previous-limit`}>
-                                            limit
-                                        </label>
-                                        <input
-                                            disabled={ true }
-                                            value={ foodBlock.limit }
-                                            type="number"
-                                            id={`${ index }-previous-limit`} />
                                     </div> 
 
                                     <div className="flex justify-content-between">
