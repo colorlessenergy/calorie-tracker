@@ -82,14 +82,22 @@ export default function Date () {
         calories: '',
         unit: '',
         amount: '',
+        totalAmount: null,
         color: ''
     });
 
-    const handleChange = (event) => {
-        setFoodBlock(previousFoodBlock => ({
-            ...previousFoodBlock,
-            [ event.target.id ]: event.target.value
-        }));
+    const handleChange = (event) => { 
+        setFoodBlock(previousFoodBlock => {
+            // set total amount to amount to update the UI
+            if (event.target.id === 'totalAmount') {
+                previousFoodBlock.amount = parseFloat(event.target.value);
+            }
+
+            return {
+                ...previousFoodBlock,
+                [ event.target.id ]: event.target.value
+            }
+        });
     }
 
     const updateColor = (color) => {
@@ -109,6 +117,7 @@ export default function Date () {
             calories: '',
             unit: '',
             amount: '',
+            totalAmount: null,
             color: ''
         });
     }
@@ -224,14 +233,14 @@ export default function Date () {
                                 min="1"
                                 step="0.01" />
 
-                            <label htmlFor="total-amount">
+                            <label htmlFor="totalAmount">
                                 total amount
                             </label>
                             <input
                                 onChange={ (event) => handleChange(event) }
                                 value={ foodBlock.totalAmount }
                                 type="number"
-                                id="total-amount"
+                                id="totalAmount"
                                 name="total-amount"
                                 required
                                 min="1"

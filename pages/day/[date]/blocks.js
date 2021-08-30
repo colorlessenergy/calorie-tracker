@@ -34,6 +34,12 @@ export default function Blocks () {
 
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+
+        // set total amount to amount to auto update the UI to most updated total amount
+        if (event.target.name === 'totalAmount') {
+            cloneFoodBlocks[index].amount = parseFloat(event.target.value);
+        }
+
         cloneFoodBlocks[index][event.target.name] = event.target.value;
         setFoodBlocks(cloneFoodBlocks);
     }
