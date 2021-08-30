@@ -87,17 +87,11 @@ export default function Date () {
     });
 
     const handleChange = (event) => { 
-        setFoodBlock(previousFoodBlock => {
-            // set total amount to amount to update the UI
-            if (event.target.id === 'totalAmount') {
-                previousFoodBlock.amount = parseFloat(event.target.value);
-            }
-
-            return {
+        setFoodBlock(previousFoodBlock => ({
                 ...previousFoodBlock,
                 [ event.target.id ]: event.target.value
             }
-        });
+        ));
     }
 
     const updateColor = (color) => {

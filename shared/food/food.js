@@ -30,6 +30,11 @@ export function updateFoodBlockInLocalStorage ({ date, foodBlock }) {
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
+
+    if (foodBlocksFromLocalStorage[date][index].amount !== 0) {
+        foodBlock.amount = parseFloat(foodBlock.totalAmount);
+    }
+
     foodBlocksFromLocalStorage[date][index] = foodBlock;
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
