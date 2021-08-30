@@ -63,11 +63,11 @@ export default function Date () {
         if (cloneFoodBlocks[index].amount === 0 && Math.sign(sign) === 1) {
             cloneFoodBlocks[index].amount += parseFloat(cloneFoodBlocks[index].totalAmount);
             setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index], updatedWithButton: true });
         } else if (cloneFoodBlocks[index].amount === parseFloat(cloneFoodBlocks[index].totalAmount) && Math.sign(sign) === -1) {
             cloneFoodBlocks[index].amount -= cloneFoodBlocks[index].totalAmount;
             setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index], updatedWithButton: true });
         }
     }
 

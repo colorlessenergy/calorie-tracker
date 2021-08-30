@@ -25,13 +25,13 @@ export function getFoodFromLocalStorage (date) {
     return getFoodBlock(date);
 }
 
-export function updateFoodBlockInLocalStorage ({ date, foodBlock }) {
+export function updateFoodBlockInLocalStorage ({ date, foodBlock, updatedWithButton = false }) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
 
-    if (foodBlocksFromLocalStorage[date][index].amount !== 0) {
+    if (foodBlocksFromLocalStorage[date][index].amount !== 0 && updatedWithButton === false) {
         foodBlock.amount = parseFloat(foodBlock.totalAmount);
     }
 
