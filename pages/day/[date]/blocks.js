@@ -34,6 +34,7 @@ export default function Blocks () {
 
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+
         cloneFoodBlocks[index][event.target.name] = event.target.value;
         setFoodBlocks(cloneFoodBlocks);
     }
@@ -260,6 +261,19 @@ export default function Blocks () {
                                     min="1"
                                     step="0.01" />
 
+                                <label htmlFor={`${ index }-total-amount`}>
+                                    total amount
+                                </label>
+                                <input
+                                    onChange={ (event) => handleChange({ event, index }) }
+                                    value={ foodBlocks[index].totalAmount }
+                                    type="number"
+                                    id={`${ index }-total-amount`}
+                                    name="totalAmount"
+                                    required
+                                    min="1"
+                                    step="0.01" />
+
                                 <label htmlFor={`${ index }-unit`}>
                                     unit of measurement
                                 </label>
@@ -359,6 +373,18 @@ export default function Blocks () {
                                             value={ foodBlock.calories }
                                             type="number"
                                             id={`${ index }-previous-calories`}
+                                            step="0.01" />
+
+                                        <label htmlFor={`${ index }-previous-total-amount`}>
+                                            total amount
+                                        </label>
+                                        <input
+                                            onChange={ (event) => handleChange({ event, index }) }
+                                            value={ foodBlock.totalAmount }
+                                            type="number"
+                                            id={`${ index }-previous-total-amount`}
+                                            required
+                                            min="1"
                                             step="0.01" />
 
                                         <label htmlFor={`${ index }-previous-unit`}>

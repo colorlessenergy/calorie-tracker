@@ -28,7 +28,7 @@ export default function Date () {
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
-            if (foodBlock.amount >= foodBlock.calories && parseFloat(foodBlock.calories)) {
+            if (foodBlock.amount >= foodBlock.totalAmount && parseFloat(foodBlock.calories)) {
                 calories += parseFloat(foodBlock.calories);
             }
         });
@@ -61,13 +61,13 @@ export default function Date () {
 
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
         if (cloneFoodBlocks[index].amount === 0 && Math.sign(sign) === 1) {
-            cloneFoodBlocks[index].amount += parseFloat(cloneFoodBlocks[index].calories);
+            cloneFoodBlocks[index].amount += parseFloat(cloneFoodBlocks[index].totalAmount);
             setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
-        } else if (cloneFoodBlocks[index].amount === parseFloat(cloneFoodBlocks[index].calories) && Math.sign(sign) === -1) {
-            cloneFoodBlocks[index].amount -= cloneFoodBlocks[index].calories;
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index], updatedWithButton: true });
+        } else if (cloneFoodBlocks[index].amount === parseFloat(cloneFoodBlocks[index].totalAmount) && Math.sign(sign) === -1) {
+            cloneFoodBlocks[index].amount -= cloneFoodBlocks[index].totalAmount;
             setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index] });
+            updateFoodBlockInLocalStorage({ date, foodBlock: cloneFoodBlocks[index], updatedWithButton: true });
         }
     }
 
@@ -82,14 +82,16 @@ export default function Date () {
         calories: '',
         unit: '',
         amount: '',
+        totalAmount: null,
         color: ''
     });
 
-    const handleChange = (event) => {
+    const handleChange = (event) => { 
         setFoodBlock(previousFoodBlock => ({
-            ...previousFoodBlock,
-            [ event.target.id ]: event.target.value
-        }));
+                ...previousFoodBlock,
+                [ event.target.id ]: event.target.value
+            }
+        ));
     }
 
     const updateColor = (color) => {
@@ -109,6 +111,7 @@ export default function Date () {
             calories: '',
             unit: '',
             amount: '',
+            totalAmount: null,
             color: ''
         });
     }
@@ -164,7 +167,7 @@ export default function Date () {
                             </div> 
 
                             <div className="mx-1 text-large">
-                                { foodBlock.amount } / { foodBlock.calories } <span className="text-medium">{ foodBlock.unit }</span>
+                                { foodBlock.amount } / { foodBlock.totalAmount } <span className="text-medium">{ foodBlock.unit }</span>
                             </div>
 
                             <div className="flex justify-content-between w-100">
@@ -220,6 +223,19 @@ export default function Date () {
                                 type="number"
                                 id="calories"
                                 name="calories"
+                                required
+                                min="1"
+                                step="0.01" />
+
+                            <label htmlFor="totalAmount">
+                                total amount
+                            </label>
+                            <input
+                                onChange={ (event) => handleChange(event) }
+                                value={ foodBlock.totalAmount }
+                                type="number"
+                                id="totalAmount"
+                                name="total-amount"
                                 required
                                 min="1"
                                 step="0.01" />

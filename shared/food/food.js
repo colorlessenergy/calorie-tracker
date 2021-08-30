@@ -25,11 +25,16 @@ export function getFoodFromLocalStorage (date) {
     return getFoodBlock(date);
 }
 
-export function updateFoodBlockInLocalStorage ({ date, foodBlock }) {
+export function updateFoodBlockInLocalStorage ({ date, foodBlock, updatedWithButton = false }) {
     if (!date) return;
 
     let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
     const index = foodBlocksFromLocalStorage[date].findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
+
+    if (foodBlocksFromLocalStorage[date][index].amount !== 0 && updatedWithButton === false) {
+        foodBlock.amount = parseFloat(foodBlock.totalAmount);
+    }
+
     foodBlocksFromLocalStorage[date][index] = foodBlock;
     foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
     localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
@@ -63,6 +68,7 @@ export function addEmptyFoodBlockToLocalStorage (date) {
         calories: 1,
         unit: '',
         amount: 0,
+        totalAmount: 0,
         color: colors[Math.floor(Math.random() * colors.length)]
     });
 
@@ -133,6 +139,7 @@ export function addPreviousFoodBlockToLocalStorage ({ foodBlock, setPreviousFood
 const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     if (foodBlockOne.name === foodBlockTwo.name &&
         foodBlockOne.calories === foodBlockTwo.calories &&
+        foodBlockOne.totalAmount === foodBlockTwo.totalAmount &&
         foodBlockOne.unit === foodBlockTwo.unit) {
             return true;
     }
