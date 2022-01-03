@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,9 +6,13 @@ import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
 import Confetti from 'react-confetti'
-import Modal from "../../../shared/components/modal";
+import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage } from '../../../shared/food/food';
+import {
+    addEmptyFoodBlockToLocalStorage,
+    getFoodFromLocalStorage,
+    updateFoodBlockInLocalStorage
+} from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
@@ -116,17 +120,28 @@ export default function Date () {
         });
     }
 
+    const addEmptyFoodBlock = () => {
+        addEmptyFoodBlockToLocalStorage(date);
+        setFoodBlocks(getFoodFromLocalStorage(date));
+    }
+
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
 
-            <div className="mx-15 mt-1 mb-1 flex">
+            <div className="mx-15 mt-1 mb-1 flex align-items-center">
                 <div className="mr-1">
                     { totalCalories } total calories
                 </div>
                 <div>
                     { goalCalories } calorie goal
                 </div>
+
+                <button
+                    onClick={ () => addEmptyFoodBlock() }
+                    className="add-food-block-button">
+                    +
+                </button>
             </div>
 
             { foodBlocks?.length === 0 ? (
