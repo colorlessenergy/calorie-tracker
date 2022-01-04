@@ -169,7 +169,7 @@ export default function Date () {
                     return (
                         <div
                             key={ index } 
-                            className="card"
+                            className="card cursor-pointer"
                             style={{ backgroundColor: foodBlock.color }}
                             onClick={ () => toggleEditFoodBlockModal(foodBlock) }>
                             <div className="flex justify-content-between w-100">
