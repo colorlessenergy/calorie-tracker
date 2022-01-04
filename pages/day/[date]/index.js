@@ -11,6 +11,7 @@ import Modal from '../../../shared/components/modal';
 import {
     addEmptyFoodBlockToLocalStorage,
     getFoodFromLocalStorage,
+    removeFoodBlockFromLocalStorage,
     updateFoodBlockInLocalStorage
 } from '../../../shared/food/food';
 
@@ -82,6 +83,7 @@ export default function Date () {
     }
 
     const [ foodBlock, setFoodBlock ] = useState({
+        ID: null,
         name: '',
         calories: '',
         unit: '',
@@ -111,6 +113,7 @@ export default function Date () {
         updateFoodBlockInLocalStorage({ date, foodBlock: foodBlock });
         setFoodBlocks(getFoodFromLocalStorage(date));
         toggleEditFoodBlockModal({
+            ID: null,
             name: '',
             calories: '',
             unit: '',
@@ -123,6 +126,22 @@ export default function Date () {
     const addEmptyFoodBlock = () => {
         addEmptyFoodBlockToLocalStorage(date);
         setFoodBlocks(getFoodFromLocalStorage(date));
+    }
+
+    const removeFoodBlock = (foodBlockID) => {
+        removeFoodBlockFromLocalStorage({ date, foodBlockID });
+
+        setFoodBlocks(getFoodFromLocalStorage(date));
+
+        toggleEditFoodBlockModal({
+            ID: null,
+            name: '',
+            calories: '',
+            unit: '',
+            amount: '',
+            totalAmount: null,
+            color: ''
+        });
     }
 
     return (
@@ -215,7 +234,7 @@ export default function Date () {
                 <Modal isOpen={ isEditFoodBlockModalOpen }>
                     <form
                         onSubmit={ handleSubmit }
-                        className="flex flex-direction-column justify-content-between mb-2 p-1"
+                        className="flex flex-direction-column justify-content-between p-1"
                         style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
                         <div className="flex flex-direction-column align-items-start mb-2">
                             <label htmlFor="name">
@@ -288,16 +307,27 @@ export default function Date () {
                                 type="button"
                                 onClick={ () => {
                                     toggleEditFoodBlockModal({
+                                        ID: null,
                                         name: '',
                                         calories: '',
                                         unit: '',
                                         amount: '',
                                         color: ''
-                                    })
+                                    });
                                 }}
                                 className="button button-red">
                                 cancel
                             </button>
+
+                            <button
+                                type="button"
+                                onClick={ () => {
+                                    removeFoodBlock(foodBlock.ID);
+                                } }
+                                className="button button-pink">
+                                remove
+                            </button>
+
                             <button className="button button-green">
                                 update
                             </button>
