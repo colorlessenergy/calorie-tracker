@@ -177,7 +177,7 @@ export default function Blocks () {
         setIsModalOpen(previousIsModalOpen => !previousIsModalOpen);
     }
 
-    const [ allFoodBlocks, setAllFoodBlocks ] = useState({});
+    const [ allFoodBlocks, setAllFoodBlocks ] = useState(null);
     const [ previousFoodBlockDate, setPreviousFoodBlockDate ] = useState('');
     const handlePreviousFoodBlockDateChange = event => {
         if (event.currentTarget.value) return setPreviousFoodBlockDate(event.currentTarget.value);
@@ -326,30 +326,32 @@ export default function Blocks () {
                         add a new food block
                     </button>
 
-                    <form onSubmit={ handleDuplicateAndMergePreviousDateSubmit }>
-                        <div className="flex flex-direction-column mb-2">
-                            <label
-                                className="text-black text-medium mb-1"
-                                htmlFor="foodBlocksDate">duplicate previous day food blocks</label>
-                            <select
-                                onChange={ handlePreviousFoodBlockDateChange }
-                                className="text-medium w-50"
-                                id="foodBlocksDate">
-                                <option value="">choose a date</option>
-                                { allFoodBlocks ? (Object.keys(allFoodBlocks).map(foodBlockDate => {
-                                    if (foodBlockDate === date) return;
+                    { allFoodBlocks && Object.keys(allFoodBlocks).length > 1 ? (
+                        <form onSubmit={ handleDuplicateAndMergePreviousDateSubmit }>
+                            <div className="flex flex-direction-column mb-2">
+                                <label
+                                    className="text-black text-medium mb-1"
+                                    htmlFor="foodBlocksDate">duplicate previous day food blocks</label>
+                                <select
+                                    onChange={ handlePreviousFoodBlockDateChange }
+                                    className="text-medium w-50"
+                                    id="foodBlocksDate">
+                                    <option value="">choose a date</option>
+                                    { Object.keys(allFoodBlocks).map(foodBlockDate => {
+                                        if (foodBlockDate === date) return;
 
-                                    return (
-                                        <option
-                                            key={ foodBlockDate }
-                                            value={ foodBlockDate }>{ foodBlockDate }</option>
-                                    )
-                                })) : (null) }
-                            </select>
-                        </div>
+                                        return (
+                                            <option
+                                                key={ foodBlockDate }
+                                                value={ foodBlockDate }>{ foodBlockDate }</option>
+                                        )
+                                    }) }
+                                </select>
+                            </div>
 
-                        <button className="button button-pink">duplicate</button>
-                    </form>
+                            <button className="button button-pink">duplicate</button>
+                        </form>
+                    ) : (null) }
 
                 </div> 
             </Modal>
