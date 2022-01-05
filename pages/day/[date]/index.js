@@ -125,7 +125,10 @@ export default function Date () {
 
     const addEmptyFoodBlock = () => {
         addEmptyFoodBlockToLocalStorage(date);
-        setFoodBlocks(getFoodFromLocalStorage(date));
+        const foodBlocksFromLocalStorage = getFoodFromLocalStorage(date);
+        setFoodBlocks(foodBlocksFromLocalStorage);
+
+        toggleEditFoodBlockModal(foodBlocksFromLocalStorage[ foodBlocksFromLocalStorage.length-1 ]);
     }
 
     const removeFoodBlock = (foodBlockID) => {
