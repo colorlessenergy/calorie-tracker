@@ -213,7 +213,7 @@ export default function Blocks () {
                             src={ orangeIcon }
                             alt="orange icon" />
                     </div>
-                    <p className="text-center text-medium text-gray">
+                    <p className="text-center text-medium">
                         no food blocks
                     </p>
 
