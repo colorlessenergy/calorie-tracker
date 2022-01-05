@@ -109,10 +109,8 @@ export function importFoodBlocks (foodBlocks) {
             foodBlocks[date].forEach(foodBlock => {
                 ID += 1;
                 foodBlock.ID = ID;
-                foodBlock.previousID = null;
             });
             foodBlocksFromLocalStorage[date] = foodBlocks[date];
-            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
         } else {
             foodBlocks[date].forEach(foodBlock => {
                 let doesFoodBlockExist = false;
@@ -126,15 +124,14 @@ export function importFoodBlocks (foodBlocks) {
                 if (doesFoodBlockExist === false) {
                     ID += 1;
                     foodBlock.ID = ID;
-                    foodBlock.previousID = null;
                     foodBlocksFromLocalStorage[date].push(foodBlock);
                 }
             });
-
-            localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
-            localStorage.setItem('ID', JSON.stringify(ID));
         }
     }
+
+    localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
+    localStorage.setItem('ID', JSON.stringify(ID));
 }
 
 export function duplicateAndMergeFoodBlocksFromPreviousDate ({ previousDate, currentDate }) {
