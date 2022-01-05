@@ -175,7 +175,7 @@ export default function Date () {
                             src={ watermelonIcon }
                             alt="watermelon icon" />
                     </div>
-                    <p className="text-center text-medium text-gray">
+                    <p className="text-center text-medium">
                         no food blocks
                     </p>
                     <Link href={`/day/${ date }/blocks?modalOpen=true`}>

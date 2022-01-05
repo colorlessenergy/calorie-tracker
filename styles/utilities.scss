@@ -50,13 +50,12 @@
   margin-left: 4px;
 }
 
-.pt-3 {
-  padding-top: 30px;
+.pt-1 {
+  padding-top: 10px;
 }
 
-.py-0 {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+.pt-3 {
+  padding-top: 30px;
 }
 
 .p-1 {
@@ -65,10 +64,6 @@
 
 .text-center {
   text-align: center;
-}
-
-.text-right {
-  text-align: right;
 }
 
 .position-relative {
@@ -93,6 +88,10 @@
 
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
 }
 
 .align-items-center {
