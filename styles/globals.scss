@@ -62,6 +62,14 @@ input {
     position: fixed;
     bottom: 0;
     width: 100%;
+
+    background-color: #ffffff;
+  }
+
+  .dark .nav {
+    border-top-color: #ffffff;
+
+    background-color: #333333;
   }
 }
 
