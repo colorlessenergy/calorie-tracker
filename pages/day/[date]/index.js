@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,9 +6,14 @@ import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import Nav from '../../../shared/components/nav';
 import Confetti from 'react-confetti'
-import Modal from "../../../shared/components/modal";
+import Modal from '../../../shared/components/modal';
 
-import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage } from '../../../shared/food/food';
+import {
+    addEmptyFoodBlockToLocalStorage,
+    getFoodFromLocalStorage,
+    removeFoodBlockFromLocalStorage,
+    updateFoodBlockInLocalStorage
+} from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
@@ -78,6 +83,7 @@ export default function Date () {
     }
 
     const [ foodBlock, setFoodBlock ] = useState({
+        ID: null,
         name: '',
         calories: '',
         unit: '',
@@ -107,6 +113,31 @@ export default function Date () {
         updateFoodBlockInLocalStorage({ date, foodBlock: foodBlock });
         setFoodBlocks(getFoodFromLocalStorage(date));
         toggleEditFoodBlockModal({
+            ID: null,
+            name: '',
+            calories: '',
+            unit: '',
+            amount: '',
+            totalAmount: null,
+            color: ''
+        });
+    }
+
+    const addEmptyFoodBlock = () => {
+        addEmptyFoodBlockToLocalStorage(date);
+        const foodBlocksFromLocalStorage = getFoodFromLocalStorage(date);
+        setFoodBlocks(foodBlocksFromLocalStorage);
+
+        toggleEditFoodBlockModal(foodBlocksFromLocalStorage[ foodBlocksFromLocalStorage.length-1 ]);
+    }
+
+    const removeFoodBlock = (foodBlockID) => {
+        removeFoodBlockFromLocalStorage({ date, foodBlockID });
+
+        setFoodBlocks(getFoodFromLocalStorage(date));
+
+        toggleEditFoodBlockModal({
+            ID: null,
             name: '',
             calories: '',
             unit: '',
@@ -120,13 +151,19 @@ export default function Date () {
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
 
-            <div className="mx-15 mt-1 mb-1 flex">
+            <div className="mx-15 mt-1 mb-1 flex align-items-center">
                 <div className="mr-1">
                     { totalCalories } total calories
                 </div>
                 <div>
                     { goalCalories } calorie goal
                 </div>
+
+                <button
+                    onClick={ () => addEmptyFoodBlock() }
+                    className="add-food-block-button">
+                    +
+                </button>
             </div>
 
             { foodBlocks?.length === 0 ? (
@@ -154,7 +191,7 @@ export default function Date () {
                     return (
                         <div
                             key={ index } 
-                            className="card"
+                            className="card cursor-pointer"
                             style={{ backgroundColor: foodBlock.color }}
                             onClick={ () => toggleEditFoodBlockModal(foodBlock) }>
                             <div className="flex justify-content-between w-100">
@@ -200,7 +237,7 @@ export default function Date () {
                 <Modal isOpen={ isEditFoodBlockModalOpen }>
                     <form
                         onSubmit={ handleSubmit }
-                        className="flex flex-direction-column justify-content-between mb-2 p-1"
+                        className="flex flex-direction-column justify-content-between p-1"
                         style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
                         <div className="flex flex-direction-column align-items-start mb-2">
                             <label htmlFor="name">
@@ -273,16 +310,27 @@ export default function Date () {
                                 type="button"
                                 onClick={ () => {
                                     toggleEditFoodBlockModal({
+                                        ID: null,
                                         name: '',
                                         calories: '',
                                         unit: '',
                                         amount: '',
                                         color: ''
-                                    })
+                                    });
                                 }}
                                 className="button button-red">
                                 cancel
                             </button>
+
+                            <button
+                                type="button"
+                                onClick={ () => {
+                                    removeFoodBlock(foodBlock.ID);
+                                } }
+                                className="button button-pink">
+                                remove
+                            </button>
+
                             <button className="button button-green">
                                 update
                             </button>

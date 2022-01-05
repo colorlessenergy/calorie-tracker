@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
-import { addPreviousFoodBlockToLocalStorage, importFoodBlocks } from '../../../shared/food/food';
+import { importFoodBlocks } from '../../../shared/food/food';
 
 export default function ImportData () {
     const [ snackbars, setSnackbars ] = useState({
@@ -54,11 +54,6 @@ export default function ImportData () {
         const reader = new FileReader();
         reader.onload = (e) => {
             const importedData = JSON.parse(e.target.result)
-            const previousFoodBlocks = JSON.parse(importedData.previousFoodBlocks);
-
-            previousFoodBlocks.forEach(previousFoodBlock => {
-                addPreviousFoodBlockToLocalStorage({ foodBlock: previousFoodBlock, isImported: true })
-            });
 
             const foodBlocks = JSON.parse(importedData.foodBlocks)
             importFoodBlocks(foodBlocks);
@@ -80,8 +75,8 @@ export default function ImportData () {
                     import data 
                 </h1>
 
-                <p>
-                    import food blocks and previous food blocks
+                <p className="text-medium">
+                    import food blocks
                 </p>
 
                 <label

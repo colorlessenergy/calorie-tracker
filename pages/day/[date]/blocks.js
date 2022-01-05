@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import orangeIcon from '../../../public/icons/orange.svg';
@@ -7,7 +7,13 @@ import Nav from '../../../shared/components/nav';
 import Modal from '../../../shared/components/modal';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
-import { getFoodFromLocalStorage, updateFoodBlockInLocalStorage, removeFoodBlockFromLocalStorage, addEmptyFoodBlockToLocalStorage, addPreviousFoodBlockToLocalStorage, removePreviousFoodBlockFromLocalStorage, addPreviousFoodBlockToFoodBlocksInLocalStorage } from '../../../shared/food/food';
+import {
+    getFoodFromLocalStorage,
+    updateFoodBlockInLocalStorage,
+    removeFoodBlockFromLocalStorage,
+    addEmptyFoodBlockToLocalStorage,
+    duplicateAndMergeFoodBlocksFromPreviousDate
+} from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
@@ -100,7 +106,6 @@ export default function Blocks () {
 
         setSnackbars(cloneSnackbars);
         updateFoodBlockInLocalStorage({ date, foodBlock: foodBlocks[index] });
-        addPreviousFoodBlockToLocalStorage({ foodBlock: foodBlocks[index], setPreviousFoodBlocks });
     }
 
     const updateColor = ({ index, color }) => {
@@ -115,14 +120,6 @@ export default function Blocks () {
 
         cloneFoodBlocks.splice(index, 1);
         setFoodBlocks(cloneFoodBlocks);
-    }
-
-
-    const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const toggleModal = () => {
-        setIsModalOpen(previousIsModalOpen => {
-            return !previousIsModalOpen;
-        });
     }
 
     const addFoodBlockSnackbar = () => {
@@ -166,34 +163,32 @@ export default function Blocks () {
         addFoodBlockSnackbar();
     }
 
-    const [ previousFoodBlocks, setPreviousFoodBlocks ] = useState([])
     useEffect(() => {
-        setPreviousFoodBlocks(JSON.parse(localStorage.getItem('previousFoodBlocks')) || []);
-
-        if (router.query.modalOpen === "true") {
+        if (router.query.modalOpen === 'true') {
             setIsModalOpen(true);
         }
+
+        setAllFoodBlocks(JSON.parse(localStorage.getItem('foodBlocks')));
     }, []);
 
-    const removePreviousFoodBlock = (index) => {
-        let clonePreviousFoodBlocks = JSON.parse(JSON.stringify(previousFoodBlocks));
-        removePreviousFoodBlockFromLocalStorage(clonePreviousFoodBlocks[index].ID);
 
-        clonePreviousFoodBlocks.splice(index, 1);
-        setPreviousFoodBlocks(clonePreviousFoodBlocks);
+    const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const toggleModal = () => {
+        setIsModalOpen(previousIsModalOpen => !previousIsModalOpen);
     }
 
-    const handlePreviousFoodBlocksSubmit = ({ event, index }) => {
+    const [ allFoodBlocks, setAllFoodBlocks ] = useState({});
+    const [ previousFoodBlockDate, setPreviousFoodBlockDate ] = useState('');
+    const handlePreviousFoodBlockDateChange = event => {
+        if (event.currentTarget.value) return setPreviousFoodBlockDate(event.currentTarget.value);
+    }
+    const handleDuplicateAndMergePreviousDateSubmit = event => {
         event.preventDefault();
-        addPreviousFoodBlockToFoodBlocksInLocalStorage({ date, previousFoodBlockID: previousFoodBlocks[index].ID });
+        if (!previousFoodBlockDate) return;
+
+        duplicateAndMergeFoodBlocksFromPreviousDate({ previousDate: previousFoodBlockDate, currentDate: date });
         setFoodBlocks(getFoodFromLocalStorage(date));
-
-        addFoodBlockSnackbar();
-    }
-
-    const [ filterValue, setFilterValue ] = useState('');
-    const handleFilterChange = (event) => {
-        setFilterValue(event.target.value);
+        toggleModal();
     }
 
     return (
@@ -331,88 +326,31 @@ export default function Blocks () {
                         add a new food block
                     </button>
 
-                    { previousFoodBlocks.length ? (
-                        <Fragment>
-                            <div className="text-medium mb-1">previous food blocks</div>
+                    <form onSubmit={ handleDuplicateAndMergePreviousDateSubmit }>
+                        <div className="flex flex-direction-column mb-2">
+                            <label
+                                className="text-black text-medium mb-1"
+                                htmlFor="foodBlocksDate">duplicate previous day food blocks</label>
+                            <select
+                                onChange={ handlePreviousFoodBlockDateChange }
+                                className="text-medium w-50"
+                                id="foodBlocksDate">
+                                <option value="">choose a date</option>
+                                { allFoodBlocks ? (Object.keys(allFoodBlocks).map(foodBlockDate => {
+                                    if (foodBlockDate === date) return;
 
-                            <input
-                                type="text"
-                                onChange={ handleFilterChange }
-                                value={ filterValue }
-                                placeholder="filter previous food blocks" />
-                        </Fragment>
-                    ) : (null) }
+                                    return (
+                                        <option
+                                            key={ foodBlockDate }
+                                            value={ foodBlockDate }>{ foodBlockDate }</option>
+                                    )
+                                })) : (null) }
+                            </select>
+                        </div>
 
-                    <div className="previous-food-blocks-container flex flex-wrap justify-content-between">
-                        { previousFoodBlocks.map((foodBlock, index) => {
-                            if (!(foodBlock.name.toLowerCase().trim().includes(filterValue.toLowerCase().trim()))) {
-                                return null;
-                            }
+                        <button className="button button-pink">duplicate</button>
+                    </form>
 
-                            return (
-                                <form
-                                    key={ index }
-                                    onSubmit={ (event) => handlePreviousFoodBlocksSubmit({ event, index }) }
-                                    className="flex flex-direction-column justify-content-between mb-2 p-1 food-block-form"
-                                    style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
-                                    <div className="flex flex-direction-column align-items-start">
-                                        <label htmlFor={`${ index }-previous-name`}>
-                                            food
-                                        </label>
-                                        <input
-                                            disabled={ true }
-                                            value={ foodBlock.name }
-                                            type="text"
-                                            id={`${ index }-previous-name`} />
-
-                                        <label htmlFor={`${ index }-previous-calories`}>
-                                            total calories
-                                        </label>
-                                        <input
-                                            disabled={ true }
-                                            value={ foodBlock.calories }
-                                            type="number"
-                                            id={`${ index }-previous-calories`}
-                                            step="0.01" />
-
-                                        <label htmlFor={`${ index }-previous-total-amount`}>
-                                            total amount
-                                        </label>
-                                        <input
-                                            onChange={ (event) => handleChange({ event, index }) }
-                                            value={ foodBlock.totalAmount }
-                                            type="number"
-                                            id={`${ index }-previous-total-amount`}
-                                            required
-                                            min="1"
-                                            step="0.01" />
-
-                                        <label htmlFor={`${ index }-previous-unit`}>
-                                            unit of measurement
-                                        </label>
-                                        <input
-                                            disabled={ true }
-                                            value={ foodBlock.unit }
-                                            type="text"
-                                            id={`${ index }-previous-unit`} />
-
-                                    </div> 
-
-                                    <div className="flex justify-content-between">
-                                        <button
-                                            type="button"
-                                            onClick={ () => removePreviousFoodBlock(index) }
-                                            className="button button-red">
-                                            remove
-                                        </button>
-                                        <button className="button button-pink">
-                                            add
-                                        </button>
-                                    </div>
-                                </form>
-                            );
-                        }) }
-                    </div>
                 </div> 
             </Modal>
 

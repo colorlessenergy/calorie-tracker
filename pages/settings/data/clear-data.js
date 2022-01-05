@@ -57,8 +57,8 @@ export default function ClearData () {
                     clear data 
                 </h1>
 
-                <p>
-                    clear food blocks and previous food blocks
+                <p className="text-medium">
+                    clear food blocks
                 </p>
 
                 <button
