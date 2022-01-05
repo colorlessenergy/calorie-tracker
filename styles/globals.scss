@@ -5,6 +5,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  transition: background-color 0.5s ease;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -40,6 +44,7 @@ input {
 @import "./variables.scss";
 @import "./utilities.scss";
 @import "./module.scss";
+@import "./theme.scss";
 
 @media (max-width: 411px) {
   .container {
@@ -57,8 +62,6 @@ input {
     position: fixed;
     bottom: 0;
     width: 100%;
-
-    background-color: #ffffff;
   }
 }
 
