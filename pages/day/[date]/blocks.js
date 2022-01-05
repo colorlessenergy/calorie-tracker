@@ -337,7 +337,9 @@ export default function Blocks () {
                                     className="text-medium w-50"
                                     id="foodBlocksDate">
                                     <option value="">choose a date</option>
-                                    { Object.keys(allFoodBlocks).map(foodBlockDate => {
+                                    { Object.keys(allFoodBlocks).sort((dateOne, dateTwo) => {
+                                        return new Date(dateOne) - new Date(dateTwo);
+                                    }).slice(-10).map(foodBlockDate => {
                                         if (foodBlockDate === date) return;
 
                                         return (
