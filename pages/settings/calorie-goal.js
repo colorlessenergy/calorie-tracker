@@ -68,7 +68,9 @@ export default function CalorieGoal () {
                 <form
                     onSubmit={ handleSubmit }
                     className="mx-15 w-50-md">
-                    <label htmlFor="calorieGoal">set calorie goal</label>
+                    <label
+                        className="dark-label"
+                        htmlFor="calorieGoal">set calorie goal</label>
                     <input
                         type="number"
                         id="calorieGoal"
