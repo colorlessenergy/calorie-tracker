@@ -10,7 +10,7 @@ export default function CalorieGoal () {
     const [ calorieGoal, setCalorieGoal ] = useState(1);
 
     useEffect(() => {
-        setCalorieGoal(localStorage.getItem('calorieGoal'));
+        setCalorieGoal(localStorage.getItem('calorieGoal') || 1);
     }, []);
 
     const handleInputChange = (event) => {
