@@ -94,6 +94,10 @@ input {
 }
 
 @media (min-width: 867px) {
+  .w-50-md {
+    width: 50%;
+  }
+
   .card {
     width: 30%;
   }
