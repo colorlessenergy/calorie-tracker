@@ -1,50 +1,21 @@
-import { useEffect, useState } from 'react';
-
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
+import useSnackbar from '../../../shared/hooks/useSnackbar';
+
 export default function ClearData () {
-    const [ snackbars, setSnackbars ] = useState({
-        clear: {
-            snackbar: null,
-            timeout: null
+    const { snackbar, addSnackbar } = useSnackbar({
+        initialSnackbar: {
+            className: 'snackbar-red',
+            message: null,
+        },
+        message: {
+            single: 'cleared all data',
         }
     });
 
-    useEffect(() => {
-        return () => {
-            if (snackbars.clear.timeout) {
-                clearTimeout(snackbars.clear.timeout);
-            }
-        }
-    }, []);
-
     const clearLocalStorage = () => {
-        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-        if (cloneSnackbars.clear.timeout) {
-            clearTimeout(snackbars.clear.timeout);
-        }
-
-        let message = 'cleared all data';
-        cloneSnackbars.clear.snackbar = {
-            message: message,
-            className: 'snackbar-red'
-        }
-
-        let snackbarTimeout = setTimeout(() => {
-            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-            cloneSnackbars.clear.snackbar = null;
-            cloneSnackbars.clear.timeout = null;
-            setSnackbars(previousSnackbars => { 
-                return {
-                    ...previousSnackbars,
-                    clear: cloneSnackbars.clear
-                }
-            });
-        }, 5000);
-
-        cloneSnackbars.clear.timeout = snackbarTimeout;
-        setSnackbars(cloneSnackbars);
+        addSnackbar();
 
         localStorage.clear();
     }
@@ -66,8 +37,8 @@ export default function ClearData () {
                     className="button button-red flex-grow-1">clear data</button>
 
                 <div className="snackbars-container">
-                    { snackbars.clear.snackbar ? (
-                        <Snackbar message={ snackbars.clear.snackbar.message } className={ snackbars.clear.snackbar.className } />
+                    { snackbar.message ? (
+                        <Snackbar message={ snackbar.message } className={ snackbar.className } />
                     ) : (null) }
                 </div>
             </div>
