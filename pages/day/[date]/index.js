@@ -38,7 +38,7 @@ export default function Date () {
             }
         });
 
-        if (calories === goalCalories && goalCalories !== 0) {
+        if (calories === calorieGoal && calorieGoal !== 0) {
             const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             const height = window.innerHeight|| document.documentElement.clientHeight || document.body.clientHeight
             setConfetti({
@@ -50,16 +50,10 @@ export default function Date () {
         setTotalCalories(parseFloat(calories.toFixed(2)));
     }, [ foodBlocks ]);
 
-    const [ goalCalories, setGoalCalories ] = useState(0);
+    const [ calorieGoal, setCalorieGoal ] = useState(1);
     useEffect(() => {
-        let calories = 0;
-        foodBlocks?.forEach(foodBlock => {
-            if (parseFloat(foodBlock.calories)) {
-                calories += parseFloat(foodBlock.calories);
-            }
-        });
-        setGoalCalories(parseFloat(calories.toFixed(2)));
-    }, [ foodBlocks ])
+        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')));
+    }, []);
 
     const updateAmountOfFood = ({ event, sign, index }) => {
         event.stopPropagation();
@@ -156,7 +150,7 @@ export default function Date () {
                     { totalCalories } total calories
                 </div>
                 <div>
-                    { goalCalories } calorie goal
+                    { calorieGoal } calorie goal
                 </div>
 
                 <button
