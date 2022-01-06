@@ -3,8 +3,10 @@ import SettingsNav from '../../../shared/components/SettingsNav';
 export default function ExportData () {
     const exportData = () => {
         const foodBlocks = localStorage.getItem('foodBlocks');
+        const calorieGoal = localStorage.getItem('calorieGoal');
         const data = {
-            foodBlocks: foodBlocks
+            foodBlocks,
+            calorieGoal
         }
 
         const filename = 'calorie-tracker-data.json';

@@ -31,9 +31,13 @@ export default function ImportData () {
 
         const reader = new FileReader();
         reader.onload = (e) => {
-            const importedData = JSON.parse(e.target.result)
+            const importedData = JSON.parse(e.target.result);
 
-            const foodBlocks = JSON.parse(importedData.foodBlocks)
+            const foodBlocks = JSON.parse(importedData.foodBlocks);
+            const calorieGoal = JSON.parse(importedData.calorieGoal);
+            if (calorieGoal) {
+                localStorage.setItem('calorieGoal', calorieGoal);
+            }
             importFoodBlocks(foodBlocks);
             addSnackbarFinished();
         }
