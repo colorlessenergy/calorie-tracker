@@ -15,6 +15,10 @@ function MyApp({ Component, pageProps }) {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark');
         }
+
+        if (!localStorage.getItem('calorieGoal')) {
+            localStorage.setItem('calorieGoal', 1);
+        }
   }, []);
 
   return <Component {...pageProps} />

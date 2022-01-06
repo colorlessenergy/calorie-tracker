@@ -15,6 +15,8 @@ import {
     duplicateAndMergeFoodBlocksFromPreviousDate
 } from '../../../shared/food/food';
 
+import useSnackbar from '../../../shared/hooks/useSnackbar';
+
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
 export default function Blocks () {
@@ -45,66 +47,22 @@ export default function Blocks () {
         setFoodBlocks(cloneFoodBlocks);
     }
 
-    const [ snackbars, setSnackbars ] = useState({
-        update: {
-            snackbar: null,
-            timeout: null,
-            amountOfTimesUpdated: 0
+    const { snackbar: updateSnackbar, addSnackbar: addUpdateSnackbar } = useSnackbar({
+        initialSnackbar: {
+            className: 'snackbar-green',
+            message: null,
+            amountOfTimes: 0
         },
-        add: {
-            snackbar: null,
-            timeout: null,
-            amountOfTimesAdded: 0
+        message: {
+            single: 'food block was updated',
+            multiple: 'updates were made to food blocks'
         }
     });
-
-    useEffect(() => {
-        return () => {
-            if (snackbars.update.timeout) {
-                clearTimeout(snackbars.update.timeout);
-            }
-
-            if (snackbars.add.timeout) {
-                clearTimeout(snackbars.add.timeout);
-            }
-        }
-    }, []);
 
     const handleSubmit = ({ event, index }) => {
         event.preventDefault();
 
-        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-        if (cloneSnackbars.update.timeout) {
-            clearTimeout(snackbars.update.timeout);
-        }
-
-        let message = 'food block was updated';
-        if (cloneSnackbars.update.amountOfTimesUpdated >= 1) {
-            message = `${ cloneSnackbars.update.amountOfTimesUpdated + 1 } updates were made to food blocks`;
-        }
-
-        cloneSnackbars.update.snackbar = {
-            message: message,
-            className: 'snackbar-green'
-        }
-
-        let snackbarTimeout = setTimeout(() => {
-            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-            cloneSnackbars.update.snackbar = null;
-            cloneSnackbars.update.timeout = null;
-            cloneSnackbars.update.amountOfTimesUpdated = 0;
-            setSnackbars(previousSnackbars => { 
-                return {
-                    ...previousSnackbars,
-                    update: cloneSnackbars.update
-                }
-            });
-        }, 5000);
-
-        cloneSnackbars.update.timeout = snackbarTimeout;
-        cloneSnackbars.update.amountOfTimesUpdated += 1;
-
-        setSnackbars(cloneSnackbars);
+        addUpdateSnackbar();
         updateFoodBlockInLocalStorage({ date, foodBlock: foodBlocks[index] });
     }
 
@@ -122,45 +80,23 @@ export default function Blocks () {
         setFoodBlocks(cloneFoodBlocks);
     }
 
-    const addFoodBlockSnackbar = () => {
-        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-        if (cloneSnackbars.add.timeout) {
-            clearTimeout(cloneSnackbars.add.timeout);
+    const { snackbar, addSnackbar } = useSnackbar({
+        initialSnackbar: {
+            className: 'snackbar-pink',
+            message: null,
+            amountOfTimes: 0
+        },
+        message: {
+            single: 'a new food block was added',
+            multiple: 'food blocks were added'
         }
-
-        let message = 'a new food block was added';
-        if (cloneSnackbars.add.amountOfTimesAdded >= 1) {
-            message = `${ cloneSnackbars.add.amountOfTimesAdded + 1 } food blocks were added`;
-        }
-
-        cloneSnackbars.add.snackbar = {
-            message: message,
-            className: 'snackbar-pink'
-        }
-
-        let snackbarTimeout = setTimeout(() => {
-            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-            cloneSnackbars.add.snackbar = null;
-            cloneSnackbars.add.timeout = null;
-            cloneSnackbars.add.amountOfTimesAdded = 0;
-            setSnackbars(previousSnackbars => { 
-                return {
-                    ...previousSnackbars,
-                    add: cloneSnackbars.add
-                }
-            });
-        }, 5000);
-
-        cloneSnackbars.add.timeout = snackbarTimeout;
-        cloneSnackbars.add.amountOfTimesAdded += 1;
-        setSnackbars(cloneSnackbars);
-    }
+    });
 
     const addFoodBlock = () => {
         addEmptyFoodBlockToLocalStorage(date);
         setFoodBlocks(getFoodFromLocalStorage(date));
 
-        addFoodBlockSnackbar();
+        addSnackbar();
     }
 
     useEffect(() => {
@@ -360,11 +296,11 @@ export default function Blocks () {
 
 
             <div className="snackbars-container">
-                { snackbars.update.snackbar ? (
-                    <Snackbar message={ snackbars.update.snackbar.message } className={ snackbars.update.snackbar.className } />
+                { updateSnackbar.message ? (
+                    <Snackbar message={ updateSnackbar.message } className={ updateSnackbar.className } />
                 ) : (null) }
-                { snackbars.add.snackbar ? (
-                    <Snackbar message={ snackbars.add.snackbar.message } className={ snackbars.add.snackbar.className } />
+                { snackbar.message ? (
+                    <Snackbar message={ snackbar.message } className={ snackbar.className } />
                 ) : (null) }
             </div>
         </div>

@@ -11,6 +11,7 @@ export default function Settings() {
                 </h1>
 
                 <SettingsItem text="data" link="/settings/data" />
+                <SettingsItem text="calorie goal" link="/settings/calorie-goal" />
             </div>
         </div>
     );

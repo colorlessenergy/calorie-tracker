@@ -1,63 +1,45 @@
-import { useEffect, useState } from 'react';
-
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
 import { importFoodBlocks } from '../../../shared/food/food';
 
+import useSnackbar from '../../../shared/hooks/useSnackbar';
+
 export default function ImportData () {
-    const [ snackbars, setSnackbars ] = useState({
-        add: {
-            snackbar: null,
-            timeout: null
+    const { snackbar: snackbarStarted, addSnackbar: addSnackbarStarted } = useSnackbar({
+        initialSnackbar: {
+            className: 'snackbar-pink',
+            message: null,
+        },
+        message: {
+            single: 'started to import data',
         }
     });
 
-    useEffect(() => {
-        return () => {
-            if (snackbars.add.timeout) {
-                clearTimeout(snackbars.add.timeout);
-            }
+    const { snackbar: snackbarFinished, addSnackbar: addSnackbarFinished } = useSnackbar({
+        initialSnackbar: {
+            className: 'snackbar-pink',
+            message: null,
+        },
+        message: {
+            single: 'all data imported',
         }
-    }, []);
-
-    const createAddSnackbar = (message) => {
-        let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-        if (cloneSnackbars.add.timeout) {
-            clearTimeout(snackbars.add.timeout);
-        }
-
-        cloneSnackbars.add.snackbar = {
-            message: message,
-            className: 'snackbar-pink'
-        }
-
-        let snackbarTimeout = setTimeout(() => {
-            let cloneSnackbars = JSON.parse(JSON.stringify(snackbars));
-            cloneSnackbars.add.snackbar = null;
-            cloneSnackbars.add.timeout = null;
-            setSnackbars(previousSnackbars => { 
-                return {
-                    ...previousSnackbars,
-                    add: cloneSnackbars.add
-                }
-            });
-        }, 5000);
-
-        cloneSnackbars.add.timeout = snackbarTimeout;
-        setSnackbars(cloneSnackbars);
-    }
+    });
 
     const importData = (event) => {
-        createAddSnackbar('started to import data');
+        addSnackbarStarted();
 
         const reader = new FileReader();
         reader.onload = (e) => {
-            const importedData = JSON.parse(e.target.result)
+            const importedData = JSON.parse(e.target.result);
 
-            const foodBlocks = JSON.parse(importedData.foodBlocks)
+            const foodBlocks = JSON.parse(importedData.foodBlocks);
+            const calorieGoal = JSON.parse(importedData.calorieGoal);
+            if (calorieGoal) {
+                localStorage.setItem('calorieGoal', calorieGoal);
+            }
             importFoodBlocks(foodBlocks);
-            createAddSnackbar('all data imported');
+            addSnackbarFinished();
         }
 
         reader.readAsText(event.target.files[0]);
@@ -93,8 +75,12 @@ export default function ImportData () {
 
 
             <div className="snackbars-container">
-                { snackbars.add.snackbar ? (
-                    <Snackbar message={ snackbars.add.snackbar.message } className={ snackbars.add.snackbar.className } />
+                { snackbarStarted.message ? (
+                    <Snackbar message={ snackbarStarted.message } className={ snackbarStarted.className } />
+                ) : (null) }
+                
+                { snackbarFinished.message ? (
+                    <Snackbar message={ snackbarFinished.message } className={ snackbarFinished.className } />
                 ) : (null) }
             </div>
         </div>
