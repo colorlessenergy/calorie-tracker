@@ -1,4 +1,4 @@
-import { useState  } from 'react';
+import { useEffect, useState  } from 'react';
 import Head from 'next/head';
 
 import SettingsNav from '../../shared/components/SettingsNav';
@@ -8,6 +8,11 @@ import useSnackbar from '../../shared/hooks/useSnackbar';
 
 export default function CalorieGoal () {
     const [ calorieGoal, setCalorieGoal ] = useState(1);
+
+    useEffect(() => {
+        setCalorieGoal(localStorage.getItem('calorieGoal'));
+    }, []);
+
     const handleInputChange = (event) => {
         if (!event.currentTarget.valueAsNumber) return setCalorieGoal('');
 
