@@ -52,7 +52,7 @@ export default function Date () {
 
     const [ calorieGoal, setCalorieGoal ] = useState(1);
     useEffect(() => {
-        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')));
+        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')) || 1);
     }, []);
 
     const updateAmountOfFood = ({ event, sign, index }) => {

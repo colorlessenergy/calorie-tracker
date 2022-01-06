@@ -22,10 +22,10 @@ export default function CalorieGoal () {
     const { snackbar, addSnackbar } = useSnackbar({
         initialSnackbar: {
             className: 'snackbar-green',
-            message: null,
+            message: null
         },
         message: {
-            single: 'calorie goal is set',
+            single: 'calorie goal is set'
         }
     });
 
