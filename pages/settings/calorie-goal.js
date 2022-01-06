@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 
 import SettingsNav from '../../shared/components/SettingsNav';
+import Snackbar from '../../shared/components/Snackbar/Snackbar';
 
 export default function CalorieGoal () {
     const [ calorieGoal, setCalorieGoal ] = useState(1);
@@ -12,9 +13,41 @@ export default function CalorieGoal () {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         localStorage.setItem('calorieGoal', calorieGoal);
+
+        addSnackbar();
+    }
+
+    const [ snackbar, setSnackbar ] = useState(null);
+    const snackbarTimeoutRef = useRef(null);
+    useEffect(() => {
+        return () => {
+            if (snackbarTimeoutRef.current) {
+                clearTimeout(snackbarTimeoutRef.current);
+            }
+        }
+    }, []);
+
+    const addSnackbar = () => {
+        if (snackbarTimeoutRef.current) {
+            clearTimeout(snackbarTimeoutRef.current);
+        }
+
+        const snackbarTimeout = setTimeout(() => {
+            snackbarTimeoutRef.current = null;
+            setSnackbar(null);
+        }, 5000);
+
+        snackbarTimeoutRef.current = snackbarTimeout;
+
+        let cloneSnackbar = JSON.parse(JSON.stringify(snackbar));
+        cloneSnackbar = {
+            message: 'calorie goal is set',
+            className: 'snackbar-green'
+        }
+        setSnackbar(cloneSnackbar);
     }
 
     return (
@@ -50,6 +83,12 @@ export default function CalorieGoal () {
                         submit
                     </button>
                 </form>
+            </div>
+
+            <div className="snackbars-container">
+                { snackbar ? (
+                    <Snackbar message={ snackbar.message } className={ snackbar.className } />
+                ) : (null) }
             </div>
         </div>
     );
