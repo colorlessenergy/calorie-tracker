@@ -12,6 +12,7 @@ export default function Settings() {
 
                 <SettingsItem text="data" link="/settings/data" />
                 <SettingsItem text="calorie goal" link="/settings/calorie-goal" />
+                <SettingsItem text="food dictionary" link="/settings/food-dictionary" />
             </div>
         </div>
     );
