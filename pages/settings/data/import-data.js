@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
@@ -55,38 +57,45 @@ export default function ImportData () {
     }
 
     return (
-        <div className="container">
-            <SettingsNav />
-            <div className="mx-15">
-                <h1 className="mt-1">
-                    import data 
-                </h1>
+        <div>
+            <Head>
+                <title>calorie tracker - import data</title>
+                <meta name="description" content="calorie tracker - import data" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <div className="container">
+                <SettingsNav />
+                <div className="mx-15">
+                    <h1 className="mt-1">
+                        import data 
+                    </h1>
 
-                <p className="text-medium">
-                    import food blocks
-                </p>
+                    <p className="text-medium">
+                        import food blocks
+                    </p>
 
-                <label
-                    htmlFor="import-data"
-                    className="button button-pink cursor-pointer d-inline-block">import data</label>
-                <input
-                    type="file"
-                    id="import-data"
-                    accept=".json"
-                    onChange={ importData }
-                    onClick={ setValueToNull }
-                    className="hidden" />
-            </div>
+                    <label
+                        htmlFor="import-data"
+                        className="button button-pink cursor-pointer d-inline-block">import data</label>
+                    <input
+                        type="file"
+                        id="import-data"
+                        accept=".json"
+                        onChange={ importData }
+                        onClick={ setValueToNull }
+                        className="hidden" />
+                </div>
 
 
-            <div className="snackbars-container">
-                { snackbarStarted.message ? (
-                    <Snackbar message={ snackbarStarted.message } className={ snackbarStarted.className } />
-                ) : (null) }
-                
-                { snackbarFinished.message ? (
-                    <Snackbar message={ snackbarFinished.message } className={ snackbarFinished.className } />
-                ) : (null) }
+                <div className="snackbars-container">
+                    { snackbarStarted.message ? (
+                        <Snackbar message={ snackbarStarted.message } className={ snackbarStarted.className } />
+                    ) : (null) }
+                    
+                    { snackbarFinished.message ? (
+                        <Snackbar message={ snackbarFinished.message } className={ snackbarFinished.className } />
+                    ) : (null) }
+                </div>
             </div>
         </div>
     );
