@@ -100,16 +100,20 @@ export default function foodDictionary () {
                                 <div
                                     className="card text-medium"
                                     key={ foodBlock.ID }>
-                                    <div className="text-bold">   
+                                    <div
+                                        onClick={ () => toggleEditFoodBlockModal(foodBlock) }
+                                        className="text-bold cursor-pointer">   
                                         { foodBlock.name } 
                                     </div>
-                                    <div className="flex justify-content-between w-100 mb-1">
+                                    <div
+                                        onClick={ () => toggleEditFoodBlockModal(foodBlock) }
+                                        className="flex justify-content-between w-100 mb-1 cursor-pointer">
                                         <div>
-                                            { foodBlock.amount } { foodBlock.unit } 
+                                            { foodBlock.calories } calories
                                         </div>
 
                                         <div>
-                                            { foodBlock.calories } calories
+                                            { foodBlock.amount } { foodBlock.unit } 
                                         </div>
                                     </div>
 
