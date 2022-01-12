@@ -59,6 +59,8 @@ export default function foodDictionary () {
             amount: ''
         });
 
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+
         toggleEditFoodBlockModal(foodBlock);
     }
 
