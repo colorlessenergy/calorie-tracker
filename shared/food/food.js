@@ -153,3 +153,33 @@ export function duplicateAndMergeFoodBlocksFromPreviousDate ({ previousDate, cur
     localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
     localStorage.setItem('ID', JSON.stringify(ID));
 }
+
+export function addFoodBlockToFoodDictionary (foodBlock) {
+    if (!localStorage.getItem('foodDictionary')) {
+        localStorage.setItem('foodDictionary', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('foodDictionaryID')) {
+        localStorage.setItem('foodDictionaryID', JSON.stringify(0));
+    }
+
+    let foodDictionary = JSON.parse(localStorage.getItem('foodDictionary'));
+
+    if (foodBlock.ID) {
+        const index = foodDictionary.findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
+        foodDictionary[ index ] = foodBlock;
+    } else {
+        let foodDictionaryID = JSON.parse(localStorage.getItem('foodDictionaryID'));
+        foodDictionaryID += 1;
+        foodBlock = {
+            ...foodBlock,
+            ID: foodDictionaryID
+        }
+        foodDictionary.push(foodBlock);
+        localStorage.setItem('foodDictionaryID', JSON.stringify(foodDictionaryID));
+    }
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionary));
+
+    return foodBlock;
+}
