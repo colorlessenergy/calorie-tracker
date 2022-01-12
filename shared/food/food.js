@@ -193,3 +193,12 @@ export function addFoodBlockToFoodDictionary (foodBlock) {
 
     return foodBlock;
 }
+
+export function removeFoodBlockFromFoodDictionary (foodBlockID) {
+    let foodDictionary = JSON.parse(localStorage.getItem('foodDictionary'));
+
+    const index = foodDictionary.findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlockID);
+    foodDictionary.splice(index, 1);
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionary));
+}

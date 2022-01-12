@@ -5,7 +5,11 @@ import Head from 'next/head';
 import SettingsNav from '../../shared/components/SettingsNav';
 import Modal from '../../shared/components/modal';
 
-import { addFoodBlockToFoodDictionary, getFoodDictionaryFromLocalStorage } from '../../shared/food/food';
+import {
+    addFoodBlockToFoodDictionary,
+    getFoodDictionaryFromLocalStorage,
+    removeFoodBlockFromFoodDictionary
+} from '../../shared/food/food';
 
 export default function foodDictionary () {
     const [ foodBlock, setFoodBlock ] = useState({
@@ -56,6 +60,20 @@ export default function foodDictionary () {
         });
 
         toggleEditFoodBlockModal(foodBlock);
+    }
+
+    const removeFoodBlock = (foodBlockID) => {
+        removeFoodBlockFromFoodDictionary(foodBlockID);
+
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+
+        toggleEditFoodBlockModal({
+            ID: null,
+            name: '',
+            calories: '',
+            unit: '',
+            amount: ''
+        });
     }
 
     const [ foodDictionary, setFoodDictionary ] = useState([]);
@@ -132,7 +150,6 @@ export default function foodDictionary () {
                                     { amountOfCaloriesPerUnit[ foodBlock.ID ] ? (
                                         <div className="align-self-start">{ amountOfCaloriesPerUnit[ foodBlock.ID ] } calories</div>
                                     ) : (null) }
-
                                 </div>
                             );
                         })) : (null) }
@@ -213,6 +230,7 @@ export default function foodDictionary () {
 
                             <button
                                 type="button"
+                                onClick={ () => removeFoodBlock(foodBlock.ID) }
                                 className="button button-pink">
                                 remove
                             </button>
