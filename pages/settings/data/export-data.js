@@ -4,9 +4,11 @@ export default function ExportData () {
     const exportData = () => {
         const foodBlocks = localStorage.getItem('foodBlocks');
         const calorieGoal = localStorage.getItem('calorieGoal');
+        const foodDictionary = localStorage.getItem('foodDictionary');
         const data = {
             foodBlocks,
-            calorieGoal
+            calorieGoal,
+            foodDictionary
         }
 
         const filename = 'calorie-tracker-data.json';
