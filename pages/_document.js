@@ -13,7 +13,6 @@ class MyDocument extends Document {
                     <meta name='apple-mobile-web-app-capable' content='yes' />
                     <meta name='apple-mobile-web-app-status-bar-style' content='default' />
                     <meta name='apple-mobile-web-app-title' content='calorie tracker' />
-                    <meta name='description' content='calorie tracker' />
                     <meta name='format-detection' content='telephone=no' />
                     <meta name='mobile-web-app-capable' content='yes' />
                     <meta name='msapplication-TileColor' content='#2B5797' />

@@ -1,12 +1,16 @@
+import Head from 'next/head';
+
 import SettingsNav from '../../../shared/components/SettingsNav';
 
 export default function ExportData () {
     const exportData = () => {
         const foodBlocks = localStorage.getItem('foodBlocks');
         const calorieGoal = localStorage.getItem('calorieGoal');
+        const foodDictionary = localStorage.getItem('foodDictionary');
         const data = {
             foodBlocks,
-            calorieGoal
+            calorieGoal,
+            foodDictionary
         }
 
         const filename = 'calorie-tracker-data.json';
@@ -21,20 +25,28 @@ export default function ExportData () {
     }
 
     return (
-        <div className="container">
-            <SettingsNav />
-            <div className="mx-15">
-                <h1 className="mt-1">
-                    export data 
-                </h1>
+        <div>
+            <Head>
+                <title>calorie tracker - export data</title>
+                <meta name="description" content="calorie tracker - export data" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-                <p className="text-medium">
-                    export food blocks
-                </p>
+            <div className="container">
+                <SettingsNav />
+                <div className="mx-15">
+                    <h1 className="mt-1">
+                        export data 
+                    </h1>
 
-                <button
-                    onClick={ exportData }
-                    className="button button-green">export data</button>
+                    <p className="text-medium">
+                        export food blocks
+                    </p>
+
+                    <button
+                        onClick={ exportData }
+                        className="button button-green">export data</button>
+                </div>
             </div>
         </div>
     );

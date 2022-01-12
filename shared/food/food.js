@@ -1,28 +1,23 @@
-function getFoodBlock (date) {
-    let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
-    if (foodBlocks[date]) {
-        return foodBlocks[date];
-    } 
-
-    foodBlocks[date] = [];
-    localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
-    return foodBlocks[date];
-}
-
 export function getFoodFromLocalStorage (date) {
     if (!date) return [];
 
+    let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
     if (localStorage.getItem('foodBlocks')) {
-        return getFoodBlock(date);
+        if (foodBlocks[ date ]) {
+            return foodBlocks[ date ]
+        }
+
+        foodBlocks[ date ] = [];
+        localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
+    } else if (!localStorage.getItem('foodBlocks')) {
+        localStorage.setItem('foodBlocks', [
+            JSON.stringify({
+                [ date ]:  []
+            })
+        ]);
     }
 
-    localStorage.setItem('foodBlocks', [
-        JSON.stringify({
-            [ date ]:  []
-        })
-    ]);
-
-    return getFoodBlock(date);
+    return [];
 }
 
 export function updateFoodBlockInLocalStorage ({ date, foodBlock, updatedWithButton = false }) {
@@ -86,6 +81,33 @@ const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     }
 
     return false;
+}
+
+export function importFoodDictionary (foodDictionary) {
+    if (!foodDictionary) return;
+
+    if (foodDictionary.length === 0) return;
+
+    if (!localStorage.getItem('foodDictionary')) {
+        localStorage.setItem('foodDictionary', JSON.stringify([]));
+    }
+    
+    if (!localStorage.getItem('foodDictionaryID')) {
+        localStorage.setItem('foodDictionaryID', JSON.stringify(0));
+    }
+
+    let ID = JSON.parse(localStorage.getItem('foodDictionaryID'));
+
+    let foodDictionaryFromLocalStorage = JSON.parse(localStorage.getItem('foodDictionary'));
+    for (let i = 0; i < foodDictionary.length; i++) {
+        ID += 1
+        foodDictionary[ i ].ID = ID;
+    }
+
+    foodDictionaryFromLocalStorage = [...foodDictionaryFromLocalStorage, ...foodDictionary];
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionaryFromLocalStorage));
+    localStorage.setItem('foodDictionaryID', JSON.stringify(ID));
 }
 
 export function importFoodBlocks (foodBlocks) {
@@ -152,4 +174,53 @@ export function duplicateAndMergeFoodBlocksFromPreviousDate ({ previousDate, cur
 
     localStorage.setItem('foodBlocks', JSON.stringify(foodBlocksFromLocalStorage));
     localStorage.setItem('ID', JSON.stringify(ID));
+}
+
+const initFoodDictionary = () => {
+    if (!localStorage.getItem('foodDictionary')) {
+        localStorage.setItem('foodDictionary', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('foodDictionaryID')) {
+        localStorage.setItem('foodDictionaryID', JSON.stringify(0));
+    }
+}
+
+export function getFoodDictionaryFromLocalStorage () {
+    initFoodDictionary();
+
+    return JSON.parse(localStorage.getItem('foodDictionary'));
+}
+
+export function addFoodBlockToFoodDictionary (foodBlock) {
+    initFoodDictionary();
+
+    let foodDictionary = JSON.parse(localStorage.getItem('foodDictionary'));
+
+    if (foodBlock.ID) {
+        const index = foodDictionary.findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlock.ID);
+        foodDictionary[ index ] = foodBlock;
+    } else {
+        let foodDictionaryID = JSON.parse(localStorage.getItem('foodDictionaryID'));
+        foodDictionaryID += 1;
+        foodBlock = {
+            ...foodBlock,
+            ID: foodDictionaryID
+        }
+        foodDictionary.push(foodBlock);
+        localStorage.setItem('foodDictionaryID', JSON.stringify(foodDictionaryID));
+    }
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionary));
+
+    return foodBlock;
+}
+
+export function removeFoodBlockFromFoodDictionary (foodBlockID) {
+    let foodDictionary = JSON.parse(localStorage.getItem('foodDictionary'));
+
+    const index = foodDictionary.findIndex(foodBlockFromLocalStorage => foodBlockFromLocalStorage.ID === foodBlockID);
+    foodDictionary.splice(index, 1);
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionary));
 }
