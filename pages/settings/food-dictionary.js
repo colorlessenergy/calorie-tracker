@@ -11,7 +11,7 @@ import {
     removeFoodBlockFromFoodDictionary
 } from '../../shared/food/food';
 
-export default function foodDictionary () {
+export default function FoodDictionary () {
     const [ foodBlock, setFoodBlock ] = useState({
         ID: null,
         name: '',
