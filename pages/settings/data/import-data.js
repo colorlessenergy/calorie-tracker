@@ -1,7 +1,7 @@
 import SettingsNav from '../../../shared/components/SettingsNav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
-import { importFoodBlocks } from '../../../shared/food/food';
+import { importFoodBlocks, importFoodDictionary } from '../../../shared/food/food';
 
 import useSnackbar from '../../../shared/hooks/useSnackbar';
 
@@ -33,12 +33,17 @@ export default function ImportData () {
         reader.onload = (e) => {
             const importedData = JSON.parse(e.target.result);
 
-            const foodBlocks = JSON.parse(importedData.foodBlocks);
             const calorieGoal = JSON.parse(importedData.calorieGoal);
             if (calorieGoal) {
                 localStorage.setItem('calorieGoal', calorieGoal);
             }
+
+            const foodBlocks = JSON.parse(importedData.foodBlocks);
             importFoodBlocks(foodBlocks);
+
+            const foodDictionary = JSON.parse(importedData.foodDictionary);
+            importFoodDictionary(foodDictionary);
+
             addSnackbarFinished();
         }
 

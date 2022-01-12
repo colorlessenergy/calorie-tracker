@@ -88,6 +88,33 @@ const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     return false;
 }
 
+export function importFoodDictionary (foodDictionary) {
+    if (!foodDictionary) return;
+
+    if (foodDictionary.length === 0) return;
+
+    if (!localStorage.getItem('foodDictionary')) {
+        localStorage.setItem('foodDictionary', JSON.stringify([]));
+    }
+    
+    if (!localStorage.getItem('foodDictionaryID')) {
+        localStorage.setItem('foodDictionaryID', JSON.stringify(0));
+    }
+
+    let ID = JSON.parse(localStorage.getItem('foodDictionaryID'));
+
+    let foodDictionaryFromLocalStorage = JSON.parse(localStorage.getItem('foodDictionary'));
+    for (let i = 0; i < foodDictionary.length; i++) {
+        ID += 1
+        foodDictionary[ i ].ID = ID;
+    }
+
+    foodDictionaryFromLocalStorage = [...foodDictionaryFromLocalStorage, ...foodDictionary];
+
+    localStorage.setItem('foodDictionary', JSON.stringify(foodDictionaryFromLocalStorage));
+    localStorage.setItem('foodDictionaryID', JSON.stringify(ID));
+}
+
 export function importFoodBlocks (foodBlocks) {
     if (!foodBlocks) return;
 
