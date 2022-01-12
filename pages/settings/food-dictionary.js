@@ -63,6 +63,16 @@ export default function foodDictionary () {
         setFoodDictionary(getFoodDictionaryFromLocalStorage());
     }, []);
 
+    const [ amountOfCaloriesPerUnit, setAmountOfCaloriesPerUnit ] = useState({});
+    const handleCalculateCalories = ({ value, foodBlock }) => {
+        const amountOfCaloriesPerUnit = foodBlock.calories / foodBlock.amount;
+
+        setAmountOfCaloriesPerUnit(previousAmountOfCaloriesPerUnit => ({
+            ...previousAmountOfCaloriesPerUnit,
+            [ foodBlock.ID ]: amountOfCaloriesPerUnit * value
+        }));
+    }
+
     return (
         <div>
             <Head>
@@ -81,21 +91,48 @@ export default function foodDictionary () {
 
                     <button
                         onClick={ addNewFoodBlock }
-                        className="button button-green">add food</button>
+                        className="button button-green mb-1">add food</button>
 
 
-                    { foodDictionary.length ? (foodDictionary.map(foodBlock => {
-                        return (
-                            <div key={ foodBlock.ID }>
-                                <div>
-                                    { foodBlock.name } 
+                    <div className="flex flex-wrap justify-content-between">
+                        { foodDictionary.length ? (foodDictionary.map(foodBlock => {
+                            return (
+                                <div
+                                    className="card text-medium"
+                                    key={ foodBlock.ID }>
+                                    <div className="text-bold">   
+                                        { foodBlock.name } 
+                                    </div>
+                                    <div className="flex justify-content-between w-100 mb-1">
+                                        <div>
+                                            { foodBlock.amount } { foodBlock.unit } 
+                                        </div>
+
+                                        <div>
+                                            { foodBlock.calories } calories
+                                        </div>
+                                    </div>
+
+                                    <div className="align-self-start w-100">
+                                        <label htmlFor={`calculateCalories-${ foodBlock.ID }`}>calculate calories</label>
+                                        <input
+                                            onChange={ event => handleCalculateCalories({ value: event.currentTarget.value, foodBlock }) }
+                                            type="number"
+                                            id={`calculateCalories-${ foodBlock.ID }`}
+                                            name={`calculateCalories-${ foodBlock.ID }`}
+                                            min="1"
+                                            step="0.01"
+                                            placeholder="amount" />
+                                    </div>
+
+                                    { amountOfCaloriesPerUnit[ foodBlock.ID ] ? (
+                                        <div className="align-self-start">{ amountOfCaloriesPerUnit[ foodBlock.ID ] } calories</div>
+                                    ) : (null) }
+
                                 </div>
-                                <div>
-                                    { foodBlock.amount } { foodBlock.unit } - { foodBlock.calories } calories
-                                </div>
-                            </div>
-                        )
-                    })) : (null) }
+                            );
+                        })) : (null) }
+                    </div>
                 </div>
             </div>
 
