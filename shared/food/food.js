@@ -154,7 +154,7 @@ export function duplicateAndMergeFoodBlocksFromPreviousDate ({ previousDate, cur
     localStorage.setItem('ID', JSON.stringify(ID));
 }
 
-export function addFoodBlockToFoodDictionary (foodBlock) {
+const initFoodDictionary = () => {
     if (!localStorage.getItem('foodDictionary')) {
         localStorage.setItem('foodDictionary', JSON.stringify([]));
     }
@@ -162,6 +162,16 @@ export function addFoodBlockToFoodDictionary (foodBlock) {
     if (!localStorage.getItem('foodDictionaryID')) {
         localStorage.setItem('foodDictionaryID', JSON.stringify(0));
     }
+}
+
+export function getFoodDictionaryFromLocalStorage () {
+    initFoodDictionary();
+
+    return JSON.parse(localStorage.getItem('foodDictionary'));
+}
+
+export function addFoodBlockToFoodDictionary (foodBlock) {
+    initFoodDictionary();
 
     let foodDictionary = JSON.parse(localStorage.getItem('foodDictionary'));
 

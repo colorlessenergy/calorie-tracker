@@ -1,11 +1,11 @@
 
-import { useState  } from 'react';
+import { useEffect, useState  } from 'react';
 import Head from 'next/head';
 
 import SettingsNav from '../../shared/components/SettingsNav';
 import Modal from '../../shared/components/modal';
 
-import { addFoodBlockToFoodDictionary } from '../../shared/food/food';
+import { addFoodBlockToFoodDictionary, getFoodDictionaryFromLocalStorage } from '../../shared/food/food';
 
 export default function foodDictionary () {
     const [ foodBlock, setFoodBlock ] = useState({
@@ -35,6 +35,8 @@ export default function foodDictionary () {
 
         addFoodBlockToFoodDictionary(foodBlock);
 
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+
         toggleEditFoodBlockModal({
             ID: null,
             name: '',
@@ -56,6 +58,11 @@ export default function foodDictionary () {
         toggleEditFoodBlockModal(foodBlock);
     }
 
+    const [ foodDictionary, setFoodDictionary ] = useState([]);
+    useEffect(() => {
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+    }, []);
+
     return (
         <div>
             <Head>
@@ -75,6 +82,20 @@ export default function foodDictionary () {
                     <button
                         onClick={ addNewFoodBlock }
                         className="button button-green">add food</button>
+
+
+                    { foodDictionary.length ? (foodDictionary.map(foodBlock => {
+                        return (
+                            <div key={ foodBlock.ID }>
+                                <div>
+                                    { foodBlock.name } 
+                                </div>
+                                <div>
+                                    { foodBlock.amount } { foodBlock.unit } - { foodBlock.calories } calories
+                                </div>
+                            </div>
+                        )
+                    })) : (null) }
                 </div>
             </div>
 
