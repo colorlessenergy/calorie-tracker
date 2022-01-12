@@ -1,28 +1,23 @@
-function getFoodBlock (date) {
-    let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
-    if (foodBlocks[date]) {
-        return foodBlocks[date];
-    } 
-
-    foodBlocks[date] = [];
-    localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
-    return foodBlocks[date];
-}
-
 export function getFoodFromLocalStorage (date) {
     if (!date) return [];
 
+    let foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
     if (localStorage.getItem('foodBlocks')) {
-        return getFoodBlock(date);
+        if (foodBlocks[ date ]) {
+            return foodBlocks[ date ]
+        }
+
+        foodBlocks[ date ] = [];
+        localStorage.setItem('foodBlocks', JSON.stringify(foodBlocks));
+    } else if (!localStorage.getItem('foodBlocks')) {
+        localStorage.setItem('foodBlocks', [
+            JSON.stringify({
+                [ date ]:  []
+            })
+        ]);
     }
 
-    localStorage.setItem('foodBlocks', [
-        JSON.stringify({
-            [ date ]:  []
-        })
-    ]);
-
-    return getFoodBlock(date);
+    return [];
 }
 
 export function updateFoodBlockInLocalStorage ({ date, foodBlock, updatedWithButton = false }) {
