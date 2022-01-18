@@ -172,6 +172,7 @@ export default function FoodDictionary () {
                                 onChange={ (event) => handleChange(event) }
                                 value={ foodBlock.name }
                                 type="text"
+                                autoComplete="off"
                                 id="name"
                                 name="name"
                                 required />
@@ -209,6 +210,7 @@ export default function FoodDictionary () {
                                 onChange={ (event) => handleChange(event) }
                                 value={ foodBlock.unit }
                                 type="text"
+                                autoComplete="off"
                                 id="unit"
                                 name="unit" />
                         </div> 

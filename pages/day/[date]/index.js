@@ -241,6 +241,7 @@ export default function Date () {
                                 onChange={ (event) => handleChange(event) }
                                 value={ foodBlock.name }
                                 type="text"
+                                autoComplete="off"
                                 id="name"
                                 name="name"
                                 required />
@@ -278,6 +279,7 @@ export default function Date () {
                                 onChange={ (event) => handleChange(event) }
                                 value={ foodBlock.unit }
                                 type="text"
+                                autoComplete="off"
                                 id="unit"
                                 name="unit" />
 

@@ -175,6 +175,7 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].name }
                                     type="text"
+                                    autoComplete="off"
                                     id={`${ index }-name`}
                                     name="name"
                                     required />
@@ -212,6 +213,7 @@ export default function Blocks () {
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].unit }
                                     type="text"
+                                    autoComplete="off"
                                     id={`${ index }-unit`}
                                     name="unit" />
 
