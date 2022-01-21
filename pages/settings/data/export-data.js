@@ -53,6 +53,10 @@ export default function ExportData () {
                         export food blocks
                     </p>
 
+                    <p className="text-bold text-medium">
+                        note: a web browser is needed to export your data 
+                    </p>
+
                     <button
                         onClick={ exportData }
                         className="button button-green">export data</button>
