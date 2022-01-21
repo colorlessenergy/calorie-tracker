@@ -160,62 +160,9 @@ export default function FoodDictionary () {
 
 
             { isEditFoodBlockModalOpen ? (
-                <Modal isOpen={ isEditFoodBlockModalOpen }>
-                    <form
-                        onSubmit={ handleSubmit }
-                        className="flex flex-direction-column justify-content-between p-1">
-                        <div className="flex flex-direction-column align-items-start mb-2">
-                            <label htmlFor="name">
-                                food
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.name }
-                                type="text"
-                                autoComplete="off"
-                                id="name"
-                                name="name"
-                                required />
-
-                            <label htmlFor="calories">
-                                calories
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.calories }
-                                type="number"
-                                id="calories"
-                                name="calories"
-                                required
-                                min="1"
-                                step="0.01" />
-
-                            <label htmlFor="amount">
-                                amount
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.amount }
-                                type="number"
-                                id="amount"
-                                name="amount"
-                                required
-                                min="1"
-                                step="0.01" />
-
-                            <label htmlFor="unit">
-                                unit of measurement
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.unit }
-                                type="text"
-                                autoComplete="off"
-                                id="unit"
-                                name="unit" />
-                        </div> 
-
-                        <div className="flex justify-content-between">
+                <Modal
+                    outsideElements={
+                        <div className="flex">
                             <button
                                 type="button"
                                 onClick={ () => {
@@ -227,21 +174,81 @@ export default function FoodDictionary () {
                                         amount: '',
                                     });
                                 }}
-                                className="button button-red">
+                                className="button button-red flex-grow-1">
                                 cancel
                             </button>
 
                             <button
                                 type="button"
                                 onClick={ () => removeFoodBlock(foodBlock.ID) }
-                                className="button button-pink">
+                                className="button button-pink flex-grow-1">
                                 remove
                             </button>
 
-                            <button className="button button-green">
+                            <label
+                                htmlFor="form-submit"
+                                className="button button-green flex-grow-1 text-center cursor-pointer">
                                 update
-                            </button>
+                            </label>
                         </div>
+                    }
+                    isOpen={ isEditFoodBlockModalOpen }>
+                    <form
+                        onSubmit={ handleSubmit }
+                        className="flex flex-direction-column justify-content-between p-1">
+                        <label htmlFor="name">
+                            food
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.name }
+                            type="text"
+                            autoComplete="off"
+                            id="name"
+                            name="name"
+                            required />
+
+                        <label htmlFor="calories">
+                            calories
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.calories }
+                            type="number"
+                            id="calories"
+                            name="calories"
+                            required
+                            min="1"
+                            step="0.01" />
+
+                        <label htmlFor="amount">
+                            amount
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.amount }
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            required
+                            min="1"
+                            step="0.01" />
+
+                        <label htmlFor="unit">
+                            unit of measurement
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.unit }
+                            type="text"
+                            autoComplete="off"
+                            id="unit"
+                            name="unit" />
+
+                        <input
+                            type="submit"
+                            id="form-submit"
+                            className="hidden" />
                     </form>
                 </Modal>
             ) : (null) }

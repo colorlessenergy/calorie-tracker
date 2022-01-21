@@ -228,80 +228,9 @@ export default function Date () {
             ) : (null) }
 
             { isEditFoodBlockModalOpen ? (
-                <Modal isOpen={ isEditFoodBlockModalOpen }>
-                    <form
-                        onSubmit={ handleSubmit }
-                        className="flex flex-direction-column justify-content-between p-1"
-                        style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
-                        <div className="flex flex-direction-column align-items-start mb-2">
-                            <label htmlFor="name">
-                                food
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.name }
-                                type="text"
-                                autoComplete="off"
-                                id="name"
-                                name="name"
-                                required />
-
-                            <label htmlFor="calories">
-                                total calories
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.calories }
-                                type="number"
-                                id="calories"
-                                name="calories"
-                                required
-                                min="1"
-                                step="0.01" />
-
-                            <label htmlFor="totalAmount">
-                                total amount
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.totalAmount }
-                                type="number"
-                                id="totalAmount"
-                                name="total-amount"
-                                required
-                                min="1"
-                                step="0.01" />
-
-                            <label htmlFor="unit">
-                                unit of measurement
-                            </label>
-                            <input
-                                onChange={ (event) => handleChange(event) }
-                                value={ foodBlock.unit }
-                                type="text"
-                                autoComplete="off"
-                                id="unit"
-                                name="unit" />
-
-                            <div className="text-gray text-small ml-04 mb-04">
-                                select a color
-                            </div>
-                            <div className="flex">
-                                { colors.map(color => {
-                                    return (
-                                        <div
-                                            key={ color }
-                                            onClick={ () => updateColor(color) }
-                                            className="circle mr-1 cursor-pointer"
-                                            style={{ backgroundColor: color, border: color === foodBlock.color ? "3px solid #000000" : null }}
-                                            title={`${ color }`}>
-                                        </div>
-                                    );
-                                }) }
-                            </div>
-                        </div> 
-
-                        <div className="flex justify-content-between">
+                <Modal
+                    outsideElements={
+                        <div className="flex">
                             <button
                                 type="button"
                                 onClick={ () => {
@@ -314,7 +243,7 @@ export default function Date () {
                                         color: ''
                                     });
                                 }}
-                                className="button button-red">
+                                className="button button-red flex-grow-1">
                                 cancel
                             </button>
 
@@ -323,14 +252,92 @@ export default function Date () {
                                 onClick={ () => {
                                     removeFoodBlock(foodBlock.ID);
                                 } }
-                                className="button button-pink">
+                                className="button button-pink flex-grow-1">
                                 remove
                             </button>
 
-                            <button className="button button-green">
+                            <label
+                                htmlFor="form-submit"
+                                className="button button-green flex-grow-1 text-center cursor-pointer">
                                 update
-                            </button>
+                            </label>
                         </div>
+                    }
+                    isOpen={ isEditFoodBlockModalOpen }>
+                    <form
+                        onSubmit={ handleSubmit }
+                        className="flex flex-direction-column justify-content-between p-1"
+                        style={{ borderTop: `20px solid ${ foodBlock.color }` }}>
+                        <label htmlFor="name">
+                            food
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.name }
+                            type="text"
+                            autoComplete="off"
+                            id="name"
+                            name="name"
+                            required />
+
+                        <label htmlFor="calories">
+                            total calories
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.calories }
+                            type="number"
+                            id="calories"
+                            name="calories"
+                            required
+                            min="1"
+                            step="0.01" />
+
+                        <label htmlFor="totalAmount">
+                            total amount
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.totalAmount }
+                            type="number"
+                            id="totalAmount"
+                            name="total-amount"
+                            required
+                            min="1"
+                            step="0.01" />
+
+                        <label htmlFor="unit">
+                            unit of measurement
+                        </label>
+                        <input
+                            onChange={ (event) => handleChange(event) }
+                            value={ foodBlock.unit }
+                            type="text"
+                            autoComplete="off"
+                            id="unit"
+                            name="unit" />
+
+                        <div className="text-gray text-small ml-04 mb-04">
+                            select a color
+                        </div>
+                        <div className="flex">
+                            { colors.map(color => {
+                                return (
+                                    <div
+                                        key={ color }
+                                        onClick={ () => updateColor(color) }
+                                        className="circle mr-1 cursor-pointer"
+                                        style={{ backgroundColor: color, border: color === foodBlock.color ? "3px solid #000000" : null }}
+                                        title={`${ color }`}>
+                                    </div>
+                                );
+                            }) }
+                        </div>
+
+                        <input
+                            type="submit"
+                            className="hidden"
+                            id="form-submit" />
                     </form>
                 </Modal>
             ) : (null) }
