@@ -100,9 +100,12 @@
   border-radius: 6px;
   padding: 10px;
   min-height: 200px;
-  width: 100%;
 
   background-color: #ffffff;
+}
+
+.modal-width {
+  width: 100%;
 }
 
 body.modal-is-open {
