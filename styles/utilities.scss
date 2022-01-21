@@ -145,3 +145,8 @@
 .b-color-orange {
   border-color: $orange !important;
 }
+
+.overflow-y-100 {
+  max-height: 100px;
+  overflow-y: scroll;
+}

@@ -370,7 +370,7 @@ export default function Date () {
                                 <div className="text-gray text-small mb-04">
                                     connect food dictionary
                                 </div>
-                                <div className="flex">
+                                <div className="flex flex-wrap overflow-y-100 offset-cards">
                                     { foodDictionary.filter(food => food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim())).map(food => {
                                         return (
                                             <div
