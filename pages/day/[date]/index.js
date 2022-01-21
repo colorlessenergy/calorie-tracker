@@ -174,6 +174,7 @@ export default function Date () {
     }
 
     const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
+    const filterFoodDictionary = foodDictionary.filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()));
 
     return (
         <div className="container">
@@ -369,11 +370,12 @@ export default function Date () {
                             }) }
                         </div>
 
-                        { foodBlock.name || foodBlock.foodDictionaryID ? (
+                        { (foodBlock.name && filterFoodDictionary.length) || foodBlock.foodDictionaryID ? (
                             <div className="text-gray text-small mb-04">
                                 connect food dictionary
                             </div>
                         ) : (null) }
+
                         <div className="flex flex-wrap overflow-y-100 offset-cards">
                             { findFoodInFoodDictionary ? (
                                 <div className="card text-medium cursor-pointer b-color-orange">
@@ -393,8 +395,7 @@ export default function Date () {
                             ) : (null) }
 
                             { foodBlock.name ? (
-                                foodDictionary
-                                .filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()))
+                                filterFoodDictionary
                                 .map(food => {
                                     return (
                                         <div
