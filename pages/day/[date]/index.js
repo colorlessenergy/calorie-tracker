@@ -98,7 +98,7 @@ export default function Date () {
             return setFoodBlock(previousFoodBlock => ({
                     ...previousFoodBlock,
                     totalAmount: event.target.value,
-                    calories: getCaloriesFromFoodDictionary({ foodBlockTotalAmount: event.target.value, foodDictionaryID: foodBlock.foodDictionaryID })
+                    calories: getCaloriesFromFoodDictionary(event.target.value)
                 }
             ));
         }
@@ -114,12 +114,12 @@ export default function Date () {
         setFoodBlock(previousFoodBlock => ({
             ...previousFoodBlock,
             foodDictionaryID,
-            calories: getCaloriesFromFoodDictionary({ foodBlockTotalAmount: foodBlock.totalAmount, foodDictionaryID })
+            calories: getCaloriesFromFoodDictionary(foodBlock.totalAmount)
         }));
     }
 
-    const getCaloriesFromFoodDictionary = ({ foodBlockTotalAmount, foodDictionaryID }) => {
-        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
+    const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
+    const getCaloriesFromFoodDictionary = (foodBlockTotalAmount) => {
         const amountOfCaloriesPerUnit = findFoodInFoodDictionary.calories / findFoodInFoodDictionary.amount;
         return Math.round(amountOfCaloriesPerUnit * foodBlockTotalAmount);
     }
@@ -371,7 +371,23 @@ export default function Date () {
                                     connect food dictionary
                                 </div>
                                 <div className="flex flex-wrap overflow-y-100 offset-cards">
-                                    { foodDictionary.filter(food => food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim())).map(food => {
+                                    <div className="card text-medium cursor-pointer b-color-orange">
+                                        <div className="text-bold">   
+                                            { findFoodInFoodDictionary.name } 
+                                        </div>
+                                        <div className="flex justify-content-between w-100">
+                                            <div>
+                                                { findFoodInFoodDictionary.calories } calories
+                                            </div>
+
+                                            <div>
+                                                { findFoodInFoodDictionary.amount } { findFoodInFoodDictionary.unit } 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    { foodDictionary
+                                        .filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()))
+                                        .map(food => {
                                         return (
                                             <div
                                                 className={`card text-medium cursor-pointer ${ food.ID == foodBlock.foodDictionaryID ? ("b-color-orange") : ("") }`}
