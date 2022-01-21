@@ -353,7 +353,7 @@ export default function Date () {
                             id="unit"
                             name="unit" />
 
-                        <div className="text-gray text-small ml-04 mb-04">
+                        <div className="text-gray text-small mb-04">
                             select a color
                         </div>
                         <div className="flex mb-1">
