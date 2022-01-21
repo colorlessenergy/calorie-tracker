@@ -7,7 +7,7 @@ export default function ExportData () {
         const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
         for (const date in foodBlocks) {
             foodBlocks[date].forEach(foodBlock => {
-                if (!foodBlock.foodDictionaryID) {
+                if (!foodBlock.hasOwnProperty('foodDictionaryID')) {
                     return;
                 }
 
