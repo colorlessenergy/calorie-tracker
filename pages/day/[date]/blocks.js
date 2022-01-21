@@ -12,7 +12,8 @@ import {
     updateFoodBlockInLocalStorage,
     removeFoodBlockFromLocalStorage,
     addEmptyFoodBlockToLocalStorage,
-    duplicateAndMergeFoodBlocksFromPreviousDate
+    duplicateAndMergeFoodBlocksFromPreviousDate,
+    getFoodDictionaryFromLocalStorage
 } from '../../../shared/food/food';
 
 import useSnackbar from '../../../shared/hooks/useSnackbar';
@@ -28,6 +29,11 @@ export default function Blocks () {
             setFoodBlocks(getFoodFromLocalStorage(date));
         }
     }, [ date ]);
+    
+    const [ foodDictionary, setFoodDictionary ] = useState([]);
+    useEffect(() => {
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+    }, []);
 
     const [ totalCalories, setTotalCalories ] = useState(0);
     useEffect(() => {
@@ -43,8 +49,36 @@ export default function Blocks () {
     const handleChange = ({ event, index }) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
 
+        if (cloneFoodBlocks[index].foodDictionaryID && event.target.id === `${ index }-total-amount`) {
+            cloneFoodBlocks[index].calories = getCaloriesFromFoodDictionary({ foodDictionaryID: cloneFoodBlocks[index].foodDictionaryID, foodBlockTotalAmount: event.target.value });
+        }
+
         cloneFoodBlocks[index][event.target.name] = event.target.value;
         setFoodBlocks(cloneFoodBlocks);
+    }
+
+    const connectFoodDictionaryToFoodBlock = ({ foodDictionaryID, index }) => {
+        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+        cloneFoodBlocks[index].foodDictionaryID = findFoodInFoodDictionary.ID;
+        cloneFoodBlocks[index].name = findFoodInFoodDictionary.name;
+        cloneFoodBlocks[index].calories = getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlocks[index].totalAmount });
+
+        setFoodBlocks(cloneFoodBlocks);
+    }
+
+    const removeFoodDictionaryFromFoodBlock = ({ foodDictionaryID, index }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+
+        delete cloneFoodBlocks[index].foodDictionaryID;
+
+        setFoodBlocks(cloneFoodBlocks);
+    }
+
+    const getCaloriesFromFoodDictionary = ({ foodDictionaryID, foodBlockTotalAmount }) => {
+        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
+        const amountOfCaloriesPerUnit = findFoodInFoodDictionary.calories / findFoodInFoodDictionary.amount;
+        return Math.round(amountOfCaloriesPerUnit * foodBlockTotalAmount);
     }
 
     const { snackbar: updateSnackbar, addSnackbar: addUpdateSnackbar } = useSnackbar({
@@ -161,6 +195,9 @@ export default function Blocks () {
 
             <div className="flex flex-wrap justify-content-between mt-2 mx-15">
                 { foodBlocks?.map((foodBlock, index) => {
+                    const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
+                    const filterFoodDictionary = foodDictionary.filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()));
+
                     return (
                         <form
                             key={ index }
@@ -184,6 +221,7 @@ export default function Blocks () {
                                     total calories
                                 </label>
                                 <input
+                                    disabled={ foodBlocks[index].foodDictionaryID ? (true) : (false) }
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].calories }
                                     type="number"
@@ -217,10 +255,10 @@ export default function Blocks () {
                                     id={`${ index }-unit`}
                                     name="unit" />
 
-                                <div className="text-gray text-small ml-04 mb-04">
+                                <div className="text-gray text-small mb-04">
                                     select a color
                                 </div>
-                                <div className="flex">
+                                <div className="flex mb-1">
                                     { colors.map(color => {
                                         return (
                                             <div
@@ -232,6 +270,56 @@ export default function Blocks () {
                                             </div>
                                         );
                                     }) }
+                                </div>
+
+                                { (foodBlocks[index].name && filterFoodDictionary.length) || foodBlocks[index].foodDictionaryID ? (
+                                    <div className="text-gray text-small mb-04">
+                                        connect food dictionary
+                                    </div>
+                                ) : (null) }
+
+                                <div className="flex flex-wrap overflow-y-100 w-100">
+                                    { findFoodInFoodDictionary ? (
+                                        <div
+                                            onClick={() => removeFoodDictionaryFromFoodBlock({ foodDictionaryID: findFoodInFoodDictionary.ID, index }) }
+                                            className="card card--blocks mx-0 cursor-pointer b-color-orange">
+                                            <div className="text-bold">   
+                                                { findFoodInFoodDictionary.name } 
+                                            </div>
+                                            <div className="flex justify-content-between w-100">
+                                                <div>
+                                                    { findFoodInFoodDictionary.calories } calories
+                                                </div>
+
+                                                <div>
+                                                    { findFoodInFoodDictionary.amount } { findFoodInFoodDictionary.unit } 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (null) }
+                                    { foodBlocks[index].name ? (
+                                        filterFoodDictionary
+                                        .map(food => {
+                                            return (
+                                                <div
+                                                    className={`card card--blocks mx-0 cursor-pointer ${ food.ID == foodBlock.foodDictionaryID ? ("b-color-orange") : ("") }`}
+                                                    onClick={() => connectFoodDictionaryToFoodBlock({ foodDictionaryID: food.ID, index }) }
+                                                    key={ food.ID }>
+                                                    <div className="text-bold">   
+                                                        { food.name } 
+                                                    </div>
+                                                    <div className="flex justify-content-between w-100">
+                                                        <div>
+                                                            { food.calories } calories
+                                                        </div>
+
+                                                        <div>
+                                                            { food.amount } { food.unit } 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                    })) : (null) }
                                 </div>
                             </div> 
 

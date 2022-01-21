@@ -4,11 +4,21 @@ import SettingsNav from '../../../shared/components/SettingsNav';
 
 export default function ExportData () {
     const exportData = () => {
-        const foodBlocks = localStorage.getItem('foodBlocks');
+        const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
+        for (const date in foodBlocks) {
+            foodBlocks[date].forEach(foodBlock => {
+                if (!foodBlock.hasOwnProperty('foodDictionaryID')) {
+                    return;
+                }
+
+                delete foodBlock.foodDictionaryID;
+            });
+        }
+
         const calorieGoal = localStorage.getItem('calorieGoal');
         const foodDictionary = localStorage.getItem('foodDictionary');
         const data = {
-            foodBlocks,
+            foodBlocks: JSON.stringify(foodBlocks),
             calorieGoal,
             foodDictionary
         }

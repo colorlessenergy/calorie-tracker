@@ -89,7 +89,7 @@ export default function FoodDictionary () {
 
         setAmountOfCaloriesPerUnit(previousAmountOfCaloriesPerUnit => ({
             ...previousAmountOfCaloriesPerUnit,
-            [ foodBlock.ID ]: (amountOfCaloriesPerUnit * value).toFixed(2)
+            [ foodBlock.ID ]: Math.round((amountOfCaloriesPerUnit * value))
         }));
     }
 
