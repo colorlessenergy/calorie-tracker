@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,7 +12,8 @@ import {
     addEmptyFoodBlockToLocalStorage,
     getFoodFromLocalStorage,
     removeFoodBlockFromLocalStorage,
-    updateFoodBlockInLocalStorage
+    updateFoodBlockInLocalStorage,
+    getFoodDictionaryFromLocalStorage,
 } from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
@@ -27,6 +28,11 @@ export default function Date () {
             setFoodBlocks(getFoodFromLocalStorage(date));
         }
     }, [ date ]);
+
+    const [ foodDictionary, setFoodDictionary ] = useState([]);
+    useEffect(() => {
+        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+    }, []);
 
     const [ totalCalories, setTotalCalories ] = useState(0);
     const [ confetti, setConfetti ] = useState(null);
@@ -78,6 +84,7 @@ export default function Date () {
 
     const [ foodBlock, setFoodBlock ] = useState({
         ID: null,
+        foodDictionaryID: null,
         name: '',
         calories: '',
         unit: '',
@@ -139,6 +146,14 @@ export default function Date () {
             totalAmount: null,
             color: ''
         });
+    }
+
+    const connectFoodDictionaryToFoodBlock = foodDictionaryID => {
+        setFoodBlock(previousFoodBlock => ({
+            ...previousFoodBlock,
+            foodDictionaryID
+        }));
+
     }
 
     return (
@@ -320,7 +335,7 @@ export default function Date () {
                         <div className="text-gray text-small ml-04 mb-04">
                             select a color
                         </div>
-                        <div className="flex">
+                        <div className="flex mb-1">
                             { colors.map(color => {
                                 return (
                                     <div
@@ -333,6 +348,37 @@ export default function Date () {
                                 );
                             }) }
                         </div>
+
+                        { foodBlock.name ? (
+                            <React.Fragment>
+                                <div className="text-gray text-small ml-04 mb-04">
+                                    connect food dictionary
+                                </div>
+                                <div className="flex">
+                                    { foodDictionary.filter(food => food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim())).map(food => {
+                                        return (
+                                            <div
+                                                className={`card text-medium cursor-pointer ${ food.ID == foodBlock.foodDictionaryID ? ("b-color-orange") : ("") }`}
+                                                onClick={() => connectFoodDictionaryToFoodBlock(food.ID) }
+                                                key={ food.ID }>
+                                                <div className="text-bold">   
+                                                    { food.name } 
+                                                </div>
+                                                <div className="flex justify-content-between w-100">
+                                                    <div>
+                                                        { food.calories } calories
+                                                    </div>
+
+                                                    <div>
+                                                        { food.amount } { food.unit } 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    }) }
+                                </div>
+                            </React.Fragment>
+                        ) : (null) }
 
                         <input
                             type="submit"
