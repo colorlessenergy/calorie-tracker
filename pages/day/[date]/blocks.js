@@ -63,7 +63,14 @@ export default function Blocks () {
         cloneFoodBlocks[index].foodDictionaryID = findFoodInFoodDictionary.ID;
         cloneFoodBlocks[index].name = findFoodInFoodDictionary.name;
         cloneFoodBlocks[index].calories = getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlocks[index].totalAmount });
-        console.log(cloneFoodBlocks[index])
+
+        setFoodBlocks(cloneFoodBlocks);
+    }
+
+    const removeFoodDictionaryFromFoodBlock = ({ foodDictionaryID, index }) => {
+        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
+
+        delete cloneFoodBlocks[index].foodDictionaryID;
 
         setFoodBlocks(cloneFoodBlocks);
     }
@@ -271,7 +278,9 @@ export default function Blocks () {
 
                                 <div className="flex flex-wrap overflow-y-100 w-100">
                                     { findFoodInFoodDictionary ? (
-                                        <div className="card card--blocks mx-0 cursor-pointer b-color-orange">
+                                        <div
+                                            onClick={() => removeFoodDictionaryFromFoodBlock({ foodDictionaryID: findFoodInFoodDictionary.ID, index }) }
+                                            className="card card--blocks mx-0 cursor-pointer b-color-orange">
                                             <div className="text-bold">   
                                                 { findFoodInFoodDictionary.name } 
                                             </div>

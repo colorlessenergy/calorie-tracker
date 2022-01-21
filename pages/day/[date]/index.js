@@ -111,13 +111,21 @@ export default function Date () {
     }
 
     const connectFoodDictionaryToFoodBlock = foodDictionaryID => {
-    const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
+        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
         setFoodBlock(previousFoodBlock => ({
             ...previousFoodBlock,
             foodDictionaryID,
             name: findFoodInFoodDictionary.name,
             calories: getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlock.totalAmount })
         }));
+    }
+
+    const removeFoodDictionaryFromFoodBlock = () => {
+        let cloneFoodBlock = JSON.parse(JSON.stringify(foodBlock));
+
+        delete cloneFoodBlock.foodDictionaryID;
+
+        setFoodBlock(cloneFoodBlock);
     }
 
     const getCaloriesFromFoodDictionary = ({ foodDictionaryID, foodBlockTotalAmount }) => {
@@ -378,7 +386,9 @@ export default function Date () {
 
                         <div className="flex flex-wrap overflow-y-100 offset-cards">
                             { findFoodInFoodDictionary ? (
-                                <div className="card text-medium cursor-pointer b-color-orange">
+                                <div 
+                                    onClick={ removeFoodDictionaryFromFoodBlock }
+                                    className="card text-medium cursor-pointer b-color-orange">
                                     <div className="text-bold">   
                                         { findFoodInFoodDictionary.name } 
                                     </div>
