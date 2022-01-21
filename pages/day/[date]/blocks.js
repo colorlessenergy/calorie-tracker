@@ -196,6 +196,8 @@ export default function Blocks () {
             <div className="flex flex-wrap justify-content-between mt-2 mx-15">
                 { foodBlocks?.map((foodBlock, index) => {
                     const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
+                    const filterFoodDictionary = foodDictionary.filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()));
+
                     return (
                         <form
                             key={ index }
@@ -270,7 +272,7 @@ export default function Blocks () {
                                     }) }
                                 </div>
 
-                                { foodBlocks[index].name || foodBlocks[index].foodDictionaryID ? (
+                                { (foodBlocks[index].name && filterFoodDictionary.length) || foodBlocks[index].foodDictionaryID ? (
                                     <div className="text-gray text-small mb-04">
                                         connect food dictionary
                                     </div>
@@ -296,8 +298,7 @@ export default function Blocks () {
                                         </div>
                                     ) : (null) }
                                     { foodBlocks[index].name ? (
-                                        foodDictionary
-                                        .filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()))
+                                        filterFoodDictionary
                                         .map(food => {
                                             return (
                                                 <div
