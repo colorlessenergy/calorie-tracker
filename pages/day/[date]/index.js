@@ -98,7 +98,7 @@ export default function Date () {
             return setFoodBlock(previousFoodBlock => ({
                     ...previousFoodBlock,
                     totalAmount: event.target.value,
-                    calories: getCaloriesFromFoodDictionary(event.target.value)
+                    calories: getCaloriesFromFoodDictionary({ foodDictionaryID: foodBlock.foodDictionaryID, foodBlockTotalAmount: event.target.value })
                 }
             ));
         }
@@ -111,15 +111,17 @@ export default function Date () {
     }
 
     const connectFoodDictionaryToFoodBlock = foodDictionaryID => {
+    const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
         setFoodBlock(previousFoodBlock => ({
             ...previousFoodBlock,
             foodDictionaryID,
-            calories: getCaloriesFromFoodDictionary(foodBlock.totalAmount)
+            name: findFoodInFoodDictionary.name,
+            calories: getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlock.totalAmount })
         }));
     }
 
-    const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
-    const getCaloriesFromFoodDictionary = (foodBlockTotalAmount) => {
+    const getCaloriesFromFoodDictionary = ({ foodDictionaryID, foodBlockTotalAmount }) => {
+        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
         const amountOfCaloriesPerUnit = findFoodInFoodDictionary.calories / findFoodInFoodDictionary.amount;
         return Math.round(amountOfCaloriesPerUnit * foodBlockTotalAmount);
     }
@@ -170,6 +172,8 @@ export default function Date () {
             color: ''
         });
     }
+
+    const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
 
     return (
         <div className="container">
@@ -365,52 +369,54 @@ export default function Date () {
                             }) }
                         </div>
 
-                        { foodBlock.name ? (
-                            <React.Fragment>
-                                <div className="text-gray text-small mb-04">
-                                    connect food dictionary
-                                </div>
-                                <div className="flex flex-wrap overflow-y-100 offset-cards">
-                                    <div className="card text-medium cursor-pointer b-color-orange">
-                                        <div className="text-bold">   
-                                            { findFoodInFoodDictionary.name } 
+                        { foodBlock.name || foodBlock.foodDictionaryID ? (
+                            <div className="text-gray text-small mb-04">
+                                connect food dictionary
+                            </div>
+                        ) : (null) }
+                        <div className="flex flex-wrap overflow-y-100 offset-cards">
+                            { findFoodInFoodDictionary ? (
+                                <div className="card text-medium cursor-pointer b-color-orange">
+                                    <div className="text-bold">   
+                                        { findFoodInFoodDictionary.name } 
+                                    </div>
+                                    <div className="flex justify-content-between w-100">
+                                        <div>
+                                            { findFoodInFoodDictionary.calories } calories
                                         </div>
-                                        <div className="flex justify-content-between w-100">
-                                            <div>
-                                                { findFoodInFoodDictionary.calories } calories
-                                            </div>
 
-                                            <div>
-                                                { findFoodInFoodDictionary.amount } { findFoodInFoodDictionary.unit } 
-                                            </div>
+                                        <div>
+                                            { findFoodInFoodDictionary.amount } { findFoodInFoodDictionary.unit } 
                                         </div>
                                     </div>
-                                    { foodDictionary
-                                        .filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()))
-                                        .map(food => {
-                                        return (
-                                            <div
-                                                className={`card text-medium cursor-pointer ${ food.ID == foodBlock.foodDictionaryID ? ("b-color-orange") : ("") }`}
-                                                onClick={() => connectFoodDictionaryToFoodBlock(food.ID) }
-                                                key={ food.ID }>
-                                                <div className="text-bold">   
-                                                    { food.name } 
-                                                </div>
-                                                <div className="flex justify-content-between w-100">
-                                                    <div>
-                                                        { food.calories } calories
-                                                    </div>
+                                </div>
+                            ) : (null) }
 
-                                                    <div>
-                                                        { food.amount } { food.unit } 
-                                                    </div>
+                            { foodBlock.name ? (
+                                foodDictionary
+                                .filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()))
+                                .map(food => {
+                                    return (
+                                        <div
+                                            className={`card text-medium cursor-pointer ${ food.ID == foodBlock.foodDictionaryID ? ("b-color-orange") : ("") }`}
+                                            onClick={() => connectFoodDictionaryToFoodBlock(food.ID) }
+                                            key={ food.ID }>
+                                            <div className="text-bold">   
+                                                { food.name } 
+                                            </div>
+                                            <div className="flex justify-content-between w-100">
+                                                <div>
+                                                    { food.calories } calories
+                                                </div>
+
+                                                <div>
+                                                    { food.amount } { food.unit } 
                                                 </div>
                                             </div>
-                                        );
-                                    }) }
-                                </div>
-                            </React.Fragment>
-                        ) : (null) }
+                                        </div>
+                                    );
+                            })) : (null) }
+                        </div>
 
                         <input
                             type="submit"
