@@ -94,11 +94,34 @@ export default function Date () {
     });
 
     const handleChange = (event) => { 
+        if (foodBlock.foodDictionaryID && event.target.id == 'totalAmount') {
+            return setFoodBlock(previousFoodBlock => ({
+                    ...previousFoodBlock,
+                    totalAmount: event.target.value,
+                    calories: getCaloriesFromFoodDictionary({ foodBlockTotalAmount: event.target.value, foodDictionaryID: foodBlock.foodDictionaryID })
+                }
+            ));
+        }
+
         setFoodBlock(previousFoodBlock => ({
                 ...previousFoodBlock,
                 [ event.target.id ]: event.target.value
             }
         ));
+    }
+
+    const connectFoodDictionaryToFoodBlock = foodDictionaryID => {
+        setFoodBlock(previousFoodBlock => ({
+            ...previousFoodBlock,
+            foodDictionaryID,
+            calories: getCaloriesFromFoodDictionary({ foodBlockTotalAmount: foodBlock.totalAmount, foodDictionaryID })
+        }));
+    }
+
+    const getCaloriesFromFoodDictionary = ({ foodBlockTotalAmount, foodDictionaryID }) => {
+        const findFoodInFoodDictionary = foodDictionary.find(food => food.ID === foodDictionaryID);
+        const amountOfCaloriesPerUnit = findFoodInFoodDictionary.calories / findFoodInFoodDictionary.amount;
+        return Math.round(amountOfCaloriesPerUnit * foodBlockTotalAmount);
     }
 
     const updateColor = (color) => {
@@ -146,14 +169,6 @@ export default function Date () {
             totalAmount: null,
             color: ''
         });
-    }
-
-    const connectFoodDictionaryToFoodBlock = foodDictionaryID => {
-        setFoodBlock(previousFoodBlock => ({
-            ...previousFoodBlock,
-            foodDictionaryID
-        }));
-
     }
 
     return (
@@ -299,6 +314,7 @@ export default function Date () {
                             total calories
                         </label>
                         <input
+                            disabled={ foodBlock.foodDictionaryID ? (true) : (false) }
                             onChange={ (event) => handleChange(event) }
                             value={ foodBlock.calories }
                             type="number"
@@ -351,7 +367,7 @@ export default function Date () {
 
                         { foodBlock.name ? (
                             <React.Fragment>
-                                <div className="text-gray text-small ml-04 mb-04">
+                                <div className="text-gray text-small mb-04">
                                     connect food dictionary
                                 </div>
                                 <div className="flex">
