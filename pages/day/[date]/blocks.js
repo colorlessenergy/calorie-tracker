@@ -338,14 +338,16 @@ export default function Blocks () {
                     );
                 }) }
             </div>
-            <Modal isOpen={ isModalOpen }>
-                <div className="flex flex-direction-column position-relative">
+            <Modal
+                topElements={
                     <button
                         onClick={ toggleModal }
                         className="modal-button-close">
                         done
                     </button>
-
+                }
+                isOpen={ isModalOpen }>
+                <div className="flex flex-direction-column">
                     <button
                         onClick={ () => addFoodBlock(date) }
                         className="align-self-start text-decoration-underline text-medium mb-1">

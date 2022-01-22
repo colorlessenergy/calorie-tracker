@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const Modal = ({ isOpen, toggleModal, children, outsideElements = null }) => {
+const Modal = ({ isOpen, toggleModal, children, outsideElements = null, topElements = null }) => {
     const modalRef = useRef(null);
     const handleCloseModal = (event) => {
         if (modalRef.current === event.target) {
@@ -25,6 +25,11 @@ const Modal = ({ isOpen, toggleModal, children, outsideElements = null }) => {
         ref={ modalRef }
         onClick={ toggleModal === undefined ? (null) : (handleCloseModal) }
         className={`modal ${ isOpen ? "flex flex-direction-column" : "hidden" }`}>
+            { topElements ? (
+                <div className="modal-width position-relative">
+                    { topElements }
+                </div>
+            ) : (null) }
            <div className="modal-content modal-width">
                { children }
             </div>
