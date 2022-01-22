@@ -33,7 +33,7 @@ const useSnackbar = ({ initialSnackbar, message }) => {
             if (snackbar.amountOfTimes >= 1) {
                 cloneSnackbar = {
                     ...cloneSnackbar,
-                    message: `${ snackbar.amountOfTimes } ${ message.multiple }`
+                    message: `${ snackbar.amountOfTimes + 1 } ${ message.multiple }`
                 }
             } else {
                 cloneSnackbar = {
