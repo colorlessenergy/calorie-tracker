@@ -14,6 +14,7 @@ import {
     removeFoodBlockFromLocalStorage,
     updateFoodBlockInLocalStorage,
     getFoodDictionaryFromLocalStorage,
+    addFoodBlockToLocalStorage,
 } from '../../../shared/food/food';
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
@@ -144,7 +145,12 @@ export default function Date () {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        updateFoodBlockInLocalStorage({ date, foodBlock: foodBlock });
+        if (foodBlock.ID === null) {
+            addFoodBlockToLocalStorage({ date, foodBlock });
+        } else {
+            updateFoodBlockInLocalStorage({ date, foodBlock });
+        }
+
         setFoodBlocks(getFoodFromLocalStorage(date));
         toggleEditFoodBlockModal({
             ID: null,
@@ -158,11 +164,15 @@ export default function Date () {
     }
 
     const addEmptyFoodBlock = () => {
-        addEmptyFoodBlockToLocalStorage(date);
-        const foodBlocksFromLocalStorage = getFoodFromLocalStorage(date);
-        setFoodBlocks(foodBlocksFromLocalStorage);
-
-        toggleEditFoodBlockModal(foodBlocksFromLocalStorage[ foodBlocksFromLocalStorage.length-1 ]);
+        toggleEditFoodBlockModal({
+            ID: null,
+            name: '',
+            calories: 1,
+            unit: '',
+            amount: 0,
+            totalAmount: 0,
+            color: colors[Math.floor(Math.random() * colors.length)]
+        });
     }
 
     const removeFoodBlock = (foodBlockID) => {
@@ -302,7 +312,7 @@ export default function Date () {
                             <label
                                 htmlFor="form-submit"
                                 className="button button-green flex-grow-1 text-center cursor-pointer">
-                                update
+                                    { foodBlock.ID === null ? ("add") : ("update") }
                             </label>
                         </div>
                     }

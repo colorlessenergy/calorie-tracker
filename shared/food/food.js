@@ -72,6 +72,25 @@ export function addEmptyFoodBlockToLocalStorage (date) {
     localStorage.setItem('ID', JSON.stringify(ID));
 }
 
+
+export function addFoodBlockToLocalStorage ({ date, foodBlock }) {
+    if (!date) return;
+
+    if (!localStorage.getItem('ID')) {
+        localStorage.setItem('ID', JSON.stringify(0));
+    }
+
+    let ID = JSON.parse(localStorage.getItem('ID'));
+    ID += 1;
+    foodBlock.ID = ID;
+    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
+    foodBlocksFromLocalStorage[date].push(foodBlock);
+
+    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
+    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
+    localStorage.setItem('ID', JSON.stringify(ID));
+}
+
 const areFoodBlocksEqual = (foodBlockOne, foodBlockTwo) => {
     if (foodBlockOne.name === foodBlockTwo.name &&
         foodBlockOne.calories === foodBlockTwo.calories &&
