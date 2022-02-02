@@ -47,32 +47,6 @@ export function removeFoodBlockFromLocalStorage ({ date, foodBlockID }) {
 
 const colors = ["#ffe58f", "#eaff8f", "#b7eb8f", "#87e8de", "#ffd6e7"];
 
-export function addEmptyFoodBlockToLocalStorage (date) {
-    if (!date) return;
-
-    if (!localStorage.getItem('ID')) {
-        localStorage.setItem('ID', JSON.stringify(0));
-    }
-
-    let ID = JSON.parse(localStorage.getItem('ID'));
-    ID += 1;
-    let foodBlocksFromLocalStorage = JSON.parse(localStorage.getItem('foodBlocks'));
-    foodBlocksFromLocalStorage[date].push({
-        ID,
-        name: '',
-        calories: 1,
-        unit: '',
-        amount: 0,
-        totalAmount: 0,
-        color: colors[Math.floor(Math.random() * colors.length)]
-    });
-
-    foodBlocksFromLocalStorage = JSON.stringify(foodBlocksFromLocalStorage);
-    localStorage.setItem('foodBlocks', foodBlocksFromLocalStorage);
-    localStorage.setItem('ID', JSON.stringify(ID));
-}
-
-
 export function addFoodBlockToLocalStorage ({ date, foodBlock }) {
     if (!date) return;
 

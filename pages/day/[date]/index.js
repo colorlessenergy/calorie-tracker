@@ -9,7 +9,6 @@ import Confetti from 'react-confetti'
 import Modal from '../../../shared/components/modal';
 
 import {
-    addEmptyFoodBlockToLocalStorage,
     getFoodFromLocalStorage,
     removeFoodBlockFromLocalStorage,
     updateFoodBlockInLocalStorage,
