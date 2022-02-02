@@ -230,7 +230,7 @@ export default function Date () {
                 </>
             ) : (null) }
 
-            <div className="flex flex-wrap justify-content-between">
+            <div className="flex flex-wrap">
                 { foodBlocks?.map((foodBlock, index) => {
                     foodBlock.index = index;
 
