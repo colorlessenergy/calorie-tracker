@@ -11,7 +11,7 @@ import {
     getFoodFromLocalStorage,
     updateFoodBlockInLocalStorage,
     removeFoodBlockFromLocalStorage,
-    addEmptyFoodBlockToLocalStorage,
+    addFoodBlockToLocalStorage,
     duplicateAndMergeFoodBlocksFromPreviousDate,
     getFoodDictionaryFromLocalStorage
 } from '../../../shared/food/food';
@@ -127,7 +127,18 @@ export default function Blocks () {
     });
 
     const addFoodBlock = () => {
-        addEmptyFoodBlockToLocalStorage(date);
+        addFoodBlockToLocalStorage({
+            date,
+            foodBlock: {
+                ID: null,
+                name: '',
+                calories: 1,
+                unit: '',
+                amount: 0,
+                totalAmount: 0,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            }
+        });
         setFoodBlocks(getFoodFromLocalStorage(date));
 
         addSnackbar();
