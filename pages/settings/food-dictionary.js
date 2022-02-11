@@ -1,4 +1,3 @@
-
 import { useEffect, useState  } from 'react';
 import Head from 'next/head';
 
@@ -51,15 +50,13 @@ export default function FoodDictionary () {
     }
 
     const addNewFoodBlock = () => {
-        const foodBlock = addFoodBlockToFoodDictionary({
+        const foodBlock = {
             ID: null,
             name: '',
             calories: '',
             unit: '',
             amount: ''
-        });
-
-        setFoodDictionary(getFoodDictionaryFromLocalStorage());
+        };
 
         toggleEditFoodBlockModal(foodBlock);
     }
@@ -178,17 +175,19 @@ export default function FoodDictionary () {
                                 cancel
                             </button>
 
-                            <button
-                                type="button"
-                                onClick={ () => removeFoodBlock(foodBlock.ID) }
-                                className="button button-pink flex-grow-1">
-                                remove
-                            </button>
+                            { foodBlock.ID === null ? (null) : (
+                                <button
+                                    type="button"
+                                    onClick={ () => removeFoodBlock(foodBlock.ID) }
+                                    className="button button-pink flex-grow-1">
+                                    remove
+                                </button>
+                            ) }
 
                             <label
                                 htmlFor="form-submit"
                                 className="button button-green flex-grow-1 text-center cursor-pointer">
-                                update
+                                { foodBlock.ID === null ? ("add") : ("update") }
                             </label>
                         </div>
                     }
