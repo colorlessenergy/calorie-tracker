@@ -116,7 +116,8 @@ export default function Date () {
             ...previousFoodBlock,
             foodDictionaryID,
             name: findFoodInFoodDictionary.name,
-            calories: getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlock.totalAmount })
+            calories: getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlock.totalAmount }),
+            unit: findFoodInFoodDictionary.unit
         }));
     }
 
@@ -363,6 +364,7 @@ export default function Date () {
                             unit of measurement
                         </label>
                         <input
+                            disabled={ foodBlock.foodDictionaryID ? (true) : (false) }
                             onChange={ (event) => handleChange(event) }
                             value={ foodBlock.unit }
                             type="text"

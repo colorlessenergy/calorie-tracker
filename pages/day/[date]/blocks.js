@@ -63,11 +63,12 @@ export default function Blocks () {
         cloneFoodBlocks[index].foodDictionaryID = findFoodInFoodDictionary.ID;
         cloneFoodBlocks[index].name = findFoodInFoodDictionary.name;
         cloneFoodBlocks[index].calories = getCaloriesFromFoodDictionary({ foodDictionaryID, foodBlockTotalAmount: foodBlocks[index].totalAmount });
+        cloneFoodBlocks[index].unit = findFoodInFoodDictionary.unit;
 
         setFoodBlocks(cloneFoodBlocks);
     }
 
-    const removeFoodDictionaryFromFoodBlock = ({ foodDictionaryID, index }) => {
+    const removeFoodDictionaryFromFoodBlock = (index) => {
         let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
 
         delete cloneFoodBlocks[index].foodDictionaryID;
@@ -259,6 +260,7 @@ export default function Blocks () {
                                     unit of measurement
                                 </label>
                                 <input
+                                    disabled={ foodBlocks[index].foodDictionaryID ? (true) : (false) }
                                     onChange={ (event) => handleChange({ event, index }) }
                                     value={ foodBlocks[index].unit }
                                     type="text"
@@ -292,7 +294,7 @@ export default function Blocks () {
                                 <div className="flex flex-wrap overflow-y-100 w-100">
                                     { findFoodInFoodDictionary ? (
                                         <div
-                                            onClick={() => removeFoodDictionaryFromFoodBlock({ foodDictionaryID: findFoodInFoodDictionary.ID, index }) }
+                                            onClick={() => removeFoodDictionaryFromFoodBlock(index) }
                                             className="card card--blocks mx-0 cursor-pointer b-color-orange">
                                             <div className="text-bold">   
                                                 { findFoodInFoodDictionary.name } 
