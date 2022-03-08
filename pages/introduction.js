@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Introduction () { 
     const router = useRouter();
@@ -27,31 +28,39 @@ export default function Introduction () {
     }
 
     return (
-        <div className="container">
-            <div className="mx-15">
-                <h1>welcome to calorie tracker</h1>
-                <p className="text-medium">
-                    input a calorie goal below to get started. The calorie goal can be updated in the settings.
-                </p>
+        <div>
+            <Head>
+                <title>calorie tracker - introduction</title>
+                <meta name="description" content="calorie tracker - introduction" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-                <form
-                    onSubmit={ handleSubmit }
-                    className="w-50-md">
-                    <div>
-                        <label htmlFor="calorieGoal">calorie goal</label>
-                        <input
-                            type="number"
-                            id="calorieGoal"
-                            name="calorieGoal"
-                            onChange={ handleInputChange }
-                            value={ calorieGoal }
-                            required
-                            placeholder="calorie goal" />
-                    </div>
+            <div className="container">
+                <div className="mx-15">
+                    <h1>welcome to calorie tracker</h1>
+                    <p className="text-medium">
+                        input a calorie goal below to get started. The calorie goal can be updated in the settings.
+                    </p>
 
-                    <button
-                        className="button button-green">add</button>
-                </form>
+                    <form
+                        onSubmit={ handleSubmit }
+                        className="w-50-md">
+                        <div>
+                            <label htmlFor="calorieGoal">calorie goal</label>
+                            <input
+                                type="number"
+                                id="calorieGoal"
+                                name="calorieGoal"
+                                onChange={ handleInputChange }
+                                value={ calorieGoal }
+                                required
+                                placeholder="calorie goal" />
+                        </div>
+
+                        <button
+                            className="button button-green">add</button>
+                    </form>
+                </div>
             </div>
         </div>
     );
