@@ -77,6 +77,18 @@ export default function FoodDictionary () {
 
     const [ foodDictionary, setFoodDictionary ] = useState([]);
     useEffect(() => {
+        if (getFoodDictionaryFromLocalStorage().length === 0) {
+            addFoodBlockToFoodDictionary(
+                {
+                    ID: null,
+                    name: 'banana',
+                    calories: '89',
+                    unit: 'g',
+                    amount: '100'
+                }
+            );
+        }
+
         setFoodDictionary(getFoodDictionaryFromLocalStorage());
     }, []);
 
@@ -105,6 +117,10 @@ export default function FoodDictionary () {
                     <h1 className="mt-1">
                         food dictionary
                     </h1>
+
+                    <p className="text-medium">
+                        create a food item to connect to a food block.
+                    </p>
 
                     <button
                         onClick={ addNewFoodBlock }

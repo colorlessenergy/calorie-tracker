@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
+    const router = useRouter();
     useEffect(() => {
         if (!localStorage.getItem('theme')) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -17,7 +19,7 @@ function MyApp({ Component, pageProps }) {
         }
 
         if (!localStorage.getItem('calorieGoal')) {
-            localStorage.setItem('calorieGoal', 1);
+            router.push('/introduction');
         }
   }, []);
 
