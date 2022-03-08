@@ -39,7 +39,7 @@ export default function Introduction () {
                 <div className="mx-15">
                     <h1>welcome to calorie tracker</h1>
                     <p className="text-medium">
-                        input a calorie goal below to get started. The calorie goal can be updated in the settings.
+                        Input a calorie goal below to get started. The calorie goal can be updated in the settings.
                     </p>
 
                     <form
