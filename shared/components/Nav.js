@@ -9,7 +9,7 @@ export default function Nav ({ link=null }) {
     return (
         <nav className="nav pt-1">
             <Link href="/">
-                <a class="icon mb-1" title="calendar">
+                <a className="icon mb-1" title="calendar">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
