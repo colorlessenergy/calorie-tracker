@@ -22,6 +22,7 @@ const ThemeSelector = () => {
         return (
             <button
                 className="icon mr-1"
+                title="dark"
                 onClick={ handleThemeChange }>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -37,6 +38,7 @@ const ThemeSelector = () => {
         return (
             <button
                 className="icon mr-1"
+                title="light"
                 onClick={ handleThemeChange }>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
