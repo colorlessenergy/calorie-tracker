@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import SettingsNav from '../../../shared/components/SettingsNav';
+import Nav from '../../../shared/components/Nav';
 
 export default function ExportData () {
     const exportData = () => {
@@ -43,7 +43,8 @@ export default function ExportData () {
             </Head>
 
             <div className="container">
-                <SettingsNav />
+                <Nav />
+
                 <div className="mx-15">
                     <h1 className="mt-1">
                         export data 

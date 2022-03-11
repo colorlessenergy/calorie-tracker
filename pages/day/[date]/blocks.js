@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import orangeIcon from '../../../public/icons/orange.svg';
 
-import Nav from '../../../shared/components/nav';
+import Nav from '../../../shared/components/Nav';
 import Modal from '../../../shared/components/modal';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
@@ -176,7 +176,8 @@ export default function Blocks () {
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
-            <div className="flex justify-content-between mx-15 pt-3">
+
+            <div className="flex justify-content-between mx-15 pt-1">
                 <div>
                     food blocks
                     <button
