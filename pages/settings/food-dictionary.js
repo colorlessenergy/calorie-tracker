@@ -1,7 +1,7 @@
 import { useEffect, useState  } from 'react';
 import Head from 'next/head';
 
-import SettingsNav from '../../shared/components/SettingsNav';
+import Nav from '../../shared/components/Nav';
 import Modal from '../../shared/components/modal';
 
 import {
@@ -111,7 +111,7 @@ export default function FoodDictionary () {
             </Head>
 
             <div className="container">
-                <SettingsNav />
+                <Nav />
 
                 <div className="mx-15">
                     <h1 className="mt-1">

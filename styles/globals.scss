@@ -50,28 +50,17 @@ input {
   .snackbars-container {
     bottom: 44px;
   }
-
-  .nav {
-    border-top: 3px solid #000000;
-    margin: 0;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-
-    background-color: #ffffff;
-  }
-
-  .dark .nav {
-    border-top-color: #ffffff;
-
-    background-color: #333333;
-  }
 }
 
 @media (min-width: 412px) {
   .snackbars-container {
     width: 50%;
+  }
+}
+
+@media (min-width: 500px) {
+  .react-calendar {
+    margin: 0 auto;
   }
 }
 

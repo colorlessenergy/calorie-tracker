@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import watermelonIcon from '../../../public/icons/watermelon.svg';
 
-import Nav from '../../../shared/components/nav';
+import Nav from '../../../shared/components/Nav';
 import Confetti from 'react-confetti'
 import Modal from '../../../shared/components/modal';
 
