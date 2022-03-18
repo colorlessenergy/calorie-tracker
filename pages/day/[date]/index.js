@@ -244,9 +244,11 @@ export default function Date () {
                     <p className="text-center text-medium">
                         no food blocks
                     </p>
-                    <Link href={`/day/${ date }/blocks?modalOpen=true`}>
-                        <a className="text-center text-large d-block">add a food block</a>
-                    </Link>
+                    <button 
+                        className="text-large d-block m-center"
+                        onClick={ () => addEmptyFoodBlock() }>
+                        add a food block
+                    </button>
                 </>
             ) : (null) }
 
