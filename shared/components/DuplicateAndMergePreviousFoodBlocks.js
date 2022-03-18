@@ -32,7 +32,7 @@ const DuplicateAndMergeFoodBlocksFromPreviousDate = ({ allFoodBlocks, toggleModa
             <div className="flex flex-direction-column mb-2">
                 <label
                     className="text-black text-medium mb-1"
-                    htmlFor="foodBlocksDate">duplicate previous day food blocks</label>
+                    htmlFor="foodBlocksDate">duplicate previous food blocks</label>
                 <select
                     onChange={ handlePreviousFoodBlockDateChange }
                     className="text-medium w-50"
