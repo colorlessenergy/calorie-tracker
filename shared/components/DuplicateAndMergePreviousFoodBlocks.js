@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { 
@@ -6,14 +6,9 @@ import {
     duplicateAndMergeFoodBlocksFromPreviousDate
 } from '../food/food';
 
-const DuplicateAndMergeFoodBlocksFromPreviousDate = ({ toggleModal, setFoodBlocks }) => {
+const DuplicateAndMergeFoodBlocksFromPreviousDate = ({ allFoodBlocks, toggleModal, setFoodBlocks }) => {
     const router = useRouter();
     const date = router.query.date;
-
-    const [ allFoodBlocks, setAllFoodBlocks ] = useState(null);
-    useEffect(() => {
-        setAllFoodBlocks(JSON.parse(localStorage.getItem('foodBlocks')));
-    }, []);
 
     const [ previousFoodBlockDate, setPreviousFoodBlockDate ] = useState('');
     const handlePreviousFoodBlockDateChange = event => {

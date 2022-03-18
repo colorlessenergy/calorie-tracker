@@ -7,6 +7,7 @@ import watermelonIcon from '../../../public/icons/watermelon.svg';
 import Nav from '../../../shared/components/Nav';
 import Confetti from 'react-confetti'
 import Modal from '../../../shared/components/modal';
+import DuplicateAndMergeFoodBlocksFromPreviousDate from '../../../shared/components/DuplicateAndMergePreviousFoodBlocks';
 
 import {
     getFoodFromLocalStorage,
@@ -194,6 +195,16 @@ export default function Date () {
     const findFoodInFoodDictionary = foodBlock.foodDictionaryID ? foodDictionary.find(food => food.ID === foodBlock.foodDictionaryID) : (null);
     const filterFoodDictionary = foodDictionary.filter(food => food.ID !== foodBlock.foodDictionaryID && food.name.toLowerCase().includes(foodBlock.name.toLowerCase().trim()));
 
+    const [ allFoodBlocks, setAllFoodBlocks ] = useState(null);
+    useEffect(() => {
+        setAllFoodBlocks(JSON.parse(localStorage.getItem('foodBlocks')));
+    }, []);
+
+    const [ isDuplicatePreviousFoodBlocksModalOpen, setIsDuplicatePreviousFoodBlocksModalOpen ] = useState(false);
+    const toggleDuplicatePreviousFoodBlocksModal = () => {
+        setIsDuplicatePreviousFoodBlocksModalOpen(previousIsDuplicatePreviousFoodBlocksModalOpen => !previousIsDuplicatePreviousFoodBlocksModalOpen);
+    }
+
     return (
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
@@ -208,9 +219,17 @@ export default function Date () {
 
                 <button
                     onClick={ () => addEmptyFoodBlock() }
-                    className="add-food-block-button">
+                    className="add-food-block-button mr-1">
                     +
                 </button>
+
+                { allFoodBlocks && Object.keys(allFoodBlocks).length > 1 ? (
+                    <button
+                        onClick={ toggleDuplicatePreviousFoodBlocksModal }
+                        className="button button-pink">
+                        duplicate
+                    </button>
+                ) : (null) }
             </div>
 
             { foodBlocks?.length === 0 ? (
@@ -445,6 +464,25 @@ export default function Date () {
                             className="hidden"
                             id="form-submit" />
                     </form>
+                </Modal>
+            ) : (null) }
+
+            { isDuplicatePreviousFoodBlocksModalOpen ? (
+                <Modal
+                    topElements={
+                        <button
+                            onClick={ toggleDuplicatePreviousFoodBlocksModal }
+                            className="modal-button-close">
+                            done
+                        </button>
+                    }
+                    isOpen={ isDuplicatePreviousFoodBlocksModalOpen }>
+                    <div className="flex flex-direction-column">
+                        <DuplicateAndMergeFoodBlocksFromPreviousDate 
+                            allFoodBlocks={ allFoodBlocks }    
+                            toggleModal={ toggleDuplicatePreviousFoodBlocksModal }
+                            setFoodBlocks={ setFoodBlocks } />
+                    </div>
                 </Modal>
             ) : (null) }
         </div> 
