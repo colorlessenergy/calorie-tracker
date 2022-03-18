@@ -66,14 +66,14 @@
 
 .modal-button-close {
   border: 2px solid #000000;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
   position: absolute;
   top: -22px;
   right: 0;
 
   background-color: #ffffff;
-  font-size: 16px;
 }
 
 .container {
@@ -169,10 +169,6 @@ body.modal-is-open {
   right: 10px;
   width: 80%;
   z-index: 1;
-}
-
-.food-block-form {
-  width: 100%;
 }
 
 .react-calendar {
