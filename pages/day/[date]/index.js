@@ -209,7 +209,7 @@ export default function Date () {
         <div className="container">
             <Nav link={{ link: `/day/${ date }`, text: date }} />
 
-            <div className="mx-15 mt-1 mb-1 flex align-items-center">
+            <div className="mx-15 mt-1 mb-1 flex align-items-center flex-wrap">
                 <div className="mr-1">
                     { totalCalories } total calories
                 </div>
