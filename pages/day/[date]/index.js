@@ -337,14 +337,16 @@ export default function Date () {
                                 cancel
                             </button>
 
-                            <button
-                                type="button"
-                                onClick={ () => {
-                                    removeFoodBlock(foodBlock.ID);
-                                } }
-                                className="button button-pink flex-grow-1">
-                                remove
-                            </button>
+                            { foodBlock.ID !== null ? (
+                                <button
+                                    type="button"
+                                    onClick={ () => {
+                                        removeFoodBlock(foodBlock.ID);
+                                    } }
+                                    className="button button-pink flex-grow-1">
+                                    remove
+                                </button>
+                            ) : (null)  }
 
                             <label
                                 htmlFor="form-submit"
