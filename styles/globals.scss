@@ -73,6 +73,10 @@ input {
     top: -16px;
     right: -16px;
   }
+
+  .react-calendar__tile {
+    padding: 32px !important;
+  }
 }
 
 @media (min-width: 867px) {
