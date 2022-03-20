@@ -252,7 +252,7 @@ export default function Date () {
                         no food blocks
                     </p>
                     <button 
-                        className="dark-text text-large d-block m-center"
+                        className="dark-text text-large text-decoration-underline d-block m-center"
                         onClick={ () => addEmptyFoodBlock() }>
                         add a food block
                     </button>
