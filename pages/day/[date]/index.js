@@ -234,6 +234,7 @@ export default function Date () {
                 { allFoodBlocks && Object.keys(allFoodBlocks).length > 1 ? (
                     <button
                         onClick={ toggleDuplicatePreviousFoodBlocksModal }
+                        title="duplicate previous food blocks"
                         className="icon">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
