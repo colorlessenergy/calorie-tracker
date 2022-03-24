@@ -207,7 +207,7 @@ export default function Date () {
 
     return (
         <div className="container">
-            <Nav link={{ link: `/day/${ date }`, text: date }} />
+            <Nav />
 
             <div className="mx-15 mt-1 mb-1 flex align-items-center flex-wrap">
                 <div className="mr-1">

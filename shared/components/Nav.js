@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ThemeSelector from './ThemeSelector';
 
-export default function Nav ({ link=null }) {
+export default function Nav () {
     const router = useRouter();
     const date = router.query.date;
 
@@ -21,9 +21,9 @@ export default function Nav ({ link=null }) {
                 </a>
             </Link>
 
-            { link ? (
-                <Link href={ link.link }>
-                    <a className={`icon mb-1 ${ router.route === "/day/[date]" ? "icon-active" : "" }`} title={ link.text }>
+            { date ? (
+                <Link href={ `/day/${ date }` }>
+                    <a className={`icon mb-1 ${ router.route === "/day/[date]" ? "icon-active" : "" }`} title={ date }>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
