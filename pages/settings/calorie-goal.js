@@ -1,7 +1,6 @@
 import { useEffect, useState  } from 'react';
 import Head from 'next/head';
 
-import Nav from '../../shared/components/Nav';
 import Snackbar from '../../shared/components/Snackbar/Snackbar';
 
 import useSnackbar from '../../shared/hooks/useSnackbar';
@@ -46,8 +45,6 @@ export default function CalorieGoal () {
             </Head>
 
             <div className="container">
-                <Nav />
-
                 <h1 className="mt-1 mx-15">
                     calorie goal
                 </h1>

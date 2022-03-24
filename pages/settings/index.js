@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
 import SettingsItem from '../../shared/components/SettingsItems/SettingsItem';
-import Nav from '../../shared/components/Nav';
 
 export default function Settings() {
     return (
@@ -13,8 +12,6 @@ export default function Settings() {
             </Head>
 
             <div className="container">
-                <Nav />
-
                 <div className="mx-15">
                     <h1 className="mt-1">
                         settings

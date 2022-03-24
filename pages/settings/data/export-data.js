@@ -1,7 +1,5 @@
 import Head from 'next/head';
 
-import Nav from '../../../shared/components/Nav';
-
 export default function ExportData () {
     const exportData = () => {
         const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
@@ -43,8 +41,6 @@ export default function ExportData () {
             </Head>
 
             <div className="container">
-                <Nav />
-
                 <div className="mx-15">
                     <h1 className="mt-1">
                         export data 

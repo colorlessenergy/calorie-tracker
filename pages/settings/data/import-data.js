@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import Nav from '../../../shared/components/Nav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
 import { importFoodBlocks, importFoodDictionary } from '../../../shared/food/food';
@@ -64,8 +63,6 @@ export default function ImportData () {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="container">
-                <Nav />
-
                 <div className="mx-15">
                     <h1 className="mt-1">
                         import data 

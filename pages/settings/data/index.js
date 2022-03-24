@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import Nav from '../../../shared/components/Nav';
 import SettingsItem from '../../../shared/components/SettingsItems/SettingsItem';
 
 export default function Data () {
@@ -13,7 +12,6 @@ export default function Data () {
             </Head>
 
             <div className="container">
-                <Nav />
                 <div className="mx-15">
                     <h1 className="mt-1">
                         data 

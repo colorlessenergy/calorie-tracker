@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 
-import Nav from '../shared/components/Nav';
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -66,8 +65,6 @@ export default function Home() {
                 <meta name="description" content="calorie tracker" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <Nav />
 
             <div className="container">
                 <h1 className="mt-1 my-0 text-center">calorie tracker</h1>

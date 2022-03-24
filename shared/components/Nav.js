@@ -6,6 +6,10 @@ export default function Nav () {
     const router = useRouter();
     const date = router.query.date;
 
+    if (router.route === '/introduction') {
+        return null;
+    }
+
     return (
         <nav className="nav pt-1">
             <Link href="/">

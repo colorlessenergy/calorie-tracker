@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import Nav from '../../../shared/components/Nav';
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
 import useSnackbar from '../../../shared/hooks/useSnackbar';
@@ -31,8 +30,6 @@ export default function ClearData () {
             </Head>
 
             <div className="container">
-                <Nav />
-
                 <div className="mx-15">
                     <h1 className="mt-1">
                         clear data 

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import watermelonIcon from '../../../public/icons/watermelon.svg';
 
-import Nav from '../../../shared/components/Nav';
 import Confetti from 'react-confetti'
 import Modal from '../../../shared/components/modal';
 import DuplicateAndMergeFoodBlocksFromPreviousDate from '../../../shared/components/DuplicateAndMergePreviousFoodBlocks';
@@ -207,8 +206,6 @@ export default function Date () {
 
     return (
         <div className="container">
-            <Nav />
-
             <div className="mx-15 mt-1 mb-1 flex align-items-center flex-wrap">
                 <div className="mr-1">
                     { totalCalories } total calories

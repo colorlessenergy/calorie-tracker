@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router'
+
+import Nav from '../shared/components/Nav';
 
 import '../styles/globals.scss';
 
@@ -23,7 +25,12 @@ function MyApp({ Component, pageProps }) {
         }
   }, []);
 
-  return <Component {...pageProps} />
+  return (
+        <React.Fragment>
+            <Nav />
+            <Component {...pageProps} />
+        </React.Fragment>
+    );
 }
 
 export default MyApp
