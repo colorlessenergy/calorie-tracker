@@ -211,6 +211,14 @@ body.modal-is-open {
   background-color: #ffffff;
 }
 
+.icon-active {
+  background-color: #333333;
+}
+
+.icon-active svg {
+  fill: #ffffff;
+}
+
 .nav {
   position: fixed;
   top: 0;

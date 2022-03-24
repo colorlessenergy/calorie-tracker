@@ -9,7 +9,7 @@ export default function Nav ({ link=null }) {
     return (
         <nav className="nav pt-1">
             <Link href="/">
-                <a className={`icon mb-1 ${ router.route === "/" ? "b-1" : "" }`} title="calendar">
+                <a className={`icon mb-1 ${ router.route === "/" ? "icon-active" : "" }`} title="calendar">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -23,7 +23,7 @@ export default function Nav ({ link=null }) {
 
             { link ? (
                 <Link href={ link.link }>
-                    <a className={`icon mb-1 ${ router.route === "/day/[date]" ? "b-1" : "" }`} title={ link.text }>
+                    <a className={`icon mb-1 ${ router.route === "/day/[date]" ? "icon-active" : "" }`} title={ link.text }>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ export default function Nav ({ link=null }) {
             ) : (null) }
 
             <Link href="/settings">
-                <a className={`icon mb-1 ${ router.route.includes("/settings") ? "b-1" : "" }`} title="settings">
+                <a className={`icon mb-1 ${ router.route.includes("/settings") ? "icon-active" : "" }`} title="settings">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
