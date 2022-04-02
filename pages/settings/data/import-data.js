@@ -9,7 +9,7 @@ import useSnackbar from '../../../shared/hooks/useSnackbar';
 export default function ImportData () {
     const { snackbar: snackbarStarted, addSnackbar: addSnackbarStarted } = useSnackbar({
         initialSnackbar: {
-            className: 'snackbar-pink',
+            className: 'snackbar-purple',
             message: null,
         },
         message: {
@@ -19,7 +19,7 @@ export default function ImportData () {
 
     const { snackbar: snackbarFinished, addSnackbar: addSnackbarFinished } = useSnackbar({
         initialSnackbar: {
-            className: 'snackbar-pink',
+            className: 'snackbar-purple',
             message: null,
         },
         message: {
