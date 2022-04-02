@@ -184,7 +184,7 @@ export default function FoodDictionary () {
                                         amount: '',
                                     });
                                 }}
-                                className="button button-red flex-grow-1">
+                                className="button button-left button-red flex-grow-1">
                                 cancel
                             </button>
 
@@ -192,14 +192,14 @@ export default function FoodDictionary () {
                                 <button
                                     type="button"
                                     onClick={ () => removeFoodBlock(foodBlock.ID) }
-                                    className="button button-pink flex-grow-1">
+                                    className="button button-middle button-pink flex-grow-1">
                                     remove
                                 </button>
                             ) }
 
                             <label
                                 htmlFor="form-submit"
-                                className="button button-green flex-grow-1 text-center cursor-pointer">
+                                className="button button-right button-green flex-grow-1 text-center cursor-pointer">
                                 { foodBlock.ID === null ? ("add") : ("update") }
                             </label>
                         </div>
