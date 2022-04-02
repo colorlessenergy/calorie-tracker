@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react';
 
 import Nav from '../shared/components/Nav';
+import Banner from '../shared/components/Banner';
 
 import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
-    const router = useRouter();
     useEffect(() => {
         if (!localStorage.getItem('theme')) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -19,16 +18,17 @@ function MyApp({ Component, pageProps }) {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark');
         }
+    }, []);
 
-        if (!localStorage.getItem('calorieGoal')) {
-            router.push('/introduction');
-        }
-  }, []);
-
-  return (
+    const [ showCalorieGoalBanner, setShowCalorieGoalBanner ] = useState(false);
+    return (
         <React.Fragment>
             <Nav />
-            <Component {...pageProps} />
+            <Component {...pageProps} setShowCalorieGoalBanner={ setShowCalorieGoalBanner } />
+
+            { showCalorieGoalBanner ? (
+                <Banner text="create a calorie goal" link="/settings/calorie-goal" />
+            ) : (null) }
         </React.Fragment>
     );
 }

@@ -5,7 +5,7 @@ import Snackbar from '../../shared/components/Snackbar/Snackbar';
 
 import useSnackbar from '../../shared/hooks/useSnackbar';
 
-export default function CalorieGoal () {
+export default function CalorieGoal ({ setShowCalorieGoalBanner }) {
     const [ calorieGoal, setCalorieGoal ] = useState(1);
 
     useEffect(() => {
@@ -32,6 +32,8 @@ export default function CalorieGoal () {
         event.preventDefault();
 
         localStorage.setItem('calorieGoal', calorieGoal);
+
+        setShowCalorieGoalBanner(false);
 
         addSnackbar();
     }
