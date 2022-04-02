@@ -29,25 +29,21 @@ export default function Home() {
     }, []);
 
     const tileClassName = ({ date, view }) => {
-        if (typeof window !== 'undefined') {
-            if (view === 'month') {
-                const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
-                if (foodBlocks) {
-                    const dates = Object.keys(foodBlocks);
-                    
-                    let isValidPreviousDate = false;
-                    for (let i = 0; i < dates.length; i++) {
-                        let [ month, day ] = dates[i].split('-');
+        if (typeof window !== 'undefined' && view === 'month') {
+            const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
 
-                        if (month == date.getMonth() + 1 && day == date.getDate() && foodBlocks[dates[i]].length) {
-                            isValidPreviousDate = true;
-                            break;
-                        }
-                    }
+            if (!foodBlocks) {
+                return;
+            }
 
-                    if (isValidPreviousDate) {
-                        return 'active-date';
-                    }
+            const dates = Object.keys(foodBlocks);
+            for (let i = 0; i < dates.length; i++) {
+                let [ month, day, year ] = dates[i].split('-');
+                if (month == date.getMonth() + 1 &&
+                    day == date.getDate() &&
+                    year == date.getFullYear() &&
+                    foodBlocks[dates[i]].length) {
+                    return 'active-date';
                 }
             }
         }
