@@ -52,7 +52,7 @@ const DuplicateAndMergeFoodBlocksFromPreviousDate = ({ allFoodBlocks, toggleModa
                 </select>
             </div>
 
-            <button className="button button-pink">duplicate</button>
+            <button className="button button-purple">duplicate</button>
         </form>
     );
 }

@@ -74,7 +74,7 @@ export default function ImportData () {
 
                     <label
                         htmlFor="import-data"
-                        className="button button-pink cursor-pointer d-inline-block">import data</label>
+                        className="button button-purple cursor-pointer d-inline-block">import data</label>
                     <input
                         type="file"
                         id="import-data"

@@ -192,7 +192,7 @@ export default function FoodDictionary () {
                                 <button
                                     type="button"
                                     onClick={ () => removeFoodBlock(foodBlock.ID) }
-                                    className="button button-middle button-pink flex-grow-1">
+                                    className="button button-middle button-purple flex-grow-1">
                                     remove
                                 </button>
                             ) }
