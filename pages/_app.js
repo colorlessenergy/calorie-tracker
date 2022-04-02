@@ -6,6 +6,7 @@ import Banner from '../shared/components/Banner';
 import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
+    const [ showCalorieGoalBanner, setShowCalorieGoalBanner ] = useState(false);
     useEffect(() => {
         if (!localStorage.getItem('theme')) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -18,9 +19,14 @@ function MyApp({ Component, pageProps }) {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark');
         }
+
+        if (!localStorage.getItem('calorieGoal')) {
+            setShowCalorieGoalBanner(true);
+        } else {
+            setShowCalorieGoalBanner(false);
+        }
     }, []);
 
-    const [ showCalorieGoalBanner, setShowCalorieGoalBanner ] = useState(false);
     return (
         <React.Fragment>
             <Nav />
