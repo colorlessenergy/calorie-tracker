@@ -62,9 +62,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="container">
-                <h1 className="mt-1 my-0 text-center">calorie tracker</h1>
-
+            <div className="container pt-1">
                 <Calender
                     onChange={ onChange }
                     className="ml-1"
