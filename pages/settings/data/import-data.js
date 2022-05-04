@@ -2,36 +2,41 @@ import Head from 'next/head';
 
 import Snackbar from '../../../shared/components/Snackbar/Snackbar';
 
-import { importFoodBlocks, importFoodDictionary } from '../../../shared/food/food';
+import {
+    importFoodBlocks,
+    importFoodDictionary
+} from '../../../shared/food/food';
 
 import useSnackbar from '../../../shared/hooks/useSnackbar';
 
-export default function ImportData () {
-    const { snackbar: snackbarStarted, addSnackbar: addSnackbarStarted } = useSnackbar({
-        initialSnackbar: {
-            className: 'snackbar-purple',
-            message: null,
-        },
-        message: {
-            single: 'started to import data',
-        }
-    });
+export default function ImportData() {
+    const { snackbar: snackbarStarted, addSnackbar: addSnackbarStarted } =
+        useSnackbar({
+            initialSnackbar: {
+                className: 'snackbar-purple',
+                message: null
+            },
+            message: {
+                single: 'started to import data'
+            }
+        });
 
-    const { snackbar: snackbarFinished, addSnackbar: addSnackbarFinished } = useSnackbar({
-        initialSnackbar: {
-            className: 'snackbar-purple',
-            message: null,
-        },
-        message: {
-            single: 'all data imported',
-        }
-    });
+    const { snackbar: snackbarFinished, addSnackbar: addSnackbarFinished } =
+        useSnackbar({
+            initialSnackbar: {
+                className: 'snackbar-purple',
+                message: null
+            },
+            message: {
+                single: 'all data imported'
+            }
+        });
 
-    const importData = (event) => {
+    const importData = event => {
         addSnackbarStarted();
 
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
             const importedData = JSON.parse(e.target.result);
 
             const calorieGoal = JSON.parse(importedData.calorieGoal);
@@ -46,53 +51,61 @@ export default function ImportData () {
             importFoodDictionary(foodDictionary);
 
             addSnackbarFinished();
-        }
+        };
 
         reader.readAsText(event.target.files[0]);
-    }
+    };
 
-    const setValueToNull = event => { 
+    const setValueToNull = event => {
         event.target.value = null;
-    }
+    };
 
     return (
         <div>
             <Head>
                 <title>calorie tracker - import data</title>
-                <meta name="description" content="calorie tracker - import data" />
+                <meta
+                    name="description"
+                    content="calorie tracker - import data"
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="container">
                 <div className="mx-15">
-                    <h1 className="mt-1">
-                        import data 
-                    </h1>
+                    <h1 className="mt-1">import data</h1>
 
-                    <p className="text-medium">
-                        import food blocks
-                    </p>
+                    <p className="text-medium">import food blocks</p>
 
                     <label
                         htmlFor="import-data"
-                        className="button button-purple cursor-pointer d-inline-block">import data</label>
+                        className="button button-purple cursor-pointer d-inline-block"
+                    >
+                        import data
+                    </label>
                     <input
                         type="file"
                         id="import-data"
                         accept=".json"
-                        onChange={ importData }
-                        onClick={ setValueToNull }
-                        className="hidden" />
+                        onChange={importData}
+                        onClick={setValueToNull}
+                        className="hidden"
+                    />
                 </div>
 
-
                 <div className="snackbars-container">
-                    { snackbarStarted.message ? (
-                        <Snackbar message={ snackbarStarted.message } className={ snackbarStarted.className } />
-                    ) : (null) }
-                    
-                    { snackbarFinished.message ? (
-                        <Snackbar message={ snackbarFinished.message } className={ snackbarFinished.className } />
-                    ) : (null) }
+                    {snackbarStarted.message ? (
+                        <Snackbar
+                            message={snackbarStarted.message}
+                            className={snackbarStarted.className}
+                        />
+                    ) : null}
+
+                    {snackbarFinished.message ? (
+                        <Snackbar
+                            message={snackbarFinished.message}
+                            className={snackbarFinished.className}
+                        />
+                    ) : null}
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function ExportData () {
+export default function ExportData() {
     const exportData = () => {
         const foodBlocks = JSON.parse(localStorage.getItem('foodBlocks'));
         for (const date in foodBlocks) {
@@ -19,44 +19,49 @@ export default function ExportData () {
             foodBlocks: JSON.stringify(foodBlocks),
             calorieGoal,
             foodDictionary
-        }
+        };
 
         const filename = 'calorie-tracker-data.json';
         const JSONString = JSON.stringify(data);
         let anchorElement = document.createElement('a');
-        anchorElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSONString));
+        anchorElement.setAttribute(
+            'href',
+            'data:text/plain;charset=utf-8,' + encodeURIComponent(JSONString)
+        );
         anchorElement.setAttribute('download', filename);
         anchorElement.style.display = 'none';
         document.body.appendChild(anchorElement);
         anchorElement.click();
         document.body.removeChild(anchorElement);
-    }
+    };
 
     return (
         <div>
             <Head>
                 <title>calorie tracker - export data</title>
-                <meta name="description" content="calorie tracker - export data" />
+                <meta
+                    name="description"
+                    content="calorie tracker - export data"
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <div className="container">
                 <div className="mx-15">
-                    <h1 className="mt-1">
-                        export data 
-                    </h1>
+                    <h1 className="mt-1">export data</h1>
 
-                    <p className="text-medium">
-                        export food blocks
-                    </p>
+                    <p className="text-medium">export food blocks</p>
 
                     <p className="text-bold text-medium">
-                        note: a web browser is needed to export your data 
+                        note: a web browser is needed to export your data
                     </p>
 
                     <button
-                        onClick={ exportData }
-                        className="button button-green">export data</button>
+                        onClick={exportData}
+                        className="button button-green"
+                    >
+                        export data
+                    </button>
                 </div>
             </div>
         </div>

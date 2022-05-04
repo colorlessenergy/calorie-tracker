@@ -1,98 +1,98 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 a {
-  color: #000000;
+    color: #000000;
 }
 
 button {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 
-  background-color: transparent;
-  cursor: pointer;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 label {
-  color: #606060;
-  font-size: 14px;
+    color: #606060;
+    font-size: 14px;
 }
 
 input {
-  border: 0;
-  border-bottom: 1px solid #000000;
-  margin-bottom: 10px;
-  padding: 4px 4px 4px 0;
-  width: 100%;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 10px;
+    padding: 4px 4px 4px 0;
+    width: 100%;
 
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
 }
 
-@import "./variables.scss";
-@import "./utilities.scss";
-@import "./module.scss";
-@import "./theme.scss";
+@import './variables.scss';
+@import './utilities.scss';
+@import './module.scss';
+@import './theme.scss';
 
 @media (max-width: 411px) {
-  .container {
-    padding-bottom: 59px;
-  }
+    .container {
+        padding-bottom: 59px;
+    }
 
-  .snackbars-container {
-    bottom: 44px;
-  }
+    .snackbars-container {
+        bottom: 44px;
+    }
 }
 
 @media (min-width: 412px) {
-  .snackbars-container {
-    width: 50%;
-  }
+    .snackbars-container {
+        width: 50%;
+    }
 }
 
 @media (min-width: 500px) {
-  .react-calendar {
-    margin: 0 auto;
-  }
+    .react-calendar {
+        margin: 0 auto;
+    }
 }
 
 @media (min-width: 600px) {
-  .modal {
-    justify-content: center;
-  }
+    .modal {
+        justify-content: center;
+    }
 
-  .modal-width {
-    width: 80%;
-  }
+    .modal-width {
+        width: 80%;
+    }
 
-  .modal-button-close {
-    top: -16px;
-    right: -16px;
-  }
+    .modal-button-close {
+        top: -16px;
+        right: -16px;
+    }
 
-  .react-calendar__tile {
-    padding: 32px !important;
-  }
+    .react-calendar__tile {
+        padding: 32px !important;
+    }
 }
 
 @media (min-width: 867px) {
-  .w-50-md {
-    width: 50%;
-  }
+    .w-50-md {
+        width: 50%;
+    }
 
-  .card {
-    width: 30%;
-  }
+    .card {
+        width: 30%;
+    }
 
-  .card--blocks {
-    width: 50%;
-  }
+    .card--blocks {
+        width: 50%;
+    }
 }

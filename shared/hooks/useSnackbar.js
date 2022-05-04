@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 
 const useSnackbar = ({ initialSnackbar, message }) => {
-    const [ snackbar, setSnackbar ] = useState(
-        initialSnackbar
-    );
+    const [snackbar, setSnackbar] = useState(initialSnackbar);
     const snackbarTimeoutRef = useRef(null);
     useEffect(() => {
         return () => {
             if (snackbarTimeoutRef.current) {
                 clearTimeout(snackbarTimeoutRef.current);
             }
-        }
+        };
     }, []);
 
     const addSnackbar = () => {
@@ -33,13 +31,13 @@ const useSnackbar = ({ initialSnackbar, message }) => {
             if (snackbar.amountOfTimes >= 1) {
                 cloneSnackbar = {
                     ...cloneSnackbar,
-                    message: `${ snackbar.amountOfTimes + 1 } ${ message.multiple }`
-                }
+                    message: `${snackbar.amountOfTimes + 1} ${message.multiple}`
+                };
             } else {
                 cloneSnackbar = {
                     ...cloneSnackbar,
                     message: message.single
-                }
+                };
             }
 
             cloneSnackbar.amountOfTimes += 1;
@@ -47,16 +45,16 @@ const useSnackbar = ({ initialSnackbar, message }) => {
             cloneSnackbar = {
                 ...cloneSnackbar,
                 message: message.single
-            }
+            };
         }
 
         setSnackbar(cloneSnackbar);
-    }
+    };
 
     return {
         snackbar,
         addSnackbar
-    }
-}
+    };
+};
 
 export default useSnackbar;
