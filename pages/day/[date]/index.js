@@ -266,7 +266,7 @@ export default function Date() {
                 <button
                     onClick={() => addEmptyFoodBlock()}
                     title="add food block"
-                    className="icon mr-1"
+                    className="icon icon--food-block-button mr-1"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +283,7 @@ export default function Date() {
                     <button
                         onClick={toggleDuplicatePreviousFoodBlocksModal}
                         title="duplicate previous food blocks"
-                        className="icon"
+                        className="icon icon--food-block-button"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
