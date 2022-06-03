@@ -11,10 +11,10 @@ export default function Nav() {
     }
 
     return (
-        <nav className="nav flex flex-direction-column align-items-center pt-1">
+        <nav className="nav flex align-items-center">
             <Link href="/">
                 <a
-                    className={`icon mb-1 ${
+                    className={`icon ${
                         router.route === '/' ? 'icon-active' : ''
                     }`}
                     title="calendar"
@@ -34,7 +34,7 @@ export default function Nav() {
             {date ? (
                 <Link href={`/day/${date}`}>
                     <a
-                        className={`icon mb-1 ${
+                        className={`icon ${
                             router.route === '/day/[date]' ? 'icon-active' : ''
                         }`}
                         title={date}
@@ -54,7 +54,7 @@ export default function Nav() {
 
             <Link href="/settings">
                 <a
-                    className={`icon mb-1 ${
+                    className={`icon ${
                         router.route.includes('/settings') ? 'icon-active' : ''
                     }`}
                     title="settings"

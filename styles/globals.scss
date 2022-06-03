@@ -84,7 +84,7 @@ input {
     }
 }
 
-@media (min-width: 867px) {
+@media (min-width: 768px) {
     .w-50-md {
         width: 50%;
     }
@@ -95,5 +95,28 @@ input {
 
     .card--blocks {
         width: 50%;
+    }
+
+    .container {
+        margin-left: 40px;
+    }
+
+    .nav {
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 100%;
+        width: 40px;
+        padding-top: 10px;
+    }
+
+    .nav .icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 939px) {
+    .card {
+        width: 45%;
     }
 }
