@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Nav from '../shared/components/Nav';
-import Banner from '../shared/components/Banner';
+import Banner from '../shared/components/Banner/Banner';
 
 import '../styles/globals.scss';
 
