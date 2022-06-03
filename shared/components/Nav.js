@@ -11,7 +11,7 @@ export default function Nav() {
     }
 
     return (
-        <nav className="nav pt-1">
+        <nav className="nav flex flex-direction-column align-items-center pt-1">
             <Link href="/">
                 <a
                     className={`icon mb-1 ${
