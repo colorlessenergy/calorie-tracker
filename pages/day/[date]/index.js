@@ -184,6 +184,9 @@ export default function Date() {
     const handleSubmit = event => {
         event.preventDefault();
 
+        foodBlock.name = foodBlock.name.trim();
+        foodBlock.unit = foodBlock.unit.trim();
+
         if (foodBlock.ID === null) {
             addFoodBlockToLocalStorage({ date, foodBlock });
         } else {

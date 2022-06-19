@@ -38,6 +38,9 @@ export default function FoodDictionary() {
     const handleSubmit = event => {
         event.preventDefault();
 
+        foodBlock.name = foodBlock.name.trim();
+        foodBlock.unit = foodBlock.unit.trim();
+
         addFoodBlockToFoodDictionary(foodBlock);
 
         setFoodDictionary(getFoodDictionaryFromLocalStorage());
