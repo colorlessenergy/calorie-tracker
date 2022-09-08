@@ -217,15 +217,16 @@ body.modal-is-open {
     width: 32px;
 
     background-color: #ffffff;
+    border: 2px solid #000000;
 }
 
 .icon--food-block-button {
-    border: 2px solid #000;
     border-radius: 0px;
 }
 
 .icon-active {
     background-color: #333333;
+    border: 0;
 }
 
 .icon-active svg {
