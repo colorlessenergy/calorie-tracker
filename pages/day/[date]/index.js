@@ -311,7 +311,9 @@ export default function Date() {
                             alt="watermelon icon"
                         />
                     </div>
-                    <p className="text-center text-medium">no food blocks</p>
+                    <p className="text-center text-medium mb-1">
+                        no food blocks
+                    </p>
                     <button
                         className="dark-text text-large text-decoration-underline d-block m-center"
                         onClick={() => addEmptyFoodBlock()}
