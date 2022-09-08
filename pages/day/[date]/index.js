@@ -63,6 +63,8 @@ export default function Date() {
         }
 
         setTotalCalories(parseFloat(calories.toFixed(2)));
+
+        // eslint-disable-next-line
     }, [foodBlocks]);
 
     const [calorieGoal, setCalorieGoal] = useState(1);
