@@ -88,7 +88,7 @@ export default function ImportData() {
                         accept=".json"
                         onChange={importData}
                         onClick={setValueToNull}
-                        className="hidden"
+                        className="d-none"
                     />
                 </div>
 

@@ -302,7 +302,7 @@ export default function FoodDictionary() {
                         <input
                             type="submit"
                             id="form-submit"
-                            className="hidden"
+                            className="d-none"
                         />
                     </form>
                 </Modal>

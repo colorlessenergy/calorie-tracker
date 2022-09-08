@@ -572,7 +572,7 @@ export default function Date() {
 
                         <input
                             type="submit"
-                            className="hidden"
+                            className="d-none"
                             id="form-submit"
                         />
                     </form>

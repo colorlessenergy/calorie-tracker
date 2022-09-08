@@ -31,7 +31,7 @@ const Modal = ({
             ref={modalRef}
             onClick={toggleModal === undefined ? null : handleCloseModal}
             className={`modal ${
-                isOpen ? 'flex flex-direction-column' : 'hidden'
+                isOpen ? 'flex flex-direction-column' : 'd-none'
             }`}
         >
             {topElements ? (
