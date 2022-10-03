@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Image from 'next/image';
 import watermelonIcon from '../../../public/icons/watermelon.svg';
 
+import FoodBlock from '../../../shared/components/Home/FoodBlock';
 import Confetti from 'react-confetti';
 import Modal from '../../../shared/components/modal';
 import DuplicateAndMergeFoodBlocksFromPreviousDate from '../../../shared/components/DuplicateAndMergePreviousFoodBlocks';
@@ -71,35 +71,6 @@ export default function Date() {
     useEffect(() => {
         setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')) || 1);
     }, []);
-
-    const updateAmountOfFood = ({ event, sign, index }) => {
-        event.stopPropagation();
-
-        let cloneFoodBlocks = JSON.parse(JSON.stringify(foodBlocks));
-        if (cloneFoodBlocks[index].amount === 0 && Math.sign(sign) === 1) {
-            cloneFoodBlocks[index].amount += parseFloat(
-                cloneFoodBlocks[index].totalAmount
-            );
-            setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({
-                date,
-                foodBlock: cloneFoodBlocks[index],
-                updatedWithButton: true
-            });
-        } else if (
-            cloneFoodBlocks[index].amount ===
-                parseFloat(cloneFoodBlocks[index].totalAmount) &&
-            Math.sign(sign) === -1
-        ) {
-            cloneFoodBlocks[index].amount -= cloneFoodBlocks[index].totalAmount;
-            setFoodBlocks(cloneFoodBlocks);
-            updateFoodBlockInLocalStorage({
-                date,
-                foodBlock: cloneFoodBlocks[index],
-                updatedWithButton: true
-            });
-        }
-    };
 
     const [isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen] =
         useState(false);
@@ -330,54 +301,14 @@ export default function Date() {
                     foodBlock.index = index;
 
                     return (
-                        <div
+                        <FoodBlock
                             key={index}
-                            className="card cursor-pointer"
-                            style={{ backgroundColor: foodBlock.color }}
-                            onClick={() => toggleEditFoodBlockModal(foodBlock)}
-                        >
-                            <div className="flex justify-content-between w-100">
-                                <div>{foodBlock.name}</div>
-                                <div className="text-bold">
-                                    {foodBlock.calories} calories
-                                </div>
-                            </div>
-
-                            <div className="mx-1 text-large">
-                                {foodBlock.amount} / {foodBlock.totalAmount}{' '}
-                                <span className="text-medium">
-                                    {foodBlock.unit}
-                                </span>
-                            </div>
-
-                            <div className="flex justify-content-between w-100">
-                                <button
-                                    onClick={event => {
-                                        updateAmountOfFood({
-                                            event,
-                                            sign: -1,
-                                            index
-                                        });
-                                    }}
-                                    className="card-button"
-                                >
-                                    -
-                                </button>
-
-                                <button
-                                    onClick={event => {
-                                        updateAmountOfFood({
-                                            event,
-                                            sign: 1,
-                                            index
-                                        });
-                                    }}
-                                    className="card-button"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
+                            foodBlock={foodBlock}
+                            foodBlocks={foodBlocks}
+                            setFoodBlocks={setFoodBlocks}
+                            date={date}
+                            toggleEditFoodBlockModal={toggleEditFoodBlockModal}
+                        />
                     );
                 })}
             </div>
