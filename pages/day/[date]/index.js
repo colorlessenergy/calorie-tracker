@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
-import watermelonIcon from '../../../public/icons/watermelon.svg';
 
 import FoodBlock from '../../../shared/components/Home/FoodBlock';
+import EmptyFoodBlocks from '../../../shared/components/Home/EmptyFoodBlocks';
 import Confetti from 'react-confetti';
 import Modal from '../../../shared/components/modal';
 import DuplicateAndMergeFoodBlocksFromPreviousDate from '../../../shared/components/DuplicateAndMergePreviousFoodBlocks';
@@ -275,25 +274,7 @@ export default function Date() {
             </div>
 
             {foodBlocks?.length === 0 ? (
-                <>
-                    <div className="no-food-blocks-emoji">
-                        <Image
-                            height={140}
-                            width={140}
-                            src={watermelonIcon}
-                            alt="watermelon icon"
-                        />
-                    </div>
-                    <p className="text-center text-medium mb-1">
-                        no food blocks
-                    </p>
-                    <button
-                        className="dark-text text-large text-decoration-underline d-block m-center"
-                        onClick={() => addEmptyFoodBlock()}
-                    >
-                        add a food block
-                    </button>
-                </>
+                <EmptyFoodBlocks addEmptyFoodBlock={addEmptyFoodBlock} />
             ) : null}
 
             <div className="flex flex-wrap">
