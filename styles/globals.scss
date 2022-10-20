@@ -104,9 +104,13 @@ input {
     .nav {
         justify-content: flex-start;
         flex-direction: column;
-        height: 100%;
+        height: 50%;
         width: 40px;
+        margin: auto 0;
         padding-top: 10px;
+        top: 0;
+        bottom: 0;
+        left: 8px;
     }
 
     .nav .icon {
