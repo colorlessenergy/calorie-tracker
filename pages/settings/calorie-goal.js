@@ -24,7 +24,7 @@ export default function CalorieGoal({ setShowCalorieGoalBanner }) {
             message: null
         },
         message: {
-            single: 'calorie goal is set'
+            single: 'calorie goal set'
         }
     });
 
