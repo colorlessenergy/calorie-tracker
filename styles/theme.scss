@@ -23,3 +23,19 @@
 
     color: #ffffff;
 }
+
+.dark .modal-content {
+    background-color: #333333;
+}
+
+.dark .modal-content label,
+.dark .modal-content .text-gray {
+    color: #d1cfcf;
+}
+
+.dark .modal-content input {
+    border-bottom-color: #ffffff;
+
+    background-color: #333333;
+    color: #ffffff;
+}
