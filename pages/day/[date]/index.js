@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import FoodBlock from '../../../shared/components/Home/FoodBlock';
@@ -68,7 +69,7 @@ export default function Date() {
 
     const [calorieGoal, setCalorieGoal] = useState(1);
     useEffect(() => {
-        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')) || 1);
+        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')) || 0);
     }, []);
 
     const [isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen] =
@@ -236,7 +237,14 @@ export default function Date() {
         <div className="container">
             <div className="mx-15 mt-1 mb-1 flex align-items-center flex-wrap">
                 <div className="mr-1">{totalCalories} total calories</div>
-                <div className="mr-1">{calorieGoal} calorie goal</div>
+
+                {calorieGoal === 0 ? (
+                    <Link href="/settings/calorie-goal">
+                        <a className="mr-1">create calorie goal</a>
+                    </Link>
+                ) : (
+                    <div className="mr-1">{calorieGoal} calorie goal</div>
+                )}
 
                 <button
                     onClick={() => addEmptyFoodBlock()}
