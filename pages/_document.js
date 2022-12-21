@@ -24,7 +24,7 @@ class MyDocument extends Document {
                     <meta name="mobile-web-app-capable" content="yes" />
                     <meta name="msapplication-TileColor" content="#2B5797" />
                     <meta name="msapplication-tap-highlight" content="no" />
-                    <meta name="theme-color" content="#FFFFFF" />
+                    <meta name="theme-color" content="#222222" />
                     <link rel="apple-touch-icon" href="/icons/192.png" />
 
                     <link rel="manifest" href="/manifest.json" />
