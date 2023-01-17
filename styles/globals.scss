@@ -38,6 +38,10 @@ input {
     font-family: 'Inter', sans-serif;
 }
 
+input:disabled {
+    opacity: 0.5;
+}
+
 @import './variables.scss';
 @import './utilities.scss';
 @import './module.scss';
