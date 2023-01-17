@@ -239,8 +239,8 @@ export default function Date() {
                 <div className="mr-1">{totalCalories} total calories</div>
 
                 {calorieGoal === 0 ? (
-                    <Link href="/settings/calorie-goal">
-                        <a className="mr-1">create calorie goal</a>
+                    <Link href="/settings/calorie-goal" className="mr-1">
+                        create calorie goal
                     </Link>
                 ) : (
                     <div className="mr-1">{calorieGoal} calorie goal</div>
