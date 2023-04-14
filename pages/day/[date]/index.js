@@ -17,7 +17,7 @@ import {
     addFoodBlockToLocalStorage
 } from '../../../shared/food/food';
 
-const colors = ['#ffe58f', '#eaff8f', '#b7eb8f', '#87e8de', '#ffd6e7'];
+const colors = ['#e3bb88', '#e3dd88', '#8be388', '#88d2e3', '#e3889e'];
 
 export default function Date() {
     const router = useRouter();
