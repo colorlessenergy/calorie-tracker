@@ -58,6 +58,13 @@ export default function Home() {
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true);
+
+        if (JSON.parse(localStorage.getItem('goToFoodBlocks'))) {
+            const date = new Date()
+                .toLocaleDateString('en-US')
+                .replace(/\//g, '-');
+            router.replace(`day/${date}`);
+        }
     }, []);
 
     return (

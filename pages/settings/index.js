@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import SettingsItem from '../../shared/components/SettingsItems/SettingsItem';
+import CheckboxSettingsItem from '../../shared/components/SettingsItems/CheckboxSettingsItem';
 
 export default function Settings() {
+    const [goToFoodBlocks, setGoToFoodBlocks] = useState(false);
+    useEffect(() => {
+        if (!localStorage.getItem('goToFoodBlocks')) {
+            localStorage.setItem('goToFoodBlocks', false);
+        }
+
+        setGoToFoodBlocks(JSON.parse(localStorage.getItem('goToFoodBlocks')));
+    }, []);
+
     return (
         <div>
             <Head>
@@ -23,6 +34,12 @@ export default function Settings() {
                     <SettingsItem
                         text="food dictionary"
                         link="/settings/food-dictionary"
+                    />
+
+                    <CheckboxSettingsItem
+                        text="automatically go to food blocks"
+                        state={goToFoodBlocks}
+                        setState={setGoToFoodBlocks}
                     />
                 </div>
             </div>
