@@ -50,7 +50,10 @@ export default function CalorieGoal() {
             <div className="container">
                 <h1 className="mt-1 mx-15">calorie goal</h1>
 
-                <form onSubmit={handleSubmit} className="mx-15 w-50-md">
+                <form
+                    onSubmit={handleSubmit}
+                    className="mx-15 w-50-md flex flex-direction-column align-items-start"
+                >
                     <label className="dark-label" htmlFor="calorieGoal">
                         set calorie goal
                     </label>
@@ -63,6 +66,7 @@ export default function CalorieGoal() {
                         placeholder="calorie goal"
                         onChange={handleInputChange}
                         value={calorieGoal}
+                        className="calorie-goal-input"
                     />
 
                     <button className="button button-green">submit</button>
