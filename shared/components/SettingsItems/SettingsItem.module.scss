@@ -10,8 +10,12 @@
 }
 
 label.item {
-    color: #ffffff;
+    color: #000000;
     cursor: pointer;
+}
+
+:global(.dark) label.item {
+    color: #ffffff;
 }
 
 .item:hover {
