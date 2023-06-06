@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import CalorieGoal from '../../../shared/components/Day/CalorieGoal';
 import FoodBlock from '../../../shared/components/Home/FoodBlock';
 import EmptyFoodBlocks from '../../../shared/components/Home/EmptyFoodBlocks';
-import Confetti from 'react-confetti';
+import Confetti from '../../../shared/components/Day/Confetti';
 import Modal from '../../../shared/components/modal';
 import DuplicateAndMergeFoodBlocksFromPreviousDate from '../../../shared/components/DuplicateAndMergePreviousFoodBlocks';
 
@@ -38,7 +38,6 @@ export default function Date() {
 
     const { calorieGoal } = useDayContext();
     const [totalCalories, setTotalCalories] = useState(0);
-    const [confetti, setConfetti] = useState(null);
     useEffect(() => {
         let calories = 0;
         foodBlocks?.forEach(foodBlock => {
@@ -49,21 +48,6 @@ export default function Date() {
                 calories += parseFloat(foodBlock.calories);
             }
         });
-
-        if (calories === calorieGoal && calorieGoal !== 0) {
-            const width =
-                window.innerWidth ||
-                document.documentElement.clientWidth ||
-                document.body.clientWidth;
-            const height =
-                window.innerHeight ||
-                document.documentElement.clientHeight ||
-                document.body.clientHeight;
-            setConfetti({
-                width: width,
-                height: height
-            });
-        }
 
         setTotalCalories(parseFloat(calories.toFixed(2)));
 
@@ -302,15 +286,8 @@ export default function Date() {
                         );
                     })}
                 </div>
-                {confetti ? (
-                    <Confetti
-                        width={confetti.width}
-                        height={confetti.height}
-                        recycle={false}
-                        numberOfPieces={200}
-                        onConfettiComplete={() => setConfetti(null)}
-                    />
-                ) : null}
+
+                <Confetti totalCalories={totalCalories} />
 
                 {isEditFoodBlockModalOpen ? (
                     <Modal
