@@ -16,7 +16,6 @@ import {
     getFoodDictionaryFromLocalStorage,
     addFoodBlockToLocalStorage
 } from '../../../shared/food/food';
-import { useDayContext } from '../../../shared/contexts/DayContext';
 
 const colors = ['#e3bb88', '#e3dd88', '#8be388', '#88d2e3', '#e3889e'];
 
@@ -36,7 +35,6 @@ export default function Date() {
         setFoodDictionary(getFoodDictionaryFromLocalStorage());
     }, []);
 
-    const { calorieGoal } = useDayContext();
     const [totalCalories, setTotalCalories] = useState(0);
     useEffect(() => {
         let calories = 0;
