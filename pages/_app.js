@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import Nav from '../shared/components/Nav';
+import { DayContextProvider } from '../shared/contexts/DayContext';
 
 import '../styles/globals.scss';
 
@@ -24,8 +25,10 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <React.Fragment>
-            <Nav />
-            <Component {...pageProps} />
+            <DayContextProvider>
+                <Nav />
+                <Component {...pageProps} />
+            </DayContextProvider>
         </React.Fragment>
     );
 }
