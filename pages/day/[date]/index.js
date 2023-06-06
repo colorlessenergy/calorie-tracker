@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import CalorieGoal from '../../../shared/components/Day/CalorieGoal';
 import FoodBlock from '../../../shared/components/Home/FoodBlock';
 import EmptyFoodBlocks from '../../../shared/components/Home/EmptyFoodBlocks';
 import Confetti from 'react-confetti';
@@ -16,6 +16,7 @@ import {
     getFoodDictionaryFromLocalStorage,
     addFoodBlockToLocalStorage
 } from '../../../shared/food/food';
+import { useDayContext } from '../../../shared/contexts/DayContext';
 
 const colors = ['#e3bb88', '#e3dd88', '#8be388', '#88d2e3', '#e3889e'];
 
@@ -35,6 +36,7 @@ export default function Date() {
         setFoodDictionary(getFoodDictionaryFromLocalStorage());
     }, []);
 
+    const { calorieGoal } = useDayContext();
     const [totalCalories, setTotalCalories] = useState(0);
     const [confetti, setConfetti] = useState(null);
     useEffect(() => {
@@ -67,11 +69,6 @@ export default function Date() {
 
         // eslint-disable-next-line
     }, [foodBlocks]);
-
-    const [calorieGoal, setCalorieGoal] = useState(1);
-    useEffect(() => {
-        setCalorieGoal(parseFloat(localStorage.getItem('calorieGoal')) || 0);
-    }, []);
 
     const [isEditFoodBlockModalOpen, setIsEditFoodBlockModalOpen] =
         useState(false);
@@ -246,13 +243,7 @@ export default function Date() {
                 <div className="mx-15 mt-1 mb-1 flex align-items-center flex-wrap">
                     <div className="mr-1">{totalCalories} total calories</div>
 
-                    {calorieGoal === 0 ? (
-                        <Link href="/settings/calorie-goal" className="mr-1">
-                            create calorie goal
-                        </Link>
-                    ) : (
-                        <div className="mr-1">{calorieGoal} calorie goal</div>
-                    )}
+                    <CalorieGoal />
 
                     <button
                         onClick={() => addEmptyFoodBlock()}
