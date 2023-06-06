@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import Calender from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+import useServiceWorker from '../shared/hooks/Home/useServiceWorker';
+
 export default function Home() {
     const router = useRouter();
     const onChange = date => {
@@ -12,25 +14,7 @@ export default function Home() {
         router.push(`day/${date}`);
     };
 
-    useEffect(() => {
-        if (
-            typeof window !== 'undefined' &&
-            'serviceWorker' in navigator &&
-            window.workbox !== undefined
-        ) {
-            const wb = window.workbox;
-            const installNewVersion = () => {
-                wb.addEventListener('controlling', () => {
-                    window.location.reload();
-                });
-
-                wb.messageSkipWaiting();
-            };
-
-            wb.addEventListener('waiting', installNewVersion);
-            wb.register();
-        }
-    }, []);
+    useServiceWorker();
 
     const tileClassName = ({ date, view }) => {
         if (typeof window !== 'undefined' && view === 'month') {
