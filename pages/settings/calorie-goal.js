@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import Snackbar from '../../shared/components/Snackbar/Snackbar';
 
 import useSnackbar from '../../shared/hooks/useSnackbar';
+import { useDayContext } from '../../shared/contexts/DayContext';
 
 export default function CalorieGoal() {
-    const [calorieGoal, setCalorieGoal] = useState(1);
-
-    useEffect(() => {
-        setCalorieGoal(localStorage.getItem('calorieGoal') || 1);
-    }, []);
+    const { calorieGoal, setCalorieGoal } = useDayContext();
 
     const handleInputChange = event => {
         if (!event.currentTarget.valueAsNumber) return setCalorieGoal('');

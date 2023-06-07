@@ -9,7 +9,7 @@ export const DayContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <DayContext.Provider value={{ calorieGoal }}>
+        <DayContext.Provider value={{ calorieGoal, setCalorieGoal }}>
             {children}
         </DayContext.Provider>
     );
