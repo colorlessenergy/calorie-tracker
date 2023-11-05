@@ -77,6 +77,7 @@ const Calendar = () => {
                                         ? tileClassName(date)
                                         : ''
                                 }`}
+                                key={date}
                             >
                                 <div className="text-bold">{day}</div>
                                 <div className="mt-2">{date.getDate()}</div>
