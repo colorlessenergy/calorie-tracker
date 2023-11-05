@@ -160,53 +160,6 @@ body.modal-is-open {
     z-index: 1;
 }
 
-.react-calendar {
-    border: none !important;
-    max-width: 1000px !important;
-    width: 100% !important;
-}
-
-.react-calendar button {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.react-calendar__month-view__weekdays__weekday {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-}
-
-.react-calendar__tile {
-    padding: 15px 5px !important;
-}
-
-.react-calendar__month-view__weekdays__weekday abbr[title] {
-    text-decoration: none;
-    color: #000000;
-}
-
-.react-calendar__navigation {
-    margin: 0 auto 16px auto;
-    width: 90%;
-}
-
-.react-calendar__navigation__arrow {
-    font-size: 30px !important;
-}
-
-.react-calendar__tile--now {
-    background-color: #ffffff !important;
-}
-
-.active-date {
-    background-color: $light-green !important;
-}
-
-.react-calendar__tile--active {
-    background-color: #030852 !important;
-}
-
 .icon {
     border-radius: 50%;
     display: flex;
@@ -254,4 +207,30 @@ input[type='number'].calorie-goal-input {
     width: 50%;
 
     font-size: 24px;
+}
+
+.dates-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dates-month {
+    margin: 10px;
+}
+
+.date {
+    border: 3px solid #ffffff;
+    margin: 10px;
+    padding: 16px;
+    min-width: 100px;
+
+    text-decoration: none;
+}
+
+.active-date {
+    background-color: #007991;
+}
+
+.current-date {
+    background-color: #030852;
 }
