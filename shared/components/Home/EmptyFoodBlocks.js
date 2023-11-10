@@ -15,6 +15,7 @@ const EmptyFoodBlocks = ({ addEmptyFoodBlock }) => {
             <button
                 className="dark-text text-large text-decoration-underline d-block m-center"
                 onClick={() => addEmptyFoodBlock()}
+                title="add a food block"
             >
                 add a food block
             </button>
