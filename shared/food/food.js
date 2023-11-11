@@ -20,6 +20,15 @@ export function getFoodFromLocalStorage(date) {
     return [];
 }
 
+export function getAllFoodBlocksFromLocalStorage() {
+    if (localStorage.getItem('foodBlocks')) {
+        return JSON.parse(localStorage.getItem('foodBlocks'));
+    }
+
+    localStorage.setItem('foodBlocks', JSON.stringify({}));
+    return {};
+}
+
 export function updateFoodBlockInLocalStorage({
     date,
     foodBlock,
