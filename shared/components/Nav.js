@@ -66,6 +66,23 @@ export default function Nav() {
                 </svg>
             </Link>
 
+            <Link
+                href="/stats"
+                className={`icon ${
+                    router.route.includes('/stats') ? 'icon-active' : ''
+                }`}
+                title="stats"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                >
+                    <path d="M2 13H8V21H2V13ZM9 3H15V21H9V3ZM16 8H22V21H16V8Z"></path>
+                </svg>
+            </Link>
+
             <ThemeSelector />
         </nav>
     );
