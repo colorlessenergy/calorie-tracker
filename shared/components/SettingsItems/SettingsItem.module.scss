@@ -36,6 +36,12 @@
 .checkbox-item svg {
     margin-bottom: 10px;
     width: 24px;
+
+    fill: #606060;
+}
+
+.input:checked + .checkbox-item svg {
+    fill: #000000;
 }
 
 :global(.dark) .input:checked + .checkbox-item {
@@ -47,5 +53,9 @@
 }
 
 :global(.dark) .checkbox-item svg {
+    fill: #606060;
+}
+
+:global(.dark) .input:checked + .checkbox-item svg {
     fill: #ffffff;
 }
