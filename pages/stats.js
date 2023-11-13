@@ -15,7 +15,15 @@ export default function Stats() {
 
     const dates = Object.keys(foodBlocks);
     let activeDates = 0;
+    let totalCalories = 0;
     for (let i = 0; i < dates.length; i++) {
+        for (let j = 0; j < foodBlocks[dates[i]].length; j++) {
+            const foodBlock = foodBlocks[dates[i]][j];
+            if (foodBlock.amount === parseFloat(foodBlock.totalAmount)) {
+                totalCalories += parseFloat(foodBlocks[dates[i]][j].calories);
+            }
+        }
+
         if (foodBlocks[dates[i]].length) {
             activeDates += 1;
         }
@@ -35,10 +43,18 @@ export default function Stats() {
 
                     <h2 className="mb-1">food blocks</h2>
 
-                    <p className="m-0">
+                    <p>
                         created food blocks for{' '}
-                        <span className="text-bold">{activeDates}</span>{' '}
-                        {activeDates === 1 ? 'day' : 'days'}
+                        <span className="text-bold">
+                            {activeDates} {activeDates === 1 ? 'day' : 'days'}
+                        </span>
+                    </p>
+
+                    <p>
+                        <span className="text-bold">
+                            {totalCalories} calories
+                        </span>{' '}
+                        eaten
                     </p>
                 </div>
             </div>
