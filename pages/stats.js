@@ -108,6 +108,9 @@ export default function Stats() {
                                                             <a
                                                                 href={`day/${formatDate}`}
                                                                 className="date text-center ml-0"
+                                                                title={
+                                                                    formatDate
+                                                                }
                                                                 key={date}
                                                             >
                                                                 <div className="text-bold">
